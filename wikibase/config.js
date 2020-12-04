@@ -2,6 +2,61 @@
 var CONFIG = ( function ( window, $ ) {
 	'use strict';
 
+	var wbstackPresets = getwbstackPresets();
+
+	function getwbstackPresets() {
+		if(window.location.pathname.substring(0,6) == '/query'){
+			return {
+				api: {
+					sparql: {
+						uri: window.location.protocol + '//' + window.location.host + '/query/sparql'
+					},
+					wikibase: {
+						uri: window.location.protocol + '//' + window.location.host + '/w/api.php'
+					},
+					examples: {
+						server: window.location.protocol + '//' + window.location.host + '/',
+						apiPath: 'w/api.php',
+						pageTitle: 'Project:SPARQL/examples',
+						pagePathElement: 'wiki/'
+					}
+				},
+				brand: {
+					"title": "Query Service: " + window.location.host,
+					// TODO fix the logo and favicon and copyright
+					"logo": "logo.svg",
+					"favicon": "favicon.ico",
+					"copyrightUrl": "https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Copyright"
+				}
+			}
+		}
+        if(window.location.host.substring(window.location.host.length-14) == 'localhost:8084'){
+            return {
+                api: {
+                    sparql: {
+                        uri: window.location.protocol + '//' + window.location.host.substring(0,window.location.host.length-5) + ':8085/sparql'
+                    },
+                    wikibase: {
+                        uri: window.location.protocol + '//' + window.location.host.substring(0,window.location.host.length-5) + ':8083/w/api.php'
+                    },
+                    examples: {
+                        server: window.location.protocol + '//' + window.location.host.substring(0,window.location.host.length-5) + ':8083/',
+                        apiPath: 'w/api.php',
+                        pageTitle: 'Project:SPARQL/examples',
+                        pagePathElement: 'wiki/'
+                    }
+                },
+                brand: {
+                    "title": "WbStack Dev " + window.location.host.substring(0,window.location.host.length-5),
+                    // TODO fix the logo and favicon and copyright
+                    "logo": "logo.svg",
+                    "favicon": "favicon.ico",
+                    "copyrightUrl": "https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Copyright"
+                }
+            }
+        }
+	}
+
 	function getUserLanguage() {
 		var lang = ( navigator.languages && navigator.languages[0] ) ||
 			navigator.language ||
@@ -45,7 +100,8 @@ var CONFIG = ( function ( window, $ ) {
 		defaultConfig, customConfig;
 
 	function getEffectiveConfig() {
-		return $.extend( true, {}, presets, defaultConfig, customConfig );
+		//return $.extend( true, {}, presets, defaultConfig, customConfig );
+		return $.extend( true, {}, presets, defaultConfig, customConfig, wbstackPresets );
 	}
 
 	function onDefaultConfigLoad( config ) {

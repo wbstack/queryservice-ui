@@ -44,6 +44,7 @@
 		}
 
 		setBrand();
+		setExamplesHelpLink();
 		wb.ui.resultBrowser.helper.FormatterHelper.initMoment();
 
 		$( '#query-form' ).attr( 'action', config.api.sparql.uri );
@@ -63,7 +64,12 @@
 			shortenApi = new wb.api.UrlShortener( config.api.urlShortener ),
 			languageSelector = new wb.ui.i18n.LanguageSelector( $( '.uls-trigger' ), api, lang );
 
-		setExamplesHelpLink( querySamplesApi.getExamplesPageUrl() );
+		if(window.location.host.substring(0,6) == 'query.'){
+			api = new wb.api.Wikibase( window.location.protocol + '//www.' + window.location.host.substring(6) + '/w/api.php', lang );
+			sparqlApi = new wb.api.Sparql(window.location.protocol + '//' + window.location.host + '/sparql', lang);
+		}
+
+		setExamplesHelpLink( config.api.examples.server + config.api.examples.pagePathElement + config.api.examples.pageTitle );
 
 		var isTopWindow = window.top === window;
 

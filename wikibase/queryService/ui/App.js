@@ -143,7 +143,9 @@ wikibase.queryService.ui.App = ( function( $, window, _, Cookies, moment ) {
 		this._initApp();
 		this._initEditor();
 		this._initQueryHelper();
-		this._initDataUpdated();
+		// WBStack EDIT START don't try to get last updated time (it won't work)
+		//this._initDataUpdated();
+		// WBStack EDIT END
 		this._initQuery();
 		this._initRdfNamespaces();
 		this._initHandlers();
