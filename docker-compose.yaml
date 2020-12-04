@@ -1,0 +1,10 @@
+version: "3.7"
+services:
+  debug:
+    image: node:12-alpine
+    working_dir: /home/node/app
+    command: npm start
+    volumes:
+       - ./src:/home/node/app
+    expose:
+      - "8080"

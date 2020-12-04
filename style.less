@@ -6,6 +6,32 @@
 @import ( reference ) 'node_modules/@wikimedia/codex-design-tokens/theme-wikimedia-ui.less';
 @import ( reference ) './css-icon.less';
 @import ( less ) 'node_modules/@wikimedia/codex/dist/codex.style.css';
+/* START WbStack Customizations... */
+
+/* Logo */
+.navbar-brand img {
+	display: none;
+}
+
+/* Toolbar -> More Tools */
+#left-navbar > li:nth-child(3) {
+	display: none;
+}
+
+/* Toolbar -> Help -> Help Portal */
+.open > ul:nth-child(3) > li:nth-child(1) {
+	display: none;
+}
+/* Toolbar -> Help -> Request a Query */
+.open > ul:nth-child(3) > li:nth-child(9) {
+	display: none;
+}
+/* Toolbar -> Help -> Licencing */
+.open > ul:nth-child(3) > li:nth-child(11) {
+	display: none;
+}
+
+/* END WbStack Customizations... */
 
 // == Colors =================================================================
 // Codex “WikimediaUI” color palette
@@ -268,6 +294,28 @@ a.disabled {
 .error-character {
 	background: @background-color-error;
 	color: @color-inverted;
+}
+
+#execute-button {
+	-webkit-box-shadow: none;
+	background: @color-primary;
+	border-radius: 2px;
+	border: 2px solid @color-primary;
+	box-shadow: none;
+	margin-bottom: 5px;
+	padding-bottom: 7px;
+	padding-top: 7px;
+	width: 46px;
+
+	&:hover {
+		background: @color-primary--hover;
+		border-color: @color-primary--hover;
+	}
+
+	&:active {
+		background: @color-primary--active;
+		border-color: @color-primary--active;
+	}
 }
 
 #query-result {
@@ -1101,4 +1149,46 @@ div.jqcloud {
 
 .ekko-lightbox-nav-overlay a span {
 	padding: 0;
+}
+
+#query-builder-discovery-feedback {
+	display: none;
+	position: fixed;
+	padding: 10px;
+	background: @background-color-base;
+	border: 2px solid #396;
+	width: 99%;
+	margin-left: 1%;
+	bottom: 1px;
+}
+
+@media ( prefers-reduced-motion: reduce ) {
+	#query-builder-discovery-feedback {
+		display: none !important; // !important to override style= attribute
+	}
+}
+
+/* WbStack Customizations... */
+
+/* Logo */
+.navbar-brand > a:nth-child(1) > img:nth-child(1) {
+		display: none;
+}
+
+/* Toolbar -> More Tools */
+#left-navbar > li:nth-child(3) {
+	display: none;
+}
+
+/* Toolbar -> Help -> Help Portal */
+.open > ul:nth-child(3) > li:nth-child(1) {
+	display: none;
+}
+/* Toolbar -> Help -> Request a Query */
+.open > ul:nth-child(3) > li:nth-child(9) {
+	display: none;
+}
+/* Toolbar -> Help -> Licencing */
+.open > ul:nth-child(3) > li:nth-child(11) {
+	display: none;
 }
