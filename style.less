@@ -7,6 +7,33 @@
 @import ( reference ) './css-icon.less';
 @import ( less ) 'node_modules/@wikimedia/codex/dist/codex.style.css';
 
+/* START WbStack Customizations... */
+
+/* Logo */
+.navbar-brand img {
+	display: none;
+}
+
+/* Toolbar -> More Tools */
+#left-navbar > li:nth-child(3) {
+	display: none;
+}
+
+/* Toolbar -> Help -> Help Portal */
+.open > ul:nth-child(3) > li:nth-child(1) {
+	display: none;
+}
+/* Toolbar -> Help -> Request a Query */
+.open > ul:nth-child(3) > li:nth-child(9) {
+	display: none;
+}
+/* Toolbar -> Help -> Licencing */
+.open > ul:nth-child(3) > li:nth-child(11) {
+	display: none;
+}
+
+/* END WbStack Customizations... */
+
 // == Colors =================================================================
 // Codex “WikimediaUI” color palette
 // Don't use those variables directly, instead define your vars
@@ -57,8 +84,7 @@ pre {
 }
 
 a {
-	color: @color-progressive;
-
+	color: @color-primary;
 	&:hover {
 		color: @color-progressive--hover;
 	}
@@ -266,8 +292,28 @@ a.disabled {
 }
 
 .error-character {
-	background: @background-color-error;
-	color: @color-inverted;
+	background: @color-erroneous;
+	color: @color-base--inverted;
+}
+
+#execute-button {
+	-webkit-box-shadow: none;
+	background: @color-primary;
+	border-radius: 2px;
+	border: 2px solid @color-primary;
+	box-shadow: none;
+	margin-bottom: 5px;
+	padding-bottom: 7px;
+	padding-top: 7px;
+	width: 46px;
+	&:hover {
+		background: @color-primary--hover;
+		border-color: @color-primary--hover;
+	}
+	&:active {
+		background: @color-primary--active;
+		border-color: @color-primary--active;
+	}
 }
 
 #query-result {
@@ -530,8 +576,7 @@ div.shortUrl {
 	}
 
 	.toolbar {
-		border-right: @border-subtle;
-
+		border-right: 1px solid @border-color-heading;
 		.fa {
 			font-size: 1.5em;
 		}
@@ -541,21 +586,10 @@ div.shortUrl {
 			padding-bottom: 0.5rem;
 			padding-top: 0.5rem;
 			text-align: center;
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-
 			.fa {
 				font-size: 1.8em;
 			}
-
-			.query-action-button {
-				&:first-child {
-					margin-bottom: 0.5rem;
-				}
-			}
 		}
-
 		&-top {
 			flex-grow: 1;
 			opacity: 0.5;
@@ -718,8 +752,8 @@ div.shortUrl {
 		.exampleTable {
 			border: @border-base;
 			max-height: 500px;
-			overflow: hidden auto;
-
+			overflow-x: hidden;
+			overflow-y: auto;
 			td {
 				padding: 8px 10px;
 			}
@@ -800,8 +834,7 @@ div.shortUrl {
 
 /* Tag cloud, words are more @background-color-transparent when less important */
 div.jqcloud {
-	color: @color-progressive;
-
+	color: @color-primary;
 	a {
 		color: inherit;
 	}
@@ -900,8 +933,7 @@ div.jqcloud {
 
 /* loading spinner */
 #loading-spinner {
-	color: @color-subtle;
-
+	color: @color-base--subtle;
 	& > .fa-spinner {
 		display: block;
 		margin: 0 auto 20px;
@@ -1021,15 +1053,13 @@ div.jqcloud {
 	.select2-results__option[ aria-selected='true' ] {
 		background: inherit;
 	}
-
-	.select2-results__option--highlighted[ aria-selected ] {
-		background: @background-color-base;
+	.select2-results__option--highlighted[aria-selected] {
+		background: @background-color-framed--hover;
 		color: @color-base;
 	}
 
 	.select2-selection--single {
-		border-radius: @border-radius-base;
-
+		border-radius: 2px;
 		.select2-selection__rendered {
 			color: @color-base;
 		}
@@ -1137,4 +1167,46 @@ div.jqcloud {
 
 .ekko-lightbox-nav-overlay a span {
 	padding: 0;
+}
+
+#query-builder-discovery-feedback {
+	display: none;
+	position: fixed;
+	padding: 10px;
+	background: @background-color-base;
+	border: 2px solid #396;
+	width: 99%;
+	margin-left: 1%;
+	bottom: 1px;
+}
+
+@media ( prefers-reduced-motion: reduce ) {
+	#query-builder-discovery-feedback {
+		display: none !important; // !important to override style= attribute
+	}
+}
+
+/* WbStack Customizations... */
+
+/* Logo */
+.navbar-brand > a:nth-child(1) > img:nth-child(1) {
+		display: none;
+}
+
+/* Toolbar -> More Tools */
+#left-navbar > li:nth-child(3) {
+	display: none;
+}
+
+/* Toolbar -> Help -> Help Portal */
+.open > ul:nth-child(3) > li:nth-child(1) {
+	display: none;
+}
+/* Toolbar -> Help -> Request a Query */
+.open > ul:nth-child(3) > li:nth-child(9) {
+	display: none;
+}
+/* Toolbar -> Help -> Licencing */
+.open > ul:nth-child(3) > li:nth-child(11) {
+	display: none;
 }
