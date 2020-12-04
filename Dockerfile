@@ -13,6 +13,8 @@ RUN npm run-script build
 
 
 FROM nginx:1-alpine
+LABEL org.opencontainers.image.source="https://github.com/wbstack/queryservice-ui"
 
-ADD ./nginx/default.conf /etc/nginx/conf.d/default.conf
+
+ADD ./docker/default.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder --chown=nginx:nginx /src/app/build /usr/share/nginx/html
