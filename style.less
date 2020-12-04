@@ -7,6 +7,38 @@
 @import ( reference ) './css-icon.less';
 @import ( less ) 'node_modules/@wikimedia/codex/dist/codex.style.css';
 
+/* START WbStack Customizations... */
+
+/* Logo */
+.navbar-brand img {
+	display: none;
+}
+
+/* Toolbar -> More Tools */
+#left-navbar > li:nth-child(3) {
+	display: none;
+}
+
+/* Toolbar -> Query Builder */
+#left-navbar > li:nth-child(4) {
+	display: none;
+}
+
+/* Toolbar -> Help -> Help Portal */
+.open > ul:nth-child(3) > li:nth-child(1) {
+	display: none;
+}
+/* Toolbar -> Help -> Request a Query */
+.open > ul:nth-child(3) > li:nth-child(9) {
+	display: none;
+}
+/* Toolbar -> Help -> Licencing */
+.open > ul:nth-child(3) > li:nth-child(11) {
+	display: none;
+}
+
+/* END WbStack Customizations... */
+
 // == Colors =================================================================
 // Codex “WikimediaUI” color palette
 // Don't use those variables directly, instead define your vars
