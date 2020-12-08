@@ -1,8 +1,12 @@
-# queryservice-ui
+# WBStack queryservice-ui
 
-## December 2020
+## 1.1
 
-- 1.0 - Github Build (first)
+December 2020 updates from upstream. [PR](https://github.com/wbstack/queryservice-ui/pull/1)
+
+## 1.0
+
+Github Build (first)
 
 ## May 2020
 
