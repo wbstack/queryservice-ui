@@ -1,5 +1,32 @@
 // Query Service style.less file
 
+/* START WbStack Customizations... */
+
+/* Logo */
+.navbar-brand img {
+	display: none;
+}
+
+/* Toolbar -> More Tools */
+#left-navbar > li:nth-child(3) {
+	display: none;
+}
+
+/* Toolbar -> Help -> Help Portal */
+.open > ul:nth-child(3) > li:nth-child(1) {
+	display: none;
+}
+/* Toolbar -> Help -> Request a Query */
+.open > ul:nth-child(3) > li:nth-child(9) {
+	display: none;
+}
+/* Toolbar -> Help -> Licencing */
+.open > ul:nth-child(3) > li:nth-child(11) {
+	display: none;
+}
+
+/* END WbStack Customizations... */
+
 // == Colors =================================================================
 // WikimediaUI (WMUI) color palette
 // Don't use those variables directly, instead define your vars
@@ -1161,4 +1188,46 @@ div.jqcloud {
 
 .ekko-lightbox-nav-overlay a span {
 	padding: 0;
+}
+
+#query-builder-discovery-feedback {
+	display: none;
+	position: fixed;
+	padding: 10px;
+	background: @background-color-base;
+	border: 2px solid #396;
+	width: 99%;
+	margin-left: 1%;
+	bottom: 1px;
+}
+
+@media ( prefers-reduced-motion: reduce ) {
+	#query-builder-discovery-feedback {
+		display: none !important; // !important to override style= attribute
+	}
+}
+
+/* WbStack Customizations... */
+
+/* Logo */
+.navbar-brand > a:nth-child(1) > img:nth-child(1) {
+		display: none;
+}
+
+/* Toolbar -> More Tools */
+#left-navbar > li:nth-child(3) {
+	display: none;
+}
+
+/* Toolbar -> Help -> Help Portal */
+.open > ul:nth-child(3) > li:nth-child(1) {
+	display: none;
+}
+/* Toolbar -> Help -> Request a Query */
+.open > ul:nth-child(3) > li:nth-child(9) {
+	display: none;
+}
+/* Toolbar -> Help -> Licencing */
+.open > ul:nth-child(3) > li:nth-child(11) {
+	display: none;
 }
