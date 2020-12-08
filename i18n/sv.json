@@ -4,6 +4,7 @@
 			"Jopparn",
 			"Mjälten",
 			"Rockyfelle",
+			"Sabelöga",
 			"Sturban",
 			"WikiPhoenix"
 		]
@@ -18,6 +19,7 @@
 	"wdqs-app-button-clear-title": "Rensa förfrågan",
 	"wdqs-app-button-restore-title": "Återställ föregående fråga",
 	"wdqs-app-button-format-title": "Formatera fråga",
+	"wdqs-app-button-query-helper": "Visa frågeförklaring",
 	"wdqs-app-button-fullscreen-title": "Växla helskärmsläge för redigerare",
 	"wdqs-app-button-display": "Visning",
 	"wdqs-app-button-display-title": "Visa resultat som tabell, bild, ...",
@@ -36,6 +38,7 @@
 	"wdqs-app-help-prefixes": "Lista över prefix",
 	"wdqs-app-help-copy": "Licensinformation",
 	"wdqs-app-help-queryhelper": "Frågehjälpare",
+	"wdqs-app-logout": "Logga ut",
 	"wdqs-app-tools-edit-items": "Redigera objekt",
 	"wdqs-app-tools-query-data": "Förfrågandata",
 	"wdqs-app-tools-enhance-ui": "Förbättra användargränssnittet",
@@ -65,7 +68,7 @@
 	"wdqs-app-editor-addprefixes": "Lägg till standardprefix",
 	"wdqs-app-resultbrowser-response-summary": "$1 {{PLURAL:$1|resultat}} i $2&nbsp;ms",
 	"wdqs-app-resultbrowser-stabilize": "Stabilisera nätverk",
-	"wdqs-app-resultbrowser-hierarchical-lr": "Hierarkisk framläggning från vänster till höger",
+	"wdqs-app-resultbrowser-hierarchical-lr": "Hierarkisk utformning från vänster till höger",
 	"wdqs-app-resultbrowser-hierarchical-ud": "Hierarkisk utformning från topp till botten",
 	"wdqs-app-resultbrowser-hierarchical-rl": "Hierarkisk utformning höger till vänster",
 	"wdqs-app-resultbrowser-non-hierarchical": "Icke-hierarkiskt utseende",

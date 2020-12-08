@@ -3,6 +3,7 @@
 		"authors": [
 			"Athena in Wonderland",
 			"CaiusSPQR",
+			"GoEThe",
 			"Hamilton Abreu",
 			"MokaAkashiyaPT",
 			"Tark",
@@ -19,6 +20,7 @@
 	"wdqs-app-button-clear-title": "Limpar consulta",
 	"wdqs-app-button-restore-title": "Restaurar a consulta anterior",
 	"wdqs-app-button-format-title": "Formatar consulta",
+	"wdqs-app-button-query-helper": "Mostrar explicação da consulta",
 	"wdqs-app-button-fullscreen-title": "Alternar o modo de editor em ecrã cheio",
 	"wdqs-app-button-display": "Mostrar",
 	"wdqs-app-button-display-title": "Mostrar resultado como tabela, imagem, ...",
@@ -37,6 +39,7 @@
 	"wdqs-app-help-prefixes": "Lista de prefixos",
 	"wdqs-app-help-copy": "Informação de licença",
 	"wdqs-app-help-queryhelper": "Assistente de consulta",
+	"wdqs-app-logout": "Sair",
 	"wdqs-app-tools-edit-items": "Editar elementos",
 	"wdqs-app-tools-query-data": "Consultar dados",
 	"wdqs-app-tools-enhance-ui": "Melhorar a interface do utilizador",

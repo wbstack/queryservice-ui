@@ -21,6 +21,14 @@
 			$( '#favicon' ).attr( 'href', config.brand.favicon );
 		}
 
+		function setLogoutLink() {
+			if ( config.logout ) {
+				var $link = $( '<a id="logout" data-i18n="wdqs-app-logout">' ).attr( 'href', config.logout.url );
+				var $entry = $( '<li>' ).append( $link );
+				$( 'ul#right-navbar' ).append( $entry );
+			}
+		}
+
 		function setLanguage( lang, save, callback ) {
 			if ( save ) {
 				Cookies.set( 'lang', lang );
@@ -44,6 +52,7 @@
 		}
 
 		setBrand();
+		setLogoutLink();
 		setExamplesHelpLink();
 		wb.ui.resultBrowser.helper.FormatterHelper.initMoment();
 
@@ -76,6 +85,10 @@
 		var rdfHint = new wb.ui.editor.hint.Rdf( api ),
 				rdfTooltip = new wb.ui.editor.tooltip.Rdf( api ),
 				editor = new wb.ui.editor.Editor( rdfHint, null, rdfTooltip, { focus: isTopWindow } );
+
+		if ( config.prefixes ) {
+			wb.RdfNamespaces.addPrefixes( config.prefixes );
+		}
 
 		function afterLanguageChange() {
 			editor.updatePlaceholder();

@@ -2,9 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Bouman4",
+			"Dutchy45",
 			"Elroy",
 			"Ladsgroup",
 			"Mainframe98",
+			"Marcelhospers",
 			"McDutchie",
 			"MrLeopold",
 			"Robin van der Linde",
@@ -24,6 +26,7 @@
 	"wdqs-app-button-clear-title": "Zoekopdracht wissen",
 	"wdqs-app-button-restore-title": "Vorige zoekopdracht terugzetten",
 	"wdqs-app-button-format-title": "Formaat query",
+	"wdqs-app-button-query-helper": "Uitleg over de vraagstelling",
 	"wdqs-app-button-fullscreen-title": "Schakel de volledig scherm-modus van de editor in",
 	"wdqs-app-button-display": "Weergaven",
 	"wdqs-app-button-display-title": "Toon resultaat als tabel, afbeelding, ...",
@@ -42,6 +45,7 @@
 	"wdqs-app-help-prefixes": "Lijst van voorvoegsels",
 	"wdqs-app-help-copy": "Licentiegegevens",
 	"wdqs-app-help-queryhelper": "Zoekopdracht-assistent",
+	"wdqs-app-logout": "Afmelden",
 	"wdqs-app-tools-edit-items": "Onderdelen bewerken",
 	"wdqs-app-tools-query-data": "Gegevens van vraag",
 	"wdqs-app-tools-enhance-ui": "Verbeter gebruikersinterface",

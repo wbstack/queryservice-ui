@@ -6,6 +6,7 @@
 			"Strayblues",
 			"YaronSh",
 			"המקיסט",
+			"עמד",
 			"ערן"
 		]
 	},
@@ -19,6 +20,7 @@
 	"wdqs-app-button-clear-title": "ניקוי שאילתה",
 	"wdqs-app-button-restore-title": "שחזור השאילתה הקודמת",
 	"wdqs-app-button-format-title": "עיצוב שאילתה",
+	"wdqs-app-button-query-helper": "הצגת הסבר על השאילתה",
 	"wdqs-app-button-fullscreen-title": "שינוי מצב מסך מלא של העורך",
 	"wdqs-app-button-display": "הצגה",
 	"wdqs-app-button-display-title": "הצגת התוצאה כטבלה, תמונה, ...",
@@ -37,6 +39,7 @@
 	"wdqs-app-help-prefixes": "רשימת תחיליות",
 	"wdqs-app-help-copy": "מידע על רישיון",
 	"wdqs-app-help-queryhelper": "סייען שאילתות",
+	"wdqs-app-logout": "יציאה מהחשבון",
 	"wdqs-app-tools-edit-items": "עריכת פריטים",
 	"wdqs-app-tools-query-data": "נתוני שאילתה",
 	"wdqs-app-tools-enhance-ui": "שיפור מנשק המשתמש",
