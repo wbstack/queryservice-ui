@@ -111,7 +111,8 @@
 			sparqlApi,
 			querySamplesApi,
 			codeSamplesApi,
-			shortenApi
+			shortenApi,
+			config.api['query-builder'].server
 		);
 	} );
 
