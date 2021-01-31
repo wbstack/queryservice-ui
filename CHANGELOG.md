@@ -1,5 +1,9 @@
 # WBStack queryservice-ui
 
+## 1.2
+
+January 2021 updates from upstream.
+
 ## 1.1
 
 December 2020 updates from upstream. [PR](https://github.com/wbstack/queryservice-ui/pull/1)
