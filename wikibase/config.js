@@ -99,7 +99,7 @@ var CONFIG = ( function ( window, $ ) {
 	var deferred = $.Deferred(),
 		defaultConfig, customConfig;
 
-	function getEffectiveConfig() {
+	function getEffectiveConfig() {https://gitlab.wikimedia.org/repos/wmde/wikidata-query-gui
 		//return $.extend( true, {}, presets, defaultConfig, customConfig );
 		return $.extend( true, {}, presets, defaultConfig, customConfig, wbstackPresets );
 	}
