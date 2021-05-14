@@ -16,5 +16,5 @@ FROM nginx:1-alpine
 LABEL org.opencontainers.image.source="https://github.com/wbstack/queryservice-ui"
 
 
-ADD ./docker/default.conf /etc/nginx/conf.d/default.conf
+COPY ./docker/default.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder --chown=nginx:nginx /src/app/build /usr/share/nginx/html
