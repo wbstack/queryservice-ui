@@ -1,4 +1,4 @@
-var wikibase = wikibase || {};
+var wikibase = window.wikibase || {};
 wikibase.queryService = wikibase.queryService || {};
 wikibase.queryService.ui = wikibase.queryService.ui || {};
 
@@ -20,6 +20,7 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 	 *
 	 * @param {wikibase.queryService.api.Sparql} sparqlApi
 	 * @param {wikibase.queryService.api.QuerySamples} querySamplesApi
+	 * @param {wikibase.querService.api.Wikibase} wikibaseApi
 	 * @param {?wikibase.queryService.api.CodeSamples} codeSamplesApi
 	 * @param {wikibase.queryService.api.UrlShortener} shortUrlApi
 	 * @param {wikibase.queryService.ui.editor.Editor} [editor]
@@ -28,6 +29,7 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 	function SELF(
 		sparqlApi,
 		querySamplesApi,
+		wikibaseApi,
 		codeSamplesApi,
 		shortUrlApi,
 		editor,
@@ -35,10 +37,12 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 	) {
 		this._sparqlApi = sparqlApi;
 		this._querySamplesApi = querySamplesApi;
+		this._wikibaseApi = wikibaseApi;
 		this._codeSamplesApi = codeSamplesApi;
 		this._shorten = shortUrlApi;
 		this._editor = editor || null;
 		this._queryBuilderUrl = queryBuilderUrl;
+		this._originalDocumentTitle = document.title;
 
 		this._init();
 	}
@@ -60,6 +64,18 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 	 * @private
 	 */
 	SELF.prototype._sparqlApi = null;
+
+	/**
+	 * @property {wikibase.queryService.api.QuerySamples}
+	 * @private
+	 */
+	SELF.prototype._querySamplesApi = null;
+
+	/**
+	 * @property {wikibase.queryService.api.Wikibase}
+	 * @private
+	 */
+	SELF.prototype._wikibaseApi = null;
 
 	/**
 	 * @property {?wikibase.queryService.api.CodeSamples}
@@ -108,6 +124,12 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 	 * @private
 	 */
 	SELF.prototype._queryBuilderUrl = null;
+
+	/**
+	 * @property {string}
+	 * @private
+	 */
+	SELF.prototype._originalDocumentTitle = null;
 
 	/**
 	 * @property {Object}
@@ -508,7 +530,7 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 						self.draw( query );
 						window.location.hash = '#' + encodeURIComponent( '#' + title + '\n' + query );
 					}
-				} );
+				}, this._wikibaseApi );
 	};
 
 	/**
@@ -698,6 +720,15 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 				resultBrowser.draw( $( '#query-result' ) );
 				$( '#MJX-CHTML-styles' ).replaceWith( MathJax.chtmlStylesheet() );
 				self._actionBar.hide();
+
+				var title = self._query.match( /#title:(.*)/ );
+
+				if ( title && title[ 1 ] ) {
+					self._actionBar.show( title[ 1 ] , '' );
+					document.title = title[ 1 ] + ' - ' + self._originalDocumentTitle;
+				} else {
+					document.title = self._originalDocumentTitle;
+				}
 			} catch ( e ) {
 				self._drawErrorResult( resultBrowser );
 

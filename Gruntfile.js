@@ -293,40 +293,26 @@ module.exports = function( grunt ) {
 		var done = this.async();
 		var spawn = require( 'child_process' ).spawn;
 
-		// Install selenium-standalone if necessary
-		spawn( 'node_modules/.bin/selenium-standalone', [ 'install' ], {
+		var serverProcess = spawn( 'node_modules/.bin/http-server', [ '-p', '8082' ], {
 			stdio: [ process.stdin, process.stdout, process.stderr ]
-		} ).on( 'exit', function () {
+		} );
 
-			// Run server
-			var serverProcess = spawn( 'node_modules/.bin/http-server', [ '-p', '8082' ], {
-				stdio: [ process.stdin, process.stdout, process.stderr ]
-			} );
-			var seleniumProcess = spawn( 'node_modules/.bin/selenium-standalone', [ 'start' ], {
-				stdio: [ process.stdin, process.stdout, process.stderr ]
-			} );
+		var wdioProcess = spawn( 'node_modules/.bin/wdio', [], {
+			stdio: [ process.stdin, process.stdout, process.stderr ]
+		} );
 
-			// Run tests
-			var wdioProcess = spawn( 'node_modules/.bin/wdio', [], {
-				stdio: [ process.stdin, process.stdout, process.stderr ]
-			} );
-
-			wdioProcess.on( 'exit', function ( error ) {
-				serverProcess.kill();
-				seleniumProcess.kill();
-				if ( error ) {
-					done( false );
-				} else {
-					done( true );
-				}
-			} );
-
-			wdioProcess.on( 'error', function ( error ) {
-				serverProcess.kill();
-				seleniumProcess.kill();
+		wdioProcess.on( 'exit', function ( error ) {
+			serverProcess.kill();
+			if ( error ) {
 				done( false );
-			} );
+			} else {
+				done( true );
+			}
+		} );
 
+		wdioProcess.on( 'error', function ( error ) {
+			serverProcess.kill();
+			done( false );
 		} );
 
 	} );
@@ -345,8 +331,11 @@ module.exports = function( grunt ) {
 	grunt.registerTask( 'only_build', [
 		'less', 'copy', 'useminPrepare', 'concat', 'cssmin', 'uglify', 'filerev', 'usemin', 'htmlmin', 'merge-i18n'
 	] );
+	grunt.registerTask( 'build_for_deploy', [
+		'test', 'browser_test', 'clean', 'shell:cloneDeploy', 'clean:deploy', 'only_build'
+	] );
 	grunt.registerTask( 'deploy', [
-		'test', 'browser_test', 'clean', 'shell:cloneDeploy', 'clean:deploy', 'only_build', 'shell:commitDeploy', 'shell:review'
+		'build-for-deploy', 'shell:commitDeploy', 'shell:review'
 	] );
 	grunt.registerTask( 'security', [
 		'clean', 'shell:cloneDeploy', 'clean:deploy', 'only_build', 'shell:commitDeploy', 'shell:formatPatchDeploy'

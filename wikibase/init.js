@@ -110,6 +110,7 @@
 			new wb.ui.queryHelper.QueryHelper( api, sparqlApiHelper ),
 			sparqlApi,
 			querySamplesApi,
+			api,
 			codeSamplesApi,
 			shortenApi,
 			config.api['query-builder'].server
