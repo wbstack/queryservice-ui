@@ -1,5 +1,9 @@
 # WBStack queryservice-ui
 
+## 1.3
+
+June 2021 updates from upstream.
+
 ## 1.2
 
 January 2021 updates from upstream.
