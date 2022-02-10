@@ -42,7 +42,6 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 		this._shorten = shortUrlApi;
 		this._editor = editor || null;
 		this._queryBuilderUrl = queryBuilderUrl;
-		this._originalDocumentTitle = document.title;
 
 		this._init();
 	}
@@ -124,12 +123,6 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 	 * @private
 	 */
 	SELF.prototype._queryBuilderUrl = null;
-
-	/**
-	 * @property {string}
-	 * @private
-	 */
-	SELF.prototype._originalDocumentTitle = null;
 
 	/**
 	 * @property {Object}
@@ -238,8 +231,9 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 
 	/**
 	 * @property {string}
+	 * It gets overridden by embedInit.js
 	 */
-	SELF.prototype.trackingNamespace = 'wikibase.queryService.ui.';
+	SELF.prototype.trackingNamespace = 'wikibase.queryService.ui.index.';
 
 	/**
 	 * Initialize private members and call delegate to specific init methods
@@ -530,7 +524,7 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 						self.draw( query );
 						window.location.hash = '#' + encodeURIComponent( '#' + title + '\n' + query );
 					}
-				}, this._wikibaseApi );
+				}, this._wikibaseApi, this._queryBuilderUrl );
 	};
 
 	/**
@@ -725,9 +719,6 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 
 				if ( title && title[ 1 ] ) {
 					self._actionBar.show( title[ 1 ] , '' );
-					document.title = title[ 1 ] + ' - ' + self._originalDocumentTitle;
-				} else {
-					document.title = self._originalDocumentTitle;
 				}
 			} catch ( e ) {
 				self._drawErrorResult( resultBrowser );

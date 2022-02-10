@@ -72,7 +72,8 @@ module.exports = function( grunt ) {
 		banana: {
 			all: 'i18n/',
 					options: {
-						disallowBlankTranslations: false
+						disallowBlankTranslations: false,
+						requireKeyPrefix: 'wdqs-'
 					}
 				},
 		clean: {
@@ -179,6 +180,10 @@ module.exports = function( grunt ) {
 							],
 							dest: buildFolder + '/default-config.json',
 							filter: 'isFile'
+						},
+						{// query builder dropdown image
+							src: 'wikibase/queryService/ui/304px_querybuilder_final.gif',
+							dest: buildFolder + '/',
 						}
 				]
 			}
@@ -335,7 +340,7 @@ module.exports = function( grunt ) {
 		'test', 'browser_test', 'clean', 'shell:cloneDeploy', 'clean:deploy', 'only_build'
 	] );
 	grunt.registerTask( 'deploy', [
-		'build-for-deploy', 'shell:commitDeploy', 'shell:review'
+		'build_for_deploy', 'shell:commitDeploy', 'shell:review'
 	] );
 	grunt.registerTask( 'security', [
 		'clean', 'shell:cloneDeploy', 'clean:deploy', 'only_build', 'shell:commitDeploy', 'shell:formatPatchDeploy'

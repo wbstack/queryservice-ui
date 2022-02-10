@@ -147,6 +147,12 @@ wikibase.queryService.ui.resultBrowser.helper.FormatterHelper = ( function( $, m
 
 		switch ( data.datatype || data.type ) {
 		case TYPE_URI:
+			if ( /^javascript:/.test( value ) ) {
+				// don’t treat JavaScript URIs as URIs
+				data = $.extend( {}, data, { datatype: DATATYPE_STRING } );
+				return this.formatValue( data, title, embed );
+			}
+
 			var $link = $( '<a>' ).attr( { title: title, href: value, target: '_blank', class: 'item-link', rel: 'noopener' } );
 			$html.append( $link );
 
@@ -276,8 +282,14 @@ wikibase.queryService.ui.resultBrowser.helper.FormatterHelper = ( function( $, m
 	 * @return {jQuery}
 	 */
 	SELF.prototype.createExploreButton = function( url ) {
-		var $button = $( '<a href="' + url +
-				'" title="Explore item" class="explore glyphicon glyphicon-search" tabindex="-1" aria-hidden="true">' );
+		var $button = $( '<a>' )
+			.attr( {
+				href: url,
+				title: 'Explore item', // TODO i18n
+				class: 'explore glyphicon glyphicon-search',
+				tabindex: '-1',
+				'aria-hidden': 'true',
+			} );
 		$button.click( $.proxy( this.handleExploreItem, this ) );
 
 		return $button;

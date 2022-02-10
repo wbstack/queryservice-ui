@@ -29,6 +29,7 @@ wikibase.queryService.ui.App = ( function( $, window, _, Cookies, moment ) {
 	 * @param {wikibase.queryService.api.CodeSamples} codeSamplesApi
 	 * @param {wikibase.queryService.api.UrlShortener} shortUrlApi
 	 * @param {string} queryBuilderUrl
+	 * @param {boolean} showBanner
 	 */
 	function SELF(
 		$element,
@@ -39,7 +40,8 @@ wikibase.queryService.ui.App = ( function( $, window, _, Cookies, moment ) {
 		wikibaseApi,
 		codeSamplesApi,
 		shortUrlApi,
-		queryBuilderUrl
+		queryBuilderUrl,
+		showBanner
 	) {
 		this._$element = $element;
 		this._editor = editor;
@@ -50,6 +52,7 @@ wikibase.queryService.ui.App = ( function( $, window, _, Cookies, moment ) {
 		this._codeSamplesApi = codeSamplesApi;
 		this._shorten = shortUrlApi;
 		this._queryBuilderUrl = queryBuilderUrl;
+		this._showBanner = showBanner;
 
 		this._init();
 	}
@@ -127,6 +130,12 @@ wikibase.queryService.ui.App = ( function( $, window, _, Cookies, moment ) {
 	SELF.prototype._queryBuilderUrl = null;
 
 	/**
+	 * @property {string}
+	 * @private
+	 */
+	SELF.prototype._originalDocumentTitle = null;
+
+	/**
 	 * @property {boolean}
 	 * @private
 	 */
@@ -167,6 +176,8 @@ wikibase.queryService.ui.App = ( function( $, window, _, Cookies, moment ) {
 		}
 
 		this._track( 'init' );
+
+		this._originalDocumentTitle = document.title;
 
 		this._initApp();
 		this._initEditor();
@@ -214,6 +225,31 @@ wikibase.queryService.ui.App = ( function( $, window, _, Cookies, moment ) {
 		$( '#display-button' ).tooltip();
 		$( '#download-button' ).tooltip();
 		$( '#link-button' ).tooltip();
+
+		function onBannerDismiss() {
+			$( '.navbar' ).css( 'border-top-width', '' );
+		}
+
+		function renderBanner( banner ) {
+			$( 'body' ).prepend( banner );
+			$( '.navbar' ).css( 'border-top-width', '0' );
+		}
+
+		// render the banner
+		if ( this._showBanner ) {
+			var bannerContent = $( '<span>' )
+				.attr( 'data-i18n', '[html]wdqs-app-query-builder-banner-content' )
+				.addClass( 'wdqs-app-query-builder-banner-content' )
+				.html( 'Do you need help creating a query? You can build queries without ' +
+					'having to write SPARQL in the new <a>Query Builder</a>.' );
+			new wikibase.queryService.ui.Banner(
+				'survey2021Banner',
+				renderBanner,
+				onBannerDismiss,
+				true,
+				bannerContent
+			);
+		}
 
 		this._actionBar = new wikibase.queryService.ui.toolbar.Actionbar( $( '.action-bar' ) );
 
@@ -561,6 +597,7 @@ wikibase.queryService.ui.App = ( function( $, window, _, Cookies, moment ) {
 			this._editor.setValue( decodeURIComponent( window.location.hash.substr( 1 ) ) );
 			this._editor.refresh();
 			this._isHistoryDisabled = false;
+			this._updateTitle();
 		}
 	};
 
@@ -775,6 +812,7 @@ wikibase.queryService.ui.App = ( function( $, window, _, Cookies, moment ) {
 		e.preventDefault();
 		this._editor.save();
 		this._updateQueryUrl();
+		this._updateTitle();
 
 		$( '#execute-button' ).prop( 'disabled', true );
 		if ( this._isEmptyQuery() ) {
@@ -834,6 +872,19 @@ wikibase.queryService.ui.App = ( function( $, window, _, Cookies, moment ) {
 			} else {
 				window.location.hash = hash;
 			}
+		}
+	};
+
+	/**
+	 * @private
+	 */
+	SELF.prototype._updateTitle = function() {
+		var title = this._editor.getValue().match( /#title:(.*)/ );
+
+		if ( title && title[ 1 ] ) {
+			document.title = title[ 1 ] + ' - ' + this._originalDocumentTitle;
+		} else {
+			document.title = this._originalDocumentTitle;
 		}
 	};
 
