@@ -25,6 +25,11 @@
 	display: none;
 }
 
+// https://phabricator.wikimedia.org/T301255
+#query-builder-dd {
+	display: none;
+}
+
 /* END WbStack Customizations... */
 
 // == Colors =================================================================
@@ -184,6 +189,30 @@ a {
 	display: none;
 }
 
+.banner {
+	background-color: @wmui-color-base80;
+	border: 1px solid @wmui-color-base70;
+	padding: 15px 25px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	&__text {
+		display: flex;
+		align-items: center;
+	}
+
+	button {
+		margin-top: -2px;
+		padding-left: 15px;
+	}
+
+	.glyphicon {
+		padding: 0 0.5em 0 0;
+		font-size: 18px;
+	}
+}
+
 .navbar,
 .toolbar {
 	-webkit-box-shadow: none;
@@ -204,6 +233,14 @@ a {
 
 		& > li > a:hover {
 			background: @background-color-framed--hover;
+		}
+
+		&.query-builder {
+			padding: 15px;
+
+			p {
+				white-space: break-spaces;
+			}
 		}
 	}
 
@@ -689,6 +726,12 @@ div.shortUrl {
 	.fa:before,
 	.glyphicon:before {
 		margin-right: 3px;
+	}
+}
+
+#query-builder-dd:hover {
+	.dropdown-menu {
+		display: block;
 	}
 }
 

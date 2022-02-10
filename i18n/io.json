@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Algentem",
+			"JSantos",
 			"Joao Xavier"
 		]
 	},
@@ -10,7 +11,7 @@
 	"wdqs-app-button-more-tools": "Plura utensili",
 	"wdqs-app-button-help": "Helpo",
 	"wdqs-app-button-run": "Exekutar",
-	"wdqs-app-button-run-title": "Demandez (<CTRL>+<ENTER>)",
+	"wdqs-app-button-run-title": "Facez questiono (CTRL+ENTER)",
 	"wdqs-app-button-clear": "Vakuigar",
 	"wdqs-app-button-clear-title": "Efacar demando",
 	"wdqs-app-button-restore-title": "Restaurar l'antea demando",
@@ -30,6 +31,11 @@
 	"wdqs-app-help-portal": "Helpo-portalo",
 	"wdqs-app-help-manual": "Lernolibro por la uzero",
 	"wdqs-app-help-examples": "Exempli pri demandi",
+	"wdqs-app-query-builder-name": "Questiono-Konstruktilo (''Query Builder'')",
+	"wdqs-app-query-builder-dd-title": "Questionar sen uzar SPARQL",
+	"wdqs-app-query-builder-dd-copy": "Questionar visuale kun poka kliki. Ne bezonas konocar SPARQL.",
+	"wdqs-app-query-builder-banner-content": "Ka vu bezonas helpo por krear demando? Vu povas krear inquesti sen skribar SPARKL en la nova <a>demando-konstruktero (''Query Builder'')</a>.",
+	"wdqs-app-query-builder-example-banner-content": "Vu povas krear demandi sen redaktar uzanta SPARKL, uzanta <a>demando-konstruktero (''Query Builder'')</a>.",
 	"wdqs-app-help-datamodel": "Modelo pri dati RDF",
 	"wdqs-app-help-prefixes": "Listo di prefixi",
 	"wdqs-app-help-copy": "Informi pri permiso di uzo",
@@ -108,7 +114,7 @@
 	"wdqs-ve-remove-row-title": "Desblokusar ica kolumno",
 	"wdqs-ve-with": "kun",
 	"wdqs-ve-anything": "ulo",
-	"wdqs-ve-any": "ula",
+	"wdqs-ve-any": "irga",
 	"wdqs-ve-or": "o",
 	"wdqs-ve-subtype": "subtipo",
 	"wdqs-ve-sb-suggestions": "Sugesti",
