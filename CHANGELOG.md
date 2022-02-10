@@ -1,5 +1,11 @@
 # WBStack queryservice-ui
 
+## 1.4
+
+February 2022 updates from upstream.
+Security patches.
+Includes hotfix until upstream [bug](https://phabricator.wikimedia.org/T301255) is resolved
+
 ## 1.3
 
 June 2021 updates from upstream.
