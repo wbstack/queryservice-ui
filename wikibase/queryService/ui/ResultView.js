@@ -163,35 +163,40 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 			label: [ 'wdqs-app-resultbrowser-line-chart', 'Line chart' ],
 			class: 'LineChartResultBrowser',
 			object: null,
-			$element: null
+			$element: null,
+			supportsSvgDownload: true
 		},
 		BarChart: {
 			icon: 'fa-bar-chart',
 			label: [ 'wdqs-app-resultbrowser-bar-chart', 'Bar chart' ],
 			class: 'BarChartResultBrowser',
 			object: null,
-			$element: null
+			$element: null,
+			supportsSvgDownload: true
 		},
 		ScatterChart: {
 			icon: 'fa-braille',
 			label: [ 'wdqs-app-resultbrowser-scatter-chart', 'Scatter chart' ],
 			class: 'ScatterChartResultBrowser',
 			object: null,
-			$element: null
+			$element: null,
+			supportsSvgDownload: true
 		},
 		AreaChart: {
 			icon: 'fa-area-chart',
 			label: [ 'wdqs-app-resultbrowser-area-chart', 'Area chart' ],
 			class: 'AreaChartResultBrowser',
 			object: null,
-			$element: null
+			$element: null,
+			supportsSvgDownload: true
 		},
 		BubbleChart: {
 			icon: 'glyphicon-tint',
 			label: [ 'wdqs-app-resultbrowser-bubble-chart', 'Bubble chart' ],
 			class: 'BubbleChartResultBrowser',
 			object: null,
-			$element: null
+			$element: null,
+			supportsSvgDownload: true
 		},
 		TreeMap: {
 			icon: 'glyphicon-th',
@@ -219,7 +224,8 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 			label: [ 'wdqs-app-resultbrowser-dimensions', 'Dimensions' ],
 			class: 'MultiDimensionResultBrowser',
 			object: null,
-			$element: null
+			$element: null,
+			supportsSvgDownload: true
 		},
 		Graph: {
 			icon: 'glyphicon-retweet',
@@ -444,6 +450,7 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 
 			if ( browserOptions.defaultName === key ) {
 				self._setSelectedDisplayType( b );
+				self._setSvgDownloadVisibility( b );
 				defaultBrowser = instance;
 			}
 
@@ -457,7 +464,10 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 			b.object = instance;
 		} );
 		if ( defaultBrowser === null ) {
-			defaultBrowser = this._resultBrowsers.Table.object;
+			var b = this._resultBrowsers.Table;
+			this._setSelectedDisplayType( b );
+			this._setSvgDownloadVisibility( b );
+			defaultBrowser = b.object;
 		}
 
 		defaultBrowser.resetVisitors();
@@ -653,6 +663,9 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 
 				if ( data ) {
 					download( data, filename, mimetype );
+				} else {
+					window.console.warn( 'Unable to create ' + filename + ' download' );
+					self._track( 'buttonClick.downloadError.' + filename );
 				}
 			};
 		};
@@ -683,6 +696,7 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 					$( this ).closest( '.open' ).removeClass( 'open' );
 
 					self._setSelectedDisplayType( b );
+					self._setSvgDownloadVisibility( b );
 
 					$( '#query-result' ).html( '' );
 					self._drawResult( b.object );
@@ -749,6 +763,15 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 	SELF.prototype._setSelectedDisplayType = function ( browser ) {
 		$( '#display-button-icon' ).attr( 'class', browser.icon.split( '-', 1 )[0] + ' ' + browser.icon );
 		$( '#display-button-label' ).text( browser.label );
+	};
+
+	/**
+	 * @private
+	 */
+	SELF.prototype._setSvgDownloadVisibility = function ( browser ) {
+		var elements = $( '#downloadSVG' ).parent( 'li' );
+		elements = elements.add( elements.prev( 'li.divider' ) );
+		elements.toggle( !!browser.supportsSvgDownload );
 	};
 
 	/**
