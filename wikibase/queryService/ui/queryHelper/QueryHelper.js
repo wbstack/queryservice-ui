@@ -209,7 +209,7 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function( $, wikibase, _ ) 
 	 * @private
 	 */
 	SELF.prototype._createTagCloud = function () {
-		return; //T195384
+		return; // T195384
 //		var $tagCloud = $( '.query-helper-tag-cloud' );
 //		if ( $tagCloud.length > 0 ) {
 //			$tagCloud.html( this._createSection( this._createTagCloudShow(), this._createTagCloudFilter() ) );
@@ -251,7 +251,7 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function( $, wikibase, _ ) 
 					self._changeListener( self );
 				}
 				self._createTagCloud();
-				return true;//close popover
+				return true;// close popover
 			}
 		} );
 
@@ -634,7 +634,7 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function( $, wikibase, _ ) 
 				}
 			} );
 
-			//TODO: refactor method
+			// TODO: refactor method
 			self._selectorBox.add( $link, triple.triple, function( selectedId ) {
 				var newEntity = entity.replace( new RegExp( id + '$' ), '' ) + selectedId;// TODO: technical debt
 
