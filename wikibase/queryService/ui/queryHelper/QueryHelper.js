@@ -3,7 +3,7 @@ wikibase.queryService = wikibase.queryService || {};
 wikibase.queryService.ui = wikibase.queryService.ui || {};
 wikibase.queryService.ui.queryHelper = wikibase.queryService.ui.queryHelper || {};
 
-wikibase.queryService.ui.queryHelper.QueryHelper = ( function( $, wikibase, _ ) {
+wikibase.queryService.ui.queryHelper.QueryHelper = ( function ( $, wikibase, _ ) {
 	'use strict';
 
 	var FILTER_PREDICATES = {
@@ -83,7 +83,7 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function( $, wikibase, _ ) 
 	 *
 	 * @param {string} query SPARQL query string
 	 */
-	SELF.prototype.setQuery = function( query ) {
+	SELF.prototype.setQuery = function ( query ) {
 		var prefixes = wikibase.queryService.RdfNamespaces.ALL_PREFIXES;
 		this._query.parse( query, prefixes );
 
@@ -95,7 +95,7 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function( $, wikibase, _ ) 
 	 *
 	 * @return {string|null}
 	 */
-	SELF.prototype.getQuery = function() {
+	SELF.prototype.getQuery = function () {
 		try {
 			return this._query.getQueryString().trim();
 		} catch ( e ) {
@@ -108,7 +108,7 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function( $, wikibase, _ ) 
 	 *
 	 * @param {jQuery} $element
 	 */
-	SELF.prototype.draw = function( $element ) {
+	SELF.prototype.draw = function ( $element ) {
 		var template = wikibase.queryService.ui.queryHelper.QueryTemplate.parse( this._query ),
 			self = this,
 			bindings = this._query.getBindings();
@@ -120,11 +120,11 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function( $, wikibase, _ ) 
 		if ( template !== null ) {
 			try {
 				return this._$element.html( template.getHtml(
-					function( variable ) {
+					function ( variable ) {
 						return self._getLabel( bindings[ variable ].expression );
 					},
 					this._selectorBox,
-					function( variable, oldId, newId ) {
+					function ( variable, oldId, newId ) {
 						bindings[ variable ].expression = bindings[ variable ].expression
 							.replace( new RegExp( oldId + '$' ), '' )
 							+ newId;
@@ -156,14 +156,14 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function( $, wikibase, _ ) 
 	 *
 	 * @param {Function} listener a function called when query changed
 	 */
-	SELF.prototype.setChangeListener = function( listener ) {
+	SELF.prototype.setChangeListener = function ( listener ) {
 		this._changeListener = listener;
 	};
 
 	/**
 	 * @private
 	 */
-	SELF.prototype._i18nSpan = function( key, message ) {
+	SELF.prototype._i18nSpan = function ( key, message ) {
 		return $( '<span>' )
 			.attr( 'data-i18n', key )
 			.text( wikibase.queryService.ui.i18n.getMessage( key, message ) );
@@ -172,7 +172,7 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function( $, wikibase, _ ) 
 	/**
 	 * @private
 	 */
-	SELF.prototype._getHtml = function() {
+	SELF.prototype._getHtml = function () {
 		var self = this,
 			$html = $( '<div>' )
 				.attr( 'class', 'panel-body-sub' ),
@@ -183,7 +183,7 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function( $, wikibase, _ ) 
 				.attr( 'class', 'query-helper-data' )
 				.bootstrapTable( TABLE_OPTIONS );
 
-		$.each( this._triples, function( k, triple ) {
+		$.each( this._triples, function ( k, triple ) {
 			if ( self._isNotRelevant( triple.triple ) ) {
 				return;
 			}
@@ -219,7 +219,7 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function( $, wikibase, _ ) 
 	/**
 	 * @private
 	 */
-	SELF.prototype._getLimitSection = function() {
+	SELF.prototype._getLimitSection = function () {
 		var $limitSection = $( '<div>' )
 				.attr( 'class', 'query-helper-limit-section' ),
 			$limit = $( '<a data-type="number">' )
@@ -231,7 +231,7 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function( $, wikibase, _ ) 
 				.text( this._query.getLimit() || '' );
 
 		var self = this;
-		this._selectorBox.add( $limit, null, function( value ) {
+		this._selectorBox.add( $limit, null, function ( value ) {
 			if ( value === '0' ) {
 				value = null;
 			}
@@ -243,7 +243,7 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function( $, wikibase, _ ) 
 				self._changeListener( self );
 			}
 		}, {
-			trash: function() {
+			trash: function () {
 				self._query.setLimit( null );
 				$limit.data( 'value', '' );
 				$value.text( '' );
@@ -261,7 +261,7 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function( $, wikibase, _ ) 
 	/**
 	 * @private
 	 */
-	SELF.prototype._createSection = function( $td2, $td1 ) {
+	SELF.prototype._createSection = function ( $td2, $td1 ) {
 		return $( '<table>' ).attr( 'class', 'query-helper-section' )
 			.append( $( '<tr>' ).append(
 				$( '<td>' ).append( $td1 ),
@@ -272,12 +272,12 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function( $, wikibase, _ ) 
 	/**
 	 * @private
 	 */
-	SELF.prototype._createTagCloudShow = function() {
+	SELF.prototype._createTagCloudShow = function () {
 		var self = this,
 		$tagCloud = $( '<div data-entity="property" data-type="tagCloud" class="tagCloud">' );
 
 		// SelectorBox
-		this._selectorBox.add( $tagCloud, null, function( id, name, update ) {
+		this._selectorBox.add( $tagCloud, null, function ( id, name, update ) {
 			var prop = 'http://www.wikidata.org/prop/direct/' + id;// FIXME technical debt
 
 			var subject = self._query.getBoundVariables().shift() || '?item';
@@ -302,12 +302,12 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function( $, wikibase, _ ) 
 	/**
 	 * @private
 	 */
-	SELF.prototype._createTagCloudFilter = function() {
+	SELF.prototype._createTagCloudFilter = function () {
 		var self = this,
 			$tagCloud = $( '<div data-entity="item" data-type="tagCloud" class="tagCloud">' );
 
 		// SelectorBox
-		self._selectorBox.add( $tagCloud, null, function( id, name, propertyId, update ) {
+		self._selectorBox.add( $tagCloud, null, function ( id, name, propertyId, update ) {
 			var entity = 'http://www.wikidata.org/entity/' + id;// FIXME technical debt
 
 			var variable = self._query.getBoundVariables().shift();
@@ -336,7 +336,7 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function( $, wikibase, _ ) 
 	/**
 	 * @private
 	 */
-	SELF.prototype._createFindButton = function( $table ) {
+	SELF.prototype._createFindButton = function ( $table ) {
 		// Show link
 		var $button = $( '<a class="btn">' )
 			.append( this._i18nSpan( 'wdqs-ve-filter', 'Filter' ) )
@@ -349,7 +349,7 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function( $, wikibase, _ ) 
 
 		// SelectorBox
 		var self = this;
-		this._selectorBox.add( $button, null, function( id, name, propertyId ) {
+		this._selectorBox.add( $button, null, function ( id, name, propertyId ) {
 			var entity = 'http://www.wikidata.org/entity/' + id;// FIXME technical debt
 
 			var variable = self._query.getBoundVariables().shift();
@@ -379,7 +379,7 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function( $, wikibase, _ ) 
 	/**
 	 * @private
 	 */
-	SELF.prototype._createShowButton = function( $table ) {
+	SELF.prototype._createShowButton = function ( $table ) {
 		// Show link
 		var $button = $( '<a class="btn">' )
 			.append( this._i18nSpan( 'wdqs-ve-show', 'Show' ) )
@@ -392,7 +392,7 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function( $, wikibase, _ ) 
 
 		// SelectorBox
 		var self = this;
-		this._selectorBox.add( $button, null, function( id, name ) {
+		this._selectorBox.add( $button, null, function ( id, name ) {
 			var prop = 'http://www.wikidata.org/prop/direct/' + id;// FIXME technical debt
 
 			var subject = self._query.getBoundVariables().shift() || '?item';
@@ -417,7 +417,7 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function( $, wikibase, _ ) 
 	/**
 	 * @private
 	 */
-	SELF.prototype._addLabelVariableAfterItemColumn = function( propertyId, triple ) {
+	SELF.prototype._addLabelVariableAfterItemColumn = function ( propertyId, triple ) {
 		var self = this;
 
 		this._api.getDataType( propertyId ).done( function ( type ) {
@@ -430,7 +430,7 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function( $, wikibase, _ ) 
 	/**
 	 * @private
 	 */
-	SELF.prototype._isNotRelevant = function( triple ) {
+	SELF.prototype._isNotRelevant = function ( triple ) {
 		if ( FILTER_PREDICATES[triple.predicate] ) {
 			return true;
 		}
@@ -448,7 +448,7 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function( $, wikibase, _ ) 
 	/**
 	 * @private
 	 */
-	SELF.prototype._isInShowSection = function( triple ) {
+	SELF.prototype._isInShowSection = function ( triple ) {
 		var bindings = this._query.getBindings();
 
 		// Must match ?value wdt:Pxx ?item
@@ -463,12 +463,12 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function( $, wikibase, _ ) 
 	/**
 	 * @private
 	 */
-	SELF.prototype._getTripleHtml = function( triple ) {
+	SELF.prototype._getTripleHtml = function ( triple ) {
 		var self = this,
 			$triple = $( '<tr>' ),
 			bindings = this._query.getBindings();
 
-		$.each( triple.triple, function( k, entity ) {
+		$.each( triple.triple, function ( k, entity ) {
 			if ( self._isVariable( entity ) && bindings[entity] &&
 					typeof bindings[entity].expression === 'string' ) {
 				entity = bindings[entity].expression;
@@ -496,7 +496,7 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function( $, wikibase, _ ) 
 	/**
 	 * @private
 	 */
-	SELF.prototype._getTripleHtmlToolbar = function( $triple, triple ) {
+	SELF.prototype._getTripleHtmlToolbar = function ( $triple, triple ) {
 		var self = this;
 
 		var $delete = $( '<a href="#">' ).addClass( 'fa fa-trash-o' ).click( function () {
@@ -536,7 +536,7 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function( $, wikibase, _ ) 
 	/**
 	 * @private
 	 */
-	SELF.prototype._addLabelVariable = function( triple ) {
+	SELF.prototype._addLabelVariable = function ( triple ) {
 
 		this._query.convertWildcardQueryToUseVariables();
 
@@ -553,18 +553,18 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function( $, wikibase, _ ) 
 	/**
 	 * @private
 	 */
-	SELF.prototype._isVariable = function( entity ) {
+	SELF.prototype._isVariable = function ( entity ) {
 		return typeof entity === 'string' && entity.startsWith( '?' );
 	};
 
 	/**
 	 * @private
 	 */
-	SELF.prototype._isSimpleQuery = function() {
+	SELF.prototype._isSimpleQuery = function () {
 		var boundVariables = {};
 
 		var self = this;
-		$.each( this._triples, function( k, t ) {
+		$.each( this._triples, function ( k, t ) {
 			// Must match ?value wdt:Pxx ?item
 			if ( self._isVariable( t.triple.subject ) &&
 					self._isVariable( t.triple.object ) === false ) {
@@ -578,10 +578,10 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function( $, wikibase, _ ) 
 	/**
 	 * @private
 	 */
-	SELF.prototype._getTripleEntityPathHtml = function( path, triple ) {
+	SELF.prototype._getTripleEntityPathHtml = function ( path, triple ) {
 		var self = this,
 			$path = $( '<span>' );
-		$.each( path.items, function( k, v ) {
+		$.each( path.items, function ( k, v ) {
 			if ( v.type && v.type === 'path' ) {
 				$path.append( self._getTripleEntityPathHtml( v, triple ) );
 				return;
@@ -598,7 +598,7 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function( $, wikibase, _ ) 
 			}
 
 			// FIXME: Do not fake triple here
-			var newTriple = path.items.reduce( function( o, v, i ) {
+			var newTriple = path.items.reduce( function ( o, v, i ) {
 				o[i] = v;
 				return o;
 			}, {} );
@@ -615,11 +615,11 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function( $, wikibase, _ ) 
 	/**
 	 * @private
 	 */
-	SELF.prototype._getTripleEntityHtml = function( entity, triple, key ) {
+	SELF.prototype._getTripleEntityHtml = function ( entity, triple, key ) {
 		var self = this,
 			$label = $( '<span>' );
 
-		this._getLabel( entity ).done( function( label, id, description, type ) {
+		this._getLabel( entity ).done( function ( label, id, description, type ) {
 			var $link = $( '<a>' )
 				.text( label )
 				.attr( { 'data-id': id, 'data-type': type, href: '#' } )
@@ -628,14 +628,14 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function( $, wikibase, _ ) 
 			$label.tooltip( {
 				'title': '(' + id + ') ' + description
 			} );
-			$( $label ).on( 'show.bs.tooltip', function() {
+			$( $label ).on( 'show.bs.tooltip', function () {
 				if ( $( '.tooltip' ).is( ':visible' ) ) {
 					$( '.tooltip' ).not( this ).hide();
 				}
 			} );
 
 			// TODO: refactor method
-			self._selectorBox.add( $link, triple.triple, function( selectedId ) {
+			self._selectorBox.add( $link, triple.triple, function ( selectedId ) {
 				var newEntity = entity.replace( new RegExp( id + '$' ), '' ) + selectedId;// TODO: technical debt
 
 				$label.replaceWith( self._getTripleEntityHtml( newEntity, triple, key ) );
@@ -653,7 +653,7 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function( $, wikibase, _ ) 
 
 			} );
 
-		} ).fail( function() {
+		} ).fail( function () {
 			$label.text( entity );
 		} );
 
@@ -663,7 +663,7 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function( $, wikibase, _ ) 
 	/**
 	 * @private
 	 */
-	SELF.prototype._getLabel = function( url ) {
+	SELF.prototype._getLabel = function ( url ) {
 		var deferred = $.Deferred();
 
 		var entity = url.match( /(Q|P)([0-9]+)/ );// TODO: make use of Rdf namespaces
@@ -678,8 +678,8 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function( $, wikibase, _ ) 
 		type = type[entity[1]];
 		var term = entity[0];
 
-		this._api.searchEntities( term, type ).done( function( data ) {
-			$.each( data.search, function( key, value ) {
+		this._api.searchEntities( term, type ).done( function ( data ) {
+			$.each( data.search, function ( key, value ) {
 				deferred.resolve( value.label, value.id, value.description, type );
 				return false;
 			} );
