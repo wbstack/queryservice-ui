@@ -284,7 +284,9 @@ wikibase.queryService.ui.App = ( function( $, window, _, Cookies, moment ) {
 	 */
 	SELF.prototype._calculateNavBarWidth = function () {
 		var totalLeftNavBarWidth = 0;
-		$( '#left-navbar li' ).each( function () { totalLeftNavBarWidth += $( this ).width(); } );
+		$( '#left-navbar li' ).each( function () {
+			totalLeftNavBarWidth += $( this ).width();
+		} );
 		// 30px here is .navbar-collapse's padding-left plus padding-right after collapse
 		this._maximumWidthBeforeLineBroke = 30 + totalLeftNavBarWidth;
 
@@ -375,6 +377,7 @@ wikibase.queryService.ui.App = ( function( $, window, _, Cookies, moment ) {
 			return false;
 		}
 
+		/* eslint-disable max-statements-per-line */
 		var keys = {
 			'?': function () { $( '#keyboardShortcutHelpModal' ).modal( 'toggle' ); },
 			i: function () { $( '.CodeMirror textarea' ).focus(); },
@@ -386,6 +389,7 @@ wikibase.queryService.ui.App = ( function( $, window, _, Cookies, moment ) {
 			h: function () { $( 'button#help-toggle' ).click(); },
 			l: function () { $( 'a#language-toggle' ).click(); }
 		};
+		/* eslint-enable max-statements-per-line */
 
 		if ( e.key in keys ) {
 			keys[e.key]();
