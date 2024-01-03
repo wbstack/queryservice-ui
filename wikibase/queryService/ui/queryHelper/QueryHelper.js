@@ -111,28 +111,22 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function( $, wikibase, _ ) 
 	 * @private
 	 */
 	SELF.prototype._cleanQueryPrefixes = function( query ) {
-		var prefixRegex = /PREFIX ([a-z]+): <(.*)>/gi,
-			m,
-			prefixes = {},
-			cleanQuery = query.replace( prefixRegex, '' ).replace( /\n+/g, '\n' );
-
-		while ( ( m = prefixRegex.exec( query ) ) ) {
-			var prefix = m[1];
-			var uri = m[2].replace( /[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&' );
-
-			var newQuery = cleanQuery.replace( new RegExp( '<' + uri + '([^/>#]+?)>', 'gi' ),
-					prefix + ':$1' );
-
-			if ( cleanQuery !== newQuery ) {
-				cleanQuery = newQuery;
-				if ( !wikibase.queryService.RdfNamespaces.STANDARD_PREFIXES[prefix] ) {
-					prefixes[m[0]] = true;
-				}
-			}
-		}
-
-		cleanQuery = Object.keys( prefixes ).join( '\n' ) + '\n\n' + cleanQuery.trim();
-		return cleanQuery;
+        var prefixRe = /^\s*PREFIX\s+([a-z]+):\s+<.*>\s*$/;
+        return query.split( '\n' )
+            .map(function ( line ) {
+                if ( !prefixRe.test( line ) ) {
+                    return line;
+                }
+                line = line.trim();
+                var match = line.match( prefixRe );
+                var prefix = match[1];
+                if ( prefix in wikibase.queryService.RdfNamespaces.STANDARD_PREFIXES ) {
+                    return null;
+                }
+                return line;
+            })
+            .filter( Boolean )
+            .join( '\n' );
 	};
 
 	/**
