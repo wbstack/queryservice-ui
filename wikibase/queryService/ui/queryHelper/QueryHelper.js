@@ -91,9 +91,7 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function ( $, wikibase, _ )
 	 */
 	SELF.prototype.getQuery = function () {
 		try {
-			var q = this._query.getQueryString();
-			q = this._cleanQueryPrefixes( q ).trim();
-			return q.trim();
+			return this._query.getQueryString().trim();
 		} catch ( e ) {
 			return null;
 		}
