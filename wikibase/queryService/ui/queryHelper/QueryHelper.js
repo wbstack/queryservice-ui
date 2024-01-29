@@ -97,36 +97,10 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function( $, wikibase, _ ) 
 	 */
 	SELF.prototype.getQuery = function() {
 		try {
-			var q = this._query.getQueryString();
-			q = this._cleanQueryPrefixes( q ).trim();
-			return q.trim();
+			return this._query.getQueryString().trim();
 		} catch ( e ) {
 			return null;
 		}
-	};
-
-	/**
-	 * Workaround for https://phabricator.wikimedia.org/T133316
-	 *
-	 * @private
-	 */
-	SELF.prototype._cleanQueryPrefixes = function( query ) {
-        var prefixRe = /^\s*PREFIX\s+([a-z]+):\s+<.*>\s*$/;
-        return query.split( '\n' )
-            .map(function ( line ) {
-                if ( !prefixRe.test( line ) ) {
-                    return line;
-                }
-                line = line.trim();
-                var match = line.match( prefixRe );
-                var prefix = match[1];
-                if ( prefix in wikibase.queryService.RdfNamespaces.STANDARD_PREFIXES ) {
-                    return null;
-                }
-                return line;
-            })
-            .filter( Boolean )
-            .join( '\n' );
 	};
 
 	/**
