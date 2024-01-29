@@ -91,42 +91,10 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function ( $, wikibase, _ )
 	 */
 	SELF.prototype.getQuery = function () {
 		try {
-			var q = this._query.getQueryString();
-			q = this._cleanQueryPrefixes( q ).trim();
-			return q.trim();
+			return this._query.getQueryString().trim();
 		} catch ( e ) {
 			return null;
 		}
-	};
-
-	/**
-	 * Workaround for https://phabricator.wikimedia.org/T133316
-	 *
-	 * @private
-	 */
-	SELF.prototype._cleanQueryPrefixes = function ( query ) {
-		var prefixRegex = new RegExp( 'PREFIX (' + wikibase.queryService.VariableNames.PrefixPattern + '): <(.*)>', 'gi' ),
-			m,
-			prefixes = {},
-			cleanQuery = query.replace( prefixRegex, '' ).replace( /\n+/g, '\n' );
-
-		while ( ( m = prefixRegex.exec( query ) ) ) {
-			var prefix = m[1];
-			var uri = m[2].replace( /[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&' );
-
-			var newQuery = cleanQuery.replace( new RegExp( '<' + uri + '([^/>#]+?)>', 'gi' ),
-				prefix + ':$1' );
-
-			if ( cleanQuery !== newQuery ) {
-				cleanQuery = newQuery;
-				if ( !wikibase.queryService.RdfNamespaces.STANDARD_PREFIXES[prefix] ) {
-					prefixes[m[0]] = true;
-				}
-			}
-		}
-
-		cleanQuery = Object.keys( prefixes ).join( '\n' ) + '\n\n' + cleanQuery.trim();
-		return cleanQuery;
 	};
 
 	/**
