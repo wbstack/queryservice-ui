@@ -1,5 +1,9 @@
 # WBStack queryservice-ui
 
+## 1.5
+
+Remove custom cleaning of prefixes on Query Formatting (https://phabricator.wikimedia.org/T347023)
+
 ## 1.4
 
 February 2022 updates from upstream.
