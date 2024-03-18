@@ -675,6 +675,7 @@ wikibase.queryService.ui.App = ( function ( $, window, _, Cookies, moment ) {
 	SELF.prototype._initHandlers = function () {
 		var self = this;
 		$( '#query-form' ).submit( $.proxy( this._handleQuerySubmit, this ) );
+		$( '#cancel-button' ).on( 'click', $.proxy( this._handleQueryCancel, this ) );
 		$( '.namespace-shortcuts' ).on( 'change', 'select',
 			$.proxy( this._handleNamespaceSelected, this ) );
 
@@ -831,6 +832,7 @@ wikibase.queryService.ui.App = ( function ( $, window, _, Cookies, moment ) {
 			$( '#execute-button' ).prop( 'disabled', false );
 		} else {
 			$( '#empty-query-error' ).hide();
+			$( '#cancel-button' ).prop( 'disabled', false );
 			this._resultView.draw( this._editor.getValue() ).catch( function ( error ) {
 				try {
 					self._editor.highlightError( error );
@@ -839,8 +841,20 @@ wikibase.queryService.ui.App = ( function ( $, window, _, Cookies, moment ) {
 				}
 			} ).then( function () {
 				$( '#execute-button' ).prop( 'disabled', false );
+				$( '#cancel-button' ).prop( 'disabled', true );
 			} );
 		}
+	};
+
+	/**
+	 * @private
+	 */
+	SELF.prototype._handleQueryCancel = function ( e ) {
+		e.preventDefault();
+		this._track( 'buttonClick.cancel' );
+		$( '#cancel-button' ).prop( 'disabled', true );
+		this._resultView.cancel();
+		$( '#execute-button' ).prop( 'disabled', false );
 	};
 
 	/**
