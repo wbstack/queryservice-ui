@@ -5,3 +5,4 @@
 /vendor/
 /polestar/
 /wikibase/codemirror/addon/
+.gitlab-ci.yml
