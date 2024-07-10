@@ -45,8 +45,29 @@ Create a build with bundled and minified files.
 $ npm run build
 ```
 
+## Local development
 
-## Deploy
+Build image locally:
+```
+DOCKER_BUILDKIT=1 docker build --target production -f .pipeline/blubber.yaml .
+```
+
+Run image:
+```
+docker run -p 8080:8080 <image name>
+```
+
+Visit `http://127.0.0.1:8080/`
+
+
+## Publish new image version
+
+To create a new image version merge your change into the master branch.
+
+This triggers the publish-image pipeline. Image is available at `docker-registry.wikimedia.org/repos/wikidata/query-gui:<timestamp>`
+
+
+## Deploy (this has to be updated once the wikikube environment is in place)
 To deploy the GUI, [trigger a new build of the deploy repo on Jenkins](https://integration.wikimedia.org/ci/job/wikidata-query-gui-build/).
 
 ![Screenshot of the Jenkins dashboard for the build repo. Highlighted are the build buttons in the sidebar with a "1" and the "Build" button in the main part with a "2"](docs/images/triggerDeployBuild.png)
