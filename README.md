@@ -67,7 +67,7 @@ Visit `http://127.0.0.1:8080/`
 
 To create a new image version merge your change into the master branch.
 
-This triggers the publish-image pipeline. Image is available at `docker-registry.wikimedia.org/repos/wikidata/query-gui:<timestamp>`
+This triggers the publish-image pipeline. Image is available at `docker-registry.wikimedia.org/repos/wmde/wikidata-query-gui:<timestamp>`
 
 
 ## Deploy (this has to be updated once the wikikube environment is in place)
