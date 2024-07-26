@@ -1,0 +1,25 @@
+include:
+  - project: 'repos/releng/kokkuri'
+    file: 'includes/images.yaml'
+
+stages:
+  - build
+  - test
+  - publish
+
+build-image:
+  extends: .kokkuri:build-image
+  stage: build
+  variables:
+    BUILD_VARIANT: production
+
+publish-image:
+  extends: .kokkuri:build-and-publish-image
+  stage: publish
+  variables:
+    BUILD_VARIANT: production
+    PUBLISH_IMAGE_TAG: $KOKKURI_PIPELINE_TIMESTAMP
+  tags:
+    - trusted
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
