@@ -62,7 +62,7 @@ Visit `http://127.0.0.1:8080/`
 
 ## Publish new image version
 
-To create a new image version merge your change into the master branch.
+To create a new image version merge your change into the main branch.
 
 This triggers the publish-image pipeline. Image is available at `docker-registry.wikimedia.org/repos/wmde/wikidata-query-gui:<timestamp>`
 
