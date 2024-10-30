@@ -82,6 +82,7 @@ wikibase.queryService.api.UrlShortener = ( function ( $ ) {
 		return wikibase.queryService.ui.i18n.getMessage( 'wdqs-app-urlshortener-bad-service' );
 	};
 
+<<<<<<< HEAD
 	/** @return {string} HTML */
 	SELF.prototype._getTinyUrl = function ( url ) {
 		var TINYURL_API = '//tinyurl.com/api-create.php?url=';
@@ -93,6 +94,33 @@ wikibase.queryService.api.UrlShortener = ( function ( $ ) {
 			'sandbox="" ' +
 			'></iframe>';
 	};
+=======
+    /** @return {string} HTML */
+    SELF.prototype._getTinyUrl = function( url ) {
+        var base64Url = new URL( url );
+        base64Url.searchParams.append( 'base64', true );
+        base64Url.hash = btoa( base64Url.hash );
+
+        var deferred = $.Deferred();
+        $.ajax( {
+            'method': 'POST',
+            'url': 'https://tinyurl.com/api-create.php',
+            'data': jQuery.param({ 'url': base64Url.toString() })
+        } ).done( function( text ) {
+            var text, html, $element;
+            html = '<!DOCTYPE html><meta charset="utf-8"><pre>' + htmlEscape( text ) + '</pre>';
+            $element = $( '<iframe>' ).attr( {
+                'class': 'shortUrl',
+                'src': 'data:text/html;charset=utf-8,' + encodeURI( html ),
+                'sandbox': ''
+            } );
+            deferred.resolve( $element );
+        } ).fail( function() {
+            deferred.resolve( wikibase.queryService.ui.i18n.getMessage( 'wdqs-app-urlshortener-failed' ) );
+        } );
+        return deferred;
+    };
+>>>>>>> d8e423d (Improve TinyURL shortener)
 
 	/** @return {string} HTML */
 	SELF.prototype._getWikiShort = function ( url, server ) {

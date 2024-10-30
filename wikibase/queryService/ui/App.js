@@ -604,7 +604,18 @@ wikibase.queryService.ui.App = ( function ( $, window, _, Cookies, moment ) {
 	/**
 	 * @private
 	 */
+<<<<<<< HEAD
 	SELF.prototype._initQuery = function () {
+=======
+	SELF.prototype._initQuery = function() {
+		var url = new URL( window.location );
+		if ( url.searchParams.has( 'base64', true ) ) {
+			url.search = '';
+			url.hash = atob( url.hash.substring( 1 ) );
+			history.pushState( null, '', url.toString() );
+		}
+
+>>>>>>> d8e423d (Improve TinyURL shortener)
 		if ( window.location.hash !== '' ) {
 			if ( location.hash.indexOf( '#result#' ) === 0 ) {
 				location.hash = location.hash.replace( '#result#', '#' );
