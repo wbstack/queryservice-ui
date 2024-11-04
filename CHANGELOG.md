@@ -1,5 +1,9 @@
 # WBStack queryservice-ui
 
+## 1.6
+
+Improve TinyURL shortener (https://phabricator.wikimedia.org/T347022)
+
 ## 1.5
 
 Remove custom cleaning of prefixes on Query Formatting (https://phabricator.wikimedia.org/T347023)
