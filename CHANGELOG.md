@@ -1,5 +1,9 @@
 # WBStack queryservice-ui
 
+## 1.7
+
+Hide graph builder (https://phabricator.wikimedia.org/T357115)
+
 ## 1.6
 
 Improve TinyURL shortener (https://phabricator.wikimedia.org/T347022)
