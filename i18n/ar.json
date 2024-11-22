@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"5glup",
 			"Abdeaitali",
 			"Alaa",
 			"Ali1",
@@ -11,6 +12,7 @@
 			"FiberAhmed",
 			"Meno25",
 			"Mido",
+			"Mohammed Qays",
 			"Mr. Ibrahem",
 			"Sandra Hanbo",
 			"Shbib Al-Subaie",
@@ -112,6 +114,7 @@
 	"wdqs-dialog-examples-preview-result": "معاينة النتيجة",
 	"wdqs-dialog-key-shortcut-title": "اختصارات لوحة المفاتيح",
 	"wdqs-dialog-key-shortcut-run-query": "شغّل استعلامًا.",
+	"wdqs-dialog-key-shortcut-cancel-query": "إلغاء الاستعلام.",
 	"wdqs-dialog-key-shortcut-esc": "ترك حقل الإدخال/جزء النص الحالي .",
 	"wdqs-dialog-key-shortcut-show-shortcut-help": "عرض مساعدة اختصار لوحة المفاتيح للصفحة الحالية.",
 	"wdqs-dialog-key-shortcut-focus-textarea": "التركيز على جزء النص بالاستعلام.",
@@ -136,6 +139,7 @@
 	"wdqs-ve-sb-suggestions": "اقتراحات",
 	"wdqs-ve-sb-other": "أخرى",
 	"wdqs-action-query": "جارٍ تنفيذ الاستعلام",
+	"wdqs-action-stop-query": "ألغي الاستعلام",
 	"wdqs-action-render": "استدعاء النتيجة",
 	"wdqs-action-error-display": "لا يمكن عرض النتيجة",
 	"wdqs-action-timeout": "الاستعلام استغرق الكثير من الوقت",
@@ -151,5 +155,6 @@
 	"wdqs-embed-button-edit-code": "تعديل سباركل",
 	"wdqs-embed-button-edit-code-title": "تعديل هذا الاستعلام بمحرر سباركل",
 	"wdqs-embed-explorer-button-incoming": "عرض الروابط الواردة",
-	"wdqs-embed-explorer-button-outgoing": "إظهار الروابط الصادرة"
+	"wdqs-embed-explorer-button-outgoing": "إظهار الروابط الصادرة",
+	"wdqs-app-graph-split-banner-content": "هل تتضمن استفساراتك عناصر تصف مقالات علمية؟ الرسم التوضيحي القادم سيفيدك. يرجى معرفة المزيد حول هذا الأمر في <a href=\"https://www.wikidata.org/wiki/Special:MyLanguage/Wikidata:SPARQL_query_service/WDQS_backend_update/September_2024_scaling_update\">هذا الإعلان</a>."
 }

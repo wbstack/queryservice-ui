@@ -8,9 +8,11 @@
 			"Fanjiayi",
 			"Googology",
 			"GuoPC",
+			"Huajing",
 			"Lantianjialiang",
 			"LittlePaw365",
 			"Liuxinyu970226",
+			"Midleading",
 			"Phenolla",
 			"Stang",
 			"Suesue",
@@ -113,6 +115,7 @@
 	"wdqs-dialog-examples-preview-result": "预览结果",
 	"wdqs-dialog-key-shortcut-title": "键盘快捷键",
 	"wdqs-dialog-key-shortcut-run-query": "运行查询。",
+	"wdqs-dialog-key-shortcut-cancel-query": "取消查询。",
 	"wdqs-dialog-key-shortcut-esc": "保留当前输入字段/文本区域。",
 	"wdqs-dialog-key-shortcut-show-shortcut-help": "为当前页面显示键盘快捷键帮助。",
 	"wdqs-dialog-key-shortcut-focus-textarea": "集中于查询文本区域。",
@@ -153,5 +156,6 @@
 	"wdqs-embed-button-edit-code": "编辑SPARQL",
 	"wdqs-embed-button-edit-code-title": "使用SPARQL编辑器编辑此查询",
 	"wdqs-embed-explorer-button-incoming": "显示传入链接",
-	"wdqs-embed-explorer-button-outgoing": "显示传出链接"
+	"wdqs-embed-explorer-button-outgoing": "显示传出链接",
+	"wdqs-app-graph-split-banner-content": "您的查询是否包含描述科学论文的项目？即将出现的图分割会对此产生影响。请透过<a href=\"https://www.wikidata.org/wiki/Special:MyLanguage/Wikidata:SPARQL_query_service/WDQS_backend_update/September_2024_scaling_update\">此公告</a>来了解更多。"
 }
