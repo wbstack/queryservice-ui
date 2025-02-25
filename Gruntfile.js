@@ -265,10 +265,7 @@ module.exports = function ( grunt ) {
 			}
 		},
 		'auto_install': {
-			local: {},
-			options: {
-				npm: '--production --no-package-lock'
-			}
+			local: {}
 		}
 	} );
 
