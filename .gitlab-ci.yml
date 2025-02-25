@@ -13,6 +13,20 @@ build-image:
   variables:
     BUILD_VARIANT: production
 
+test-on-merge-requests:
+  stage: test
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+  # Note: Browser test is not run due to issues, see https://phabricator.wikimedia.org/T384237
+  image:
+    name: docker-registry.wikimedia.org/releng/node20-test-browser
+    # WMF node image runs npm ci and npm test in entrypoint. Gitlab
+    # does not allow to have no 'script' in job spec. Below is the
+    # workaround to have entrypoint script run
+    entrypoint: [""]
+  script:
+   - "/run.sh"
+
 publish-image:
   extends: .kokkuri:build-and-publish-image
   stage: publish
