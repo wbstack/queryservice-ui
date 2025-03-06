@@ -84,23 +84,11 @@ To create a new image version merge your change into the main branch.
 This triggers the publish-image pipeline. Image is available at `docker-registry.wikimedia.org/repos/wmde/wikidata-query-gui:<timestamp>`
 
 
-## Deploy (this has to be updated once the wikikube environment is in place)
-To deploy the GUI, [trigger a new build of the deploy repo on Jenkins](https://integration.wikimedia.org/ci/job/wikidata-query-gui-build/).
+## Deploy in WMF environment (query.wikidata.org)
 
-![Screenshot of the Jenkins dashboard for the build repo. Highlighted are the build buttons in the sidebar with a "1" and the "Build" button in the main part with a "2"](docs/images/triggerDeployBuild.png)
+After the code changes have been merged and new container image version has been published to [Wikimedia registry](https://docker-registry.wikimedia.org/repos/wmde/wikidata-query-gui/tags/), change the version tag in the Helm chart used for deployments by making and approving the change in `helmfile.d/services/wikidata-query-gui/values.yaml` in WMF's [deployment-charts](https://gerrit.wikimedia.org/g/operations/deployment-charts).
 
-This creates a new open change in the deploy repository: https://gerrit.wikimedia.org/r/q/project:wikidata/query/gui-deploy+status:open
-That change will be based on the [latest commit in the master branch](https://gerrit.wikimedia.org/r/plugins/gitiles/wikidata/query/gui/+log/refs/heads/master), and thus it will include all previous commits.
-Optionally, you can edit the commit message in the Gerrit UI to include the `Bug: Txxxxx` line, to emphasize to which task the change belongs.
-
-You can clone that repository and check out the change locally to test and verify it.
-
-As that repository does not have any CI, you need to manually merge the change.
-That means, giving +2 to both the Code Review as well as the Verified label, and then clicking the "Submit" button.
-
-The site will be deployed with the next puppet run, which should happen after at most 30 minutes.
-
-See also: https://wikitech.wikimedia.org/wiki/Wikidata_Query_Service#GUI_deployment_general_notes
+Once the new deployment chart has been created, change the deployment chart version in use on the deployment server following instructions on https://wikitech.wikimedia.org/wiki/Kubernetes/Deployments. A bit more detailed deployment instructions for another service, that could be used for reference, can be found at https://wikitech.wikimedia.org/wiki/Miscweb#Deploy\_to\_Kubernetes/wikikube.
 
 ## Components
 ### Editor
