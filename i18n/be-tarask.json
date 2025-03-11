@@ -137,5 +137,6 @@
 	"wdqs-embed-button-edit-code": "Рэдагаваць SPARQL",
 	"wdqs-embed-button-edit-code-title": "Рэдагаваць гэты запыт з дапамогай SPARQL-рэдактара",
 	"wdqs-embed-explorer-button-incoming": "Паказаць уваходныя спасылкі",
-	"wdqs-embed-explorer-button-outgoing": "Паказваць зыходныя спасылкі"
+	"wdqs-embed-explorer-button-outgoing": "Паказваць зыходныя спасылкі",
+	"wdqs-app-graph-split-banner-content": "Ваш запыт уключае элемэнты з апісаньнем навуковых артыкулаў? Будучы падзел графаў можа на вас паўплываць. Дазнайцеся болей у <a href=\"https://www.wikidata.org/wiki/Special:MyLanguage/Wikidata:SPARQL_query_service/WDQS_backend_update/September_2024_scaling_update\">гэтай абвестцы</a>."
 }
