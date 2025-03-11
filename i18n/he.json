@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"A100Star",
 			"Amire80",
 			"Guycn2",
 			"Strayblues",
@@ -103,7 +104,7 @@
 	"wdqs-dialog-key-shortcut-run-query": "הרצת שאילתה.",
 	"wdqs-dialog-key-shortcut-cancel-query": "ביטול שאילתה.",
 	"wdqs-dialog-key-shortcut-esc": "עזיבת שדה הקלט הנוכחי.",
-	"wdqs-dialog-key-shortcut-show-shortcut-help": "הצגת עזרה על קיצורי מקישם עבור הדף הנוכחי.",
+	"wdqs-dialog-key-shortcut-show-shortcut-help": "הצגת עזרה על קיצורי מקשים עבור הדף הנוכחי.",
 	"wdqs-dialog-key-shortcut-focus-textarea": "התמקדות על שדה הכתיבה של השאילתה.",
 	"wdqs-dialog-key-shortcut-jump-to-result": "מעבַר לתוצאת השאילתה.",
 	"wdqs-dialog-key-shortcut-focus-filter": "התמקדות בכפתור \"סינון\" בסייען שאילתות.",

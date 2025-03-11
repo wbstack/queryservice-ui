@@ -30,7 +30,7 @@
 	"wdqs-app-button-help": "Yardım",
 	"wdqs-app-button-run": "Çalıştır",
 	"wdqs-app-button-run-title": "Sorguyu çalıştır (CTRL + ENTER)",
-	"wdqs-app-button-cancel-title": "Sorguyu durdur (CTRL + ESC)",
+	"wdqs-app-button-cancel-title": "Sorguyu iptal et (CTRL + ESC)",
 	"wdqs-app-button-clear": "Temizle",
 	"wdqs-app-button-clear-title": "Sorguyu temizle",
 	"wdqs-app-button-restore-title": "Önceki sorguyu geri yükle",
@@ -115,6 +115,7 @@
 	"wdqs-dialog-examples-preview-result": "Önizleme sonucu",
 	"wdqs-dialog-key-shortcut-title": "Klavye Kısayolları",
 	"wdqs-dialog-key-shortcut-run-query": "Sorguyu çalıştır.",
+	"wdqs-dialog-key-shortcut-cancel-query": "Sorguyu iptal et.",
 	"wdqs-dialog-key-shortcut-esc": "Geçerli giriş kısmından/metin alanından ayrıl.",
 	"wdqs-dialog-key-shortcut-show-shortcut-help": "Geçerli sayfa için klavye kısayol yardımını göster.",
 	"wdqs-dialog-key-shortcut-focus-textarea": "Sorgu metin alanına odaklan.",
@@ -155,5 +156,6 @@
 	"wdqs-embed-button-edit-code": "SPARQL'ı düzenle",
 	"wdqs-embed-button-edit-code-title": "Bu sorguyu SPARQL editörüyle düzenleyin",
 	"wdqs-embed-explorer-button-incoming": "Gelen bağlantıları göster",
-	"wdqs-embed-explorer-button-outgoing": "Giden bağlantıları göster"
+	"wdqs-embed-explorer-button-outgoing": "Giden bağlantıları göster",
+	"wdqs-app-graph-split-banner-content": "Sorgunuz bilimsel maddeler açıklayan Öğeler içeriyor mu? Yaklaşan grafik bölünmesi sizi etkileyecektir. Lütfen <a href=\"https://www.wikidata.org/wiki/Special:MyLanguage/Wikidata:SPARQL_query_service/WDQS_backend_update/September_2024_scaling_update\">bu duyuruda</a> bunun hakkında daha fazla bilgi edinin."
 }
