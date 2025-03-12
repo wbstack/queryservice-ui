@@ -5,7 +5,7 @@
   "scripts": {
     "start": "http-server -o",
     "grunt": "grunt",
-    "test": "grunt test && npm run browser_test -- $@",
+    "test": "grunt test",
     "browser_test": "grunt browser_test",
     "build": "grunt build"
   },
