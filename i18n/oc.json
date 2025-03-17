@@ -3,6 +3,7 @@
 		"authors": [
 			"BrennodAloisi",
 			"Cedric31",
+			"Lhanars",
 			"McDutchie",
 			"Nicolas Eynaud",
 			"Quentí"
@@ -35,7 +36,7 @@
 	"wdqs-app-logout": "Desconnexion",
 	"wdqs-app-tools-visualize-data": "Visualizar lei donadas",
 	"wdqs-app-tools-list-properties": "Proprietats de la lista",
-	"wdqs-app-tools-lexicographical-data": "Donada lexicografica",
+	"wdqs-app-tools-lexicographical-data": "Donadas lexicograficas",
 	"wdqs-app-tools-for-programmers": "Per lei programaires",
 	"wdqs-app-footer-help": "Quichar <i>[CTRL-SPACE]</i> per activar la sasida automatica.",
 	"wdqs-app-result-shorturl": "URL corta cap al resultat",
