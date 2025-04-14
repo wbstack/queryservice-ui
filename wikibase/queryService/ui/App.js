@@ -6,6 +6,7 @@ wikibase.queryService.ui.App = ( function ( $, window, _, Cookies, moment ) {
 	'use strict';
 
 	var TRACKING_NAMESPACE = 'wikibase.queryService.ui.app.',
+		STATS_TRACKING_NAMESPACE = 'wikibase_queryService_ui_app_',
 		DEFAULT_QUERY = 'SELECT * WHERE {  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],mul,en". } } LIMIT 100';
 
 	var COOKIE_SHOW_QUERY_HELPER = 'query-helper-show';
@@ -183,6 +184,7 @@ wikibase.queryService.ui.App = ( function ( $, window, _, Cookies, moment ) {
 		}
 
 		this._track( 'init' );
+		this._trackStats( 'init_total' );
 
 		this._originalDocumentTitle = document.title;
 
@@ -484,6 +486,7 @@ wikibase.queryService.ui.App = ( function ( $, window, _, Cookies, moment ) {
 			Cookies.set( COOKIE_SHOW_QUERY_HELPER, false );
 			self._hideQueryHelper();
 			self._track( 'buttonClick.queryHelperTrigger.close' );
+			self._trackStats( 'buttonClick_total', { name: 'queryHelperTrigger', action: 'close' } );
 			return false;
 		} );
 
@@ -493,6 +496,7 @@ wikibase.queryService.ui.App = ( function ( $, window, _, Cookies, moment ) {
 			Cookies.set( COOKIE_SHOW_QUERY_HELPER, !visible );
 			self._updateQueryEditorSize();
 			self._track( 'buttonClick.queryHelperTrigger.' + ( visible ? 'close' : 'open' ) );
+			self._trackStats( 'buttonClick_total', { name: 'queryHelperTrigger', action: ( visible ? 'close' : 'open' ) } );
 			return false;
 		} );
 
@@ -699,6 +703,7 @@ wikibase.queryService.ui.App = ( function ( $, window, _, Cookies, moment ) {
 
 			self._editor.prepandValue( prefixes + '\n\n' );
 			self._track( 'buttonClick.addPrefixes' );
+			self._trackStats( 'buttonClick_total', { name: 'addPrefixes' } );
 		} );
 
 		$( '#format-button' ).click( function () {
@@ -707,20 +712,24 @@ wikibase.queryService.ui.App = ( function ( $, window, _, Cookies, moment ) {
 				self._editor.setValue( self._queryHelper.getQuery() );
 			}
 			self._track( 'buttonClick.standardizeFormat' );
+			self._trackStats( 'buttonClick_total', { name: 'standardizeFormat' } );
 		} );
 
 		$( '[data-target="#QueryExamples"]' ).click( function () {
 			self._track( 'buttonClick.examples' );
+			self._trackStats( 'buttonClick_total', { name: 'examples' } );
 		} );
 
 		$( '#clear-button' ).click( function () {
 			self._editor.setValue( '' );
 			self._drawQueryHelper();
 			self._track( 'buttonClick.clear' );
+			self._trackStats( 'buttonClick_total', { name: 'clear' } );
 		} );
 
 		$( '.restore' ).click( function ( e ) {
 			self._track( 'buttonClick.restore' );
+			self._trackStats( 'buttonClick_total', { name: 'restore' } );
 			e.preventDefault();
 			self._editor.restoreValue();
 			self._drawQueryHelper();
@@ -728,6 +737,7 @@ wikibase.queryService.ui.App = ( function ( $, window, _, Cookies, moment ) {
 
 		$( '.fullscreen-toggle' ).click( function ( e ) {
 			self._track( 'buttonClick.fullscreen' );
+			self._trackStats( 'buttonClick_total', { name: 'fullscreen' } );
 			e.preventDefault();
 			self._toggleFullscreen();
 		} );
@@ -785,6 +795,7 @@ wikibase.queryService.ui.App = ( function ( $, window, _, Cookies, moment ) {
 			}
 		} ).click( function () {
 			self._track( 'buttonClick.shortUrlQuery' );
+			self._trackStats( 'buttonClick_total', { name: 'shortUrlQuery' } );
 		} );
 
 		$( '.embed.result' ).clickover( {
@@ -816,6 +827,7 @@ wikibase.queryService.ui.App = ( function ( $, window, _, Cookies, moment ) {
 			}
 		} ).click( function () {
 			self._track( 'buttonClick.embedResult' );
+			self._trackStats( 'buttonClick_total', { name: 'embedResult' } );
 		} );
 	};
 
@@ -825,8 +837,11 @@ wikibase.queryService.ui.App = ( function ( $, window, _, Cookies, moment ) {
 	SELF.prototype._handleQuerySubmit = function ( e ) {
 		var self = this;
 		this._track( 'buttonClick.execute' );
+		this._trackStats( 'buttonClick_total', { name: 'execute' } );
+
 		if ( !this._hasRunFirstQuery ) {
 			this._track( 'firstQuery' );
+			this._trackStats( 'firstQuery_total' );
 			this._hasRunFirstQuery = true;
 		}
 
@@ -864,6 +879,8 @@ wikibase.queryService.ui.App = ( function ( $, window, _, Cookies, moment ) {
 	SELF.prototype._handleQueryCancel = function ( e ) {
 		e.preventDefault();
 		this._track( 'buttonClick.cancel' );
+		this._trackStats( 'buttonClick_total', { name: 'cancel' } );
+
 		$( '#cancel-button' ).prop( 'disabled', true );
 		this._resultView.cancel();
 		$( '#execute-button' ).prop( 'disabled', false );
@@ -947,6 +964,23 @@ wikibase.queryService.ui.App = ( function ( $, window, _, Cookies, moment ) {
 	 */
 	SELF.prototype._track = function ( metricName, value, valueType ) {
 		this._trackingApi.track( TRACKING_NAMESPACE + metricName, value, valueType );
+	};
+
+	/**
+	 * @private
+	 */
+	SELF.prototype._trackStats = function ( metricName, value, valueType, labels ) {
+		if ( !value ) {
+			value = 1;
+		}
+		if ( !valueType ) {
+			valueType = 'c';
+		}
+		if ( !labels ) {
+			labels = {};
+		}
+
+		this._trackingApi.trackStats( STATS_TRACKING_NAMESPACE + metricName, value, valueType, labels );
 	};
 
 	return SELF;

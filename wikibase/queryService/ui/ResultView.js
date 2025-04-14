@@ -243,6 +243,12 @@ wikibase.queryService.ui.ResultView = ( function ( $, download, window ) {
 	SELF.prototype.trackingNamespace = 'wikibase.queryService.ui.index.';
 
 	/**
+	 * @property {string}
+	 * It gets overridden by embedInit.js
+	 */
+	SELF.prototype.statsTrackingNamespace = 'wikibase_queryService_ui_index_';
+
+	/**
 	 * Initialize private members and call delegate to specific init methods
 	 *
 	 * @private
@@ -406,7 +412,7 @@ wikibase.queryService.ui.ResultView = ( function ( $, download, window ) {
 
 		this._actionBar.show( errorMessageKey || '', error.message || '', 'danger' );
 		this._track( 'result.error.' + ( errorMessageKey || 'unknown' ) );
-
+		this._trackStats( 'result_error_total', { errorKey: errorMessageKey || 'unknown' } );
 		return error.debug === undefined ? '' : error.debug;
 	};
 
@@ -435,8 +441,11 @@ wikibase.queryService.ui.ResultView = ( function ( $, download, window ) {
 		this._selectedResultBrowser = null;
 
 		this._track( 'result.resultLength', api.getResultLength() );
+		this._trackStats( 'result_resultLength_total', api.getResultLength() );
 		this._track( 'result.executionTime', api.getExecutionTime(), 'ms' );
+		this._trackStats( 'result_executionTime_seconds', api.getExecutionTime(), 'ms' );
 		this._track( 'result.received.success' );
+		this._trackStats( 'result_received_success_total' );
 
 		return false;
 	};
@@ -453,8 +462,10 @@ wikibase.queryService.ui.ResultView = ( function ( $, download, window ) {
 
 		if ( browserOptions.defaultName !== null ) {
 			this._track( 'result.browser.' + browserOptions.defaultName );
+			this._trackStats( 'result_browser_total', 1, 'c', { name: browserOptions.defaultName } );
 		} else {
 			this._track( 'result.browser.default' );
+			this._trackStats( 'result_browser_total', 1, 'c', { name: 'default' } );
 		}
 
 		// instantiate
@@ -593,7 +604,8 @@ wikibase.queryService.ui.ResultView = ( function ( $, download, window ) {
 				return self._shorten.shorten( $link[0].href );
 			}
 		}, queryLinkPopoverOptions ) ).click( function () {
-			self._track( 'buttonClick.shortUrlResult' );
+			self._track( 'buttonClick_shortUrlResult' );
+			self._trackStats( 'buttonClick_total', { name: 'shortUrlResult' } );
 		} );
 
 		$( '#shortUrlTrigger-result-query' ).clickover( $.extend( {
@@ -604,6 +616,7 @@ wikibase.queryService.ui.ResultView = ( function ( $, download, window ) {
 			}
 		}, queryLinkPopoverOptions ) ).click( function () {
 			self._track( 'buttonClick.shortUrlResultQuery' );
+			self._trackStats( 'buttonClick_total', { name: 'shortUrlResultQuery' } );
 		} );
 	};
 
@@ -673,14 +686,15 @@ wikibase.queryService.ui.ResultView = ( function ( $, download, window ) {
 				e.preventDefault();
 
 				self._track( 'buttonClick.download.' + filename );
-
 				var data = handler();
 
 				if ( data ) {
+					self._trackStats( 'buttonClick_total', { name: 'download', filename: filename, status: 'success' } );
 					download( data, filename, mimetype );
 				} else {
 					window.console.warn( 'Unable to create ' + filename + ' download' );
 					self._track( 'buttonClick.downloadError.' + filename );
+					self._trackStats( 'buttonClick_total', { name: 'download', filename: filename, status: 'error' } );
 				}
 			};
 		};
@@ -717,6 +731,7 @@ wikibase.queryService.ui.ResultView = ( function ( $, download, window ) {
 					self._drawResult( b.object );
 					self._selectedResultBrowser = key;
 					self._track( 'buttonClick.display.' + key );
+					self._trackStats( 'buttonClick_total', { name: 'display', key: key } );
 					return false;
 				} );
 			} else {
@@ -800,6 +815,26 @@ wikibase.queryService.ui.ResultView = ( function ( $, download, window ) {
 			value,
 			valueType
 		);
+	};
+
+	/**
+	 * @private
+	 */
+	SELF.prototype._trackStats = function ( metricName, value, valueType, labels ) {
+		var referrerType = this._getReferrerType();
+		if ( !value ) {
+			value = 1;
+		}
+		if ( !valueType ) {
+			valueType = 'c';
+		}
+		if ( !labels ) {
+			labels = {};
+		}
+
+		labels.referrer = referrerType;
+
+		this._trackingApi.trackStats( this.statsTrackingNamespace + 'app_' + metricName, value, valueType, labels );
 	};
 
 	SELF.prototype._getReferrerType = function () {
