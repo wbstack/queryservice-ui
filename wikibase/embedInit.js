@@ -64,6 +64,7 @@
 			$editor = $( '<div>' );
 
 		resultView.trackingNamespace = 'wikibase.queryService.ui.embed.';
+		resultView.statsTrackingNamespace = 'wikibase_queryService_ui_embed_';
 
 		setBrand();
 		$.i18n().locale = lang;

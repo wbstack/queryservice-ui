@@ -7,6 +7,7 @@ wikibase.queryService.ui.dialog.QueryExampleDialog = ( function ( $ ) {
 	'use strict';
 
 	var TRACKING_NAMESPACE = 'wikibase.queryService.ui.examples.';
+	var STATS_TRACKING_NAMESPACE = 'wikibase_queryService_ui_examples_';
 
 	/**
 	 * A ui dialog for selecting a query example
@@ -298,12 +299,14 @@ wikibase.queryService.ui.dialog.QueryExampleDialog = ( function ( $ ) {
 					self._callback( query, title );
 					self._track( 'select' );
 					self._track( 'select.category.' + category.replace( /[^a-zA-Z0-9]/g, '_' ) );
+					self._trackStats( 'select_total', 1, 'c', { category: category.replace( /[^a-zA-Z0-9]/g, '_' ) } );
 				} ),
 			$edit = $( '<a>' )
 				.attr( { title: 'Edit', href: editHref, target: '_blank' } )
 				.append( '<span>' ).addClass( 'glyphicon glyphicon-pencil' )
 				.click( function () {
 					self._track( 'edit' );
+					self._trackStats( 'edit_total' );
 				} ),
 
 			$source = $( '<span>' ).addClass( 'glyphicon glyphicon-eye-open' ).popover(
@@ -331,6 +334,7 @@ wikibase.queryService.ui.dialog.QueryExampleDialog = ( function ( $ ) {
 				} )
 				.click( function () {
 					self._track( 'preview' );
+					self._trackStats( 'preview_total' );
 				} );
 
 		$( '.exampleTable' ).scroll( function () {
@@ -396,6 +400,13 @@ wikibase.queryService.ui.dialog.QueryExampleDialog = ( function ( $ ) {
 	 */
 	SELF.prototype._track = function ( metricName, value, valueType ) {
 		this._trackingApi.track( TRACKING_NAMESPACE + metricName, value, valueType );
+	};
+
+	/**
+	 * @private
+	 */
+	SELF.prototype._trackStats = function ( metricName, value, valueType, labels ) {
+		this._trackingApi.trackStats( STATS_TRACKING_NAMESPACE + metricName, value, valueType, labels );
 	};
 
 	return SELF;
