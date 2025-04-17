@@ -13,6 +13,7 @@
 			"Fitoschido",
 			"Invadinado",
 			"Irus",
+			"JaimeDes",
 			"Josecurioso",
 			"Julián L",
 			"Koavf",
@@ -74,6 +75,8 @@
 	"wdqs-app-footer-updated-ago": "Datos actualizados $1",
 	"wdqs-app-result-shorturl": "URL corto al resultado",
 	"wdqs-app-result-shorturl-title": "URL corto a este resultado",
+	"wdqs-app-result-shorturl-query": "URL corta para la consulta",
+	"wdqs-app-result-shorturl-query-title": "URL corta a la consulta usada para obtener este resultado",
 	"wdqs-app-result-rawgraphs": "Abrir en RAWGraphs.io",
 	"wdqs-app-result-rawgraphs-title": "Crear un gráfico con los resultados actuales usando RAWGraphs.io",
 	"wdqs-app-result-embed": "Incrustar resultado",
@@ -159,5 +162,6 @@
 	"wdqs-embed-button-edit-code": "Editar SPARQL",
 	"wdqs-embed-button-edit-code-title": "Editar esta consulta con el editor de SPARQL",
 	"wdqs-embed-explorer-button-incoming": "Mostrar enlaces entrantes",
-	"wdqs-embed-explorer-button-outgoing": "Mostrar enlaces salientes"
+	"wdqs-embed-explorer-button-outgoing": "Mostrar enlaces salientes",
+	"wdqs-app-graph-split-banner-content": "¿Tu consulta incluye términos que describen artículos científicos? La división de grafos próxima te afectará. Para más información ingresa a <a href=\"https://www.wikidata.org/wiki/Special:MyLanguage/Wikidata:SPARQL_query_service/WDQS_backend_update/September_2024_scaling_update\">este anuncio</a>."
 }
