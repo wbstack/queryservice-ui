@@ -65,6 +65,7 @@
 	"wdqs-dialog-key-shortcut-title": "Klaviatura qısqa túymeleri",
 	"wdqs-dialog-key-shortcut-run-query": "Sorawdı iske túsiriw",
 	"wdqs-dialog-key-shortcut-show-example": "Mısallar kórset.",
+	"wdqs-dialog-key-shortcut-help-menu": "Járdem menyusın jaǵıw/óshiriw",
 	"wdqs-dialog-key-shortcut-close-button": "Jabıw",
 	"wdqs-ve-filter": "Filtr",
 	"wdqs-ve-show": "Kórsetiw",
@@ -75,8 +76,10 @@
 	"wdqs-ve-subtype": "kishi túr",
 	"wdqs-ve-sb-suggestions": "Usınıslar",
 	"wdqs-ve-sb-other": "Basqa",
+	"wdqs-action-malformed-query": "Soraw qáte dúzilgen",
 	"wdqs-action-server-error": "Server qátesi",
 	"wdqs-action-unknow-error": "Belgisiz qáte",
 	"wdqs-action-preview": "Nátiyjeni aldınnan kóriw",
-	"wdqs-result-map-layers-all": "Barlıq qatlamları"
+	"wdqs-result-map-layers-all": "Barlıq qatlamları",
+	"wdqs-embed-button-edit-code": "SPARQLdi redaktorlań"
 }
