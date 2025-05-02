@@ -254,7 +254,7 @@ wikibase.queryService.ui.ResultView = ( function ( $, download, window ) {
 	 */
 	SELF.prototype._init = function () {
 		if ( !this._trackingApi ) {
-			this._trackingApi = new wikibase.queryService.api.Tracking();
+			this._trackingApi = wikibase.queryService.api.getTrackingServiceBasedOnGlobalContext();
 		}
 
 		this._actionBar = new wikibase.queryService.ui.toolbar.Actionbar( $( '.action-bar' ) );
