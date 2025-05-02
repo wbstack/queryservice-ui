@@ -7,6 +7,7 @@ wikibase.queryService.api.Tracking = ( function ( $ ) {
 
 	var STATSD_API_ENDPOINT = 'https://www.wikidata.org/beacon/statsv';
 	var STATS_API_ENDPOINT = 'https://www.wikidata.org/beacon/stats';
+	var METRIC_PREFIX = 'mediawiki_';
 
 	/**
 	 * API for the Tracking API
@@ -72,7 +73,7 @@ wikibase.queryService.api.Tracking = ( function ( $ ) {
 			labels = {};
 		}
 
-		var statsdExample = this._formatDogstatsd( metricName, value + '|' + valueType, labels );
+		var statsdExample = this._formatDogstatsd( this._getMetricName( metricName ), value + '|' + valueType, labels );
 
 		return $.ajax( {
 			url: this._statsEndpoint + '?' + statsdExample
@@ -88,6 +89,17 @@ wikibase.queryService.api.Tracking = ( function ( $ ) {
 		return $.ajax( {
 			url: this._statsdEndpoint + '?' + query
 		} );
+	};
+
+	/**
+	 * @private
+	 */
+	SELF.prototype._getMetricName = function ( metricName ) {
+		if ( metricName.startsWith( METRIC_PREFIX ) ) {
+			return metricName;
+		}
+
+		return METRIC_PREFIX + metricName;
 	};
 
 	/**
