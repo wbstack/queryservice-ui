@@ -168,7 +168,7 @@ wikibase.queryService.ui.App = ( function ( $, window, _, Cookies, moment ) {
 	 */
 	SELF.prototype._init = function () {
 		if ( !this._trackingApi ) {
-			this._trackingApi = new wikibase.queryService.api.Tracking();
+			this._trackingApi = wikibase.queryService.api.getTrackingServiceBasedOnGlobalContext();
 		}
 
 		if ( !this._resultView ) {

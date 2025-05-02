@@ -49,14 +49,6 @@ wikibase.queryService.api.Tracking = ( function ( $ ) {
 			valueType = 'c';
 		}
 
-		if (
-			location.hostname !== 'query.wikidata.org' ||
-			/^1|yes/.test( navigator.doNotTrack || window.doNotTrack )
-		) {
-			// skip tracking
-			return $.when();
-		}
-
 		// https://www.wikidata.org/beacon/statsv?test.statsv.foo2=5c
 		return this._track( metricName + '=' + value + valueType );
 	};
@@ -80,13 +72,6 @@ wikibase.queryService.api.Tracking = ( function ( $ ) {
 			labels = {};
 		}
 
-		if (
-			location.hostname !== 'query.wikidata.org' ||
-			/^1|yes/.test( navigator.doNotTrack || window.doNotTrack )
-		) {
-			// skip tracking
-			return $.when();
-		}
 		var statsdExample = this._formatDogstatsd( metricName, value + '|' + valueType, labels );
 
 		return $.ajax( {

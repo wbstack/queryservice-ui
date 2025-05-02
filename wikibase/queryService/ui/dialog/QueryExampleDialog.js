@@ -81,7 +81,7 @@ wikibase.queryService.ui.dialog.QueryExampleDialog = ( function ( $ ) {
 	 */
 	SELF.prototype._init = function () {
 		if ( !this._trackingApi ) {
-			this._trackingApi = new wikibase.queryService.api.Tracking();
+			this._trackingApi = wikibase.queryService.api.getTrackingServiceBasedOnGlobalContext();
 		}
 
 		if ( !this._wikibaseApi ) {
