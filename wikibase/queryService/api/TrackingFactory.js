@@ -12,5 +12,5 @@ wikibase.queryService.api.getTrackingServiceBasedOnGlobalContext = function () {
 		return new wikibase.queryService.api.NoOpTracking();
 	}
 
-	return wikibase.queryService.api.Tracking();
+	return new wikibase.queryService.api.Tracking();
 };
