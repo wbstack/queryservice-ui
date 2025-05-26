@@ -75,7 +75,7 @@
 	"wdqs-app-shorturl-page-title": "Bu səhifəyə qısa URL",
 	"wdqs-app-editor-placeholder": "(SPARQL sorğusunu daxil edin və ya bir sorğu nümunəsini seçin)",
 	"wdqs-app-editor-addprefixes": "Standart Prefiks əlavə edin",
-	"wdqs-app-resultbrowser-response-summary": "$2&nbsp;ms ərzində $1 {{PLURAL:$1|nəticə}}",
+	"wdqs-app-resultbrowser-response-summary": "$2&nbsp;ms ərzində $1 nəticə",
 	"wdqs-app-resultbrowser-stabilize": "Şəbəkəni sabitləşdir",
 	"wdqs-app-resultbrowser-hierarchical-lr": "Soldan sağa hiyerarxik düzülüş",
 	"wdqs-app-resultbrowser-hierarchical-ud": "Yuxarıdan aşağıya hiyerarxik düzülüş",
