@@ -90,6 +90,9 @@ After the code changes have been merged and new container image version has been
 
 Once the new deployment chart has been created, change the deployment chart version in use on the deployment server following instructions on https://wikitech.wikimedia.org/wiki/Kubernetes/Deployments. A bit more detailed deployment instructions for another service, that could be used for reference, can be found at https://wikitech.wikimedia.org/wiki/Miscweb#Deploy\_to\_Kubernetes/wikikube.
 
+### Usage Metrics
+Usage metrics are only emitted when hosted on query.wikidata.org. They are sent to https://wikidata.org/beacon/stats and https://wikidata.org/beacon/statsv .
+
 ## Components
 ### Editor
 A [CodeMirror](https://codemirror.net/) based SPARQL editor with code completion (ctrl+space) and tooltips (hover).
