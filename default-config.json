@@ -34,7 +34,7 @@
       "i18nKey": "wdqs-app-query-builder-banner-content"
     },
     "graph-split": {
-      "default": "Does your query include Items describing scientific articles? The upcoming graph split will affect you. Please learn more about it in <a href=\"https://www.wikidata.org/wiki/Special:MyLanguage/Wikidata:SPARQL_query_service/WDQS_backend_update/September_2024_scaling_update\">this announcement</a>.",
+      "default": "Does your query include Items describing scientific articles? The graph split affects your queries. Please learn more about it on this <a href=\"https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/WDQS_graph_split\">help page</a>.",
       "storageKey": "graphSplitBanner",
       "i18nKey": "wdqs-app-graph-split-banner-content"
     }
