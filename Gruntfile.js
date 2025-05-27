@@ -16,7 +16,10 @@ module.exports = function ( grunt ) {
 			]
 		},
 		eslint: {
-			src: '.'
+			src: '.',
+			options: {
+				fix: grunt.option( 'fix' ) || false
+			}
 		},
 		jsonlint: {
 			all: [

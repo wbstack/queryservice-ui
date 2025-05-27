@@ -42,10 +42,16 @@ Empty values, falsy values and undefined banner keys will result in the banner n
 
 ## Run tests
 
-Run JSHint, JSCS and QUnit tests.
+Run eslint, JSHint, JSCS and QUnit tests.
 
 ```bash
 $ npm test
+```
+
+Autofix eslint errors
+
+```bash
+$ npm run grunt eslint -- --fix
 ```
 
 ## Debug
