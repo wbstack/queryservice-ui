@@ -1,9 +1,9 @@
 ( function ( $, QUnit, sinon, wb ) {
 	'use strict';
 
-	QUnit.module( 'wikibase.queryService.ui.queryHelper' );
+	QUnit.module( 'wikibase.queryService.services' );
 
-	var PACKAGE = wb.queryService.ui.queryHelper;
+	var PACKAGE = wb.queryService.services;
 	var QUERY = {
 		SIMPLE: 'SELECT * WHERE {}',
 		LIMIT: 'SELECT * WHERE {} LIMIT 10',
@@ -11,6 +11,8 @@
 		TRIPLE_VARIABLES: 'SELECT ?y1 ?y2 ?y3 WHERE { ?x1 ?x2 ?x3. }\nLIMIT 10',
 		TRIPLES_UNION: 'PREFIX : <http://a.test/> SELECT ?x1 ?x2 ?x3 WHERE { :S :P :O.  OPTIONAL{ :S1 :P1 :O1 }  :S2 :P2 :O2. { :SU1 :PU1 :OU1 } UNION { :SU2 :PU2 :OU2 } }',
 		TRIPLES: 'PREFIX : <http://a.test/> SELECT ?x1 ?x2 ?x3 WHERE { :S :P :O.  OPTIONAL{ :S1 :P1 :O1 }  :S2 :P2 :O2.}',
+		TRIPLES_GROUPS: 'PREFIX : <http://a.test/> SELECT ?x1 ?x2 ?x3 WHERE { { :S :P :O.  OPTIONAL{ :S1 :P1 :O1 }  } UNION { :S2 :P2 :O2.} }',
+		TRIPLES_UNION_GROUPS: 'PREFIX : <http://a.test/> SELECT ?x1 ?x2 ?x3 WHERE { { :S :P :O.  OPTIONAL{ :S1 :P1 :O1 }  } UNION { { :S2 :P2 :O2.} UNION { :SU1 :PU1 :OU1 } UNION { :SU2 :PU2 :OU2 } } }',
 		SUBQUERIES: 'SELECT * WHERE {  {SELECT * WHERE { {SELECT * WHERE {}} }} }',
 		BOUND: 'PREFIX : <http://a.test/> SELECT * WHERE { ?bound :P :O.  OPTIONAL{ :S1 ?x ?bound2 }  :S2 :P2 :O2.}',
 		COMMENTS: '#foo:bar\n#6*9=42\nSELECT * WHERE {  }',
@@ -316,6 +318,67 @@
 		q.parse( QUERY.VARIABLES );
 
 		assert.notOk( q.isWildcardQuery(), 'isWildcardQuery returns false' );
+	} );
+
+	QUnit.test( 'When query is \'' + QUERY.TRIPLES_GROUPS + '\' then', function ( assert ) {
+		var q = new PACKAGE.SparqlQuery();
+		q.parse( QUERY.TRIPLES_GROUPS );
+
+		var result = q.getSubTriples();
+		var expectedTriples = [
+			{
+				'subject': 'http://a.test/S',
+				'predicate': 'http://a.test/P',
+				'object': 'http://a.test/O'
+			},
+			{
+				'subject': 'http://a.test/S1',
+				'predicate': 'http://a.test/P1',
+				'object': 'http://a.test/O1'
+			}
+		];
+		var expectedTripleStrings = expectedTriples.map( JSON.stringify );
+
+		assert.equal( result.length, expectedTriples.length, 'there should be' + expectedTriples.length + ' triples' );
+		result.forEach( function ( element ) {
+			var tripleString = JSON.stringify( element.triple );
+
+			assert.ok(
+				expectedTripleStrings.includes( tripleString ),
+				'triple ' + tripleString + ' should be in expected triples'
+			);
+		} );
+	} );
+
+	QUnit.test( 'When query is \'' + QUERY.TRIPLES_UNION_GROUPS + '\' then', function ( assert ) {
+		var q = new PACKAGE.SparqlQuery();
+		q.parse( QUERY.TRIPLES_UNION_GROUPS );
+
+		var result = q.getSubTriples();
+		var expectedTriples = [
+			{
+				'subject': 'http://a.test/S',
+				'predicate': 'http://a.test/P',
+				'object': 'http://a.test/O'
+			},
+			{
+				'subject': 'http://a.test/S1',
+				'predicate': 'http://a.test/P1',
+				'object': 'http://a.test/O1'
+			}
+		];
+
+		assert.equal( result.length, expectedTriples.length, 'there should be ' + expectedTriples.length + ' triples' );
+
+		result.forEach( function ( element ) {
+			var tripleString = JSON.stringify( element.triple );
+			var expectedTripleStrings = expectedTriples.map( JSON.stringify );
+
+			assert.ok(
+				expectedTripleStrings.includes( tripleString ),
+				'triple ' + tripleString + ' should be in expected triples'
+			);
+		} );
 	} );
 
 }( jQuery, QUnit, sinon, wikibase ) );

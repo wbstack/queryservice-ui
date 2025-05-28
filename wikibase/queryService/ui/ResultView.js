@@ -260,7 +260,7 @@ wikibase.queryService.ui.ResultView = ( function ( $, download, window ) {
 
 		this._actionBar = new wikibase.queryService.ui.toolbar.Actionbar( $( '.action-bar' ) );
 
-		this._sparqlQuery = this._query = new wikibase.queryService.ui.queryHelper.SparqlQuery();
+		this._sparqlQuery = this._query = new wikibase.queryService.services.SparqlQuery();
 
 		this._internationalizeCharts();
 

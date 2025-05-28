@@ -151,7 +151,7 @@
 		QUnit.test( testCase.description, function ( assert ) {
 			assert.expect( 1 );
 
-			var query = new wb.queryService.ui.queryHelper.SparqlQuery();
+			var query = new wb.queryService.services.SparqlQuery();
 			query.parse( testCase.sparql, wb.queryService.RdfNamespaces.ALL_PREFIXES );
 			var qt = QueryTemplate.parse( query );
 			var $html = qt.getHtml(
