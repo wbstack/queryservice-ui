@@ -1,0 +1,234 @@
+[
+  {
+    "query": "select *\r\nwhere{ wd:Q2719599 wdt:P39 wd:Q59193318}",
+    "expected": "single_known_relation_statement"
+  },
+  {
+    "query": "select *\r\nwhere{ wd:Q117494 wdt:P734 ?x}",
+    "expected": "only_ent_subj_statements"
+  },
+  {
+    "query": "select *\r\nwhere{ wd:Q375547 wdt:P734 wd:Q1848748}",
+    "expected": "single_known_relation_statement"
+  },
+  {
+    "query": "\n SELECT ?label\n WHERE {\n wd:Q16084063 rdfs:label ?label .\n FILTER(LANG(?label) = \"en\")\n }\n",
+    "expected": "only_term_statements"
+  },
+  {
+    "query": "\n SELECT ?alias WHERE {\n wd:Q17012587 skos:altLabel ?alias.\n FILTER (LANG(?alias) = \"en\")\n }\n",
+    "expected": "only_term_statements"
+  },
+  {
+    "query": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n PREFIX wd: <http://www.wikidata.org/entity/> \n PREFIX schema: <http://schema.org/>\n select *\n where {\n wd:Q5958960 rdfs:label ?label .\n wd:Q5958960 schema:description ?description .\n FILTER (langMatches(lang(?label), \"EN\") && langMatches(lang(?description), \"EN\"))\n }\n limit 1",
+    "expected": "only_term_statements"
+  },
+  {
+    "query": "\n SELECT ?itemLabel ?itemDescription ?language WHERE {\n VALUES ?language {\"en\" \"hi\" \"ja\" \"id\" \"ta\" \"vi\"}\n wd:Q845945 rdfs:label ?itemLabel .\n OPTIONAL { wd:Q845945 schema:description ?itemDescription . }\n FILTER (lang(?itemLabel) = ?language && (lang(?itemDescription) = ?language || !BOUND(?itemDescription)))\n }\n",
+    "expected": "only_term_statements"
+  },
+  {
+    "query": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n PREFIX wd: <http://www.wikidata.org/entity/> \n PREFIX schema: <http://schema.org/>\n select *\n where {\n wd:Q322922 rdfs:label ?label .\n wd:Q322922 schema:description ?description .\n FILTER (langMatches(lang(?label), \"EN\") && langMatches(lang(?description), \"EN\"))\n }\n limit 1",
+    "expected": "only_term_statements"
+  },
+  {
+    "query": "\n SELECT ?alias WHERE {\n wd:Q5414364 skos:altLabel ?alias.\n FILTER (LANG(?alias) = \"en\")\n }\n",
+    "expected": "only_term_statements"
+  },
+  {
+    "query": "\n SELECT DISTINCT ?v ?label ?desc WHERE {\n VALUES ?v { <http://www.wikidata.org/entity/Q119262582> }\n OPTIONAL { ?v rdfs:label ?label . FILTER(lang(?label) = \"en\") . } \n OPTIONAL { ?v schema:description ?desc. FILTER(lang(?desc) = \"en\") }. \n } ORDER BY ?v LIMIT 5000 OFFSET 0\n",
+    "expected": "only_term_statements"
+  },
+  {
+    "query": "\n SELECT ?alias WHERE {\n wd:Q26389484 skos:altLabel ?alias.\n FILTER (LANG(?alias) = \"en\")\n }\n",
+    "expected": "only_term_statements"
+  },
+  {
+    "query": "SELECT ?doi { wd:Q24336098 wdt:P356 ?doi }",
+    "expected": "only_ent_subj_statements"
+  },
+  {
+    "query": "SELECT DISTINCT * WHERE { wd:Q1730802 rdfs:label ?label . FILTER (langMatches( lang(?label), \"EN\" ) ) }",
+    "expected": "only_term_statements"
+  },
+  {
+    "query": "\n SELECT DISTINCT ?v ?label ?desc WHERE {\n VALUES ?v { <http://www.wikidata.org/entity/P122> }\n OPTIONAL { ?v rdfs:label ?label . FILTER(lang(?label) = \"en\") . } \n OPTIONAL { ?v schema:description ?desc. FILTER(lang(?desc) = \"en\") }. \n } ORDER BY ?v LIMIT 5000 OFFSET 5000\n",
+    "expected": "only_term_statements"
+  },
+  {
+    "query": "SELECT DISTINCT * WHERE { wd:Q73360 rdfs:label ?label . FILTER (langMatches( lang(?label), \"EN\" ) ) }",
+    "expected": "only_term_statements"
+  },
+  {
+    "query": "\n SELECT ?alias WHERE {\n wd:Q103973794 skos:altLabel ?alias.\n FILTER (LANG(?alias) = \"en\")\n }\n",
+    "expected": "only_term_statements"
+  },
+  {
+    "query": "SELECT ?wdt WHERE {\n VALUES ?v1 { wd:Q102398072 }\n VALUES ?v2 { wd:Q1729754 }\n wd:Q102398072 (wdt:P131|wdt:P276|wdt:P279|wdt:P361)+ wd:Q1729754.\n }",
+    "expected": "single_known_relation_statement"
+  },
+  {
+    "query": "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n\nSELECT ?p ?o WHERE {\n { <http://www.wikidata.org/entity/Q58640536> ?p ?o . FILTER(isLiteral(?o) && DATATYPE(?o) != xsd:string && DATATYPE(?o) != rdf:langString) } UNION\n { <http://www.wikidata.org/entity/Q58640536> ?p ?o . FILTER(isLiteral(?o) && lang(?o) = \"en\") } UNION\n { <http://www.wikidata.org/entity/Q58640536> ?p ?o . FILTER(isLiteral(?o) && !langMatches(lang(?o), \"en\") && (DATATYPE(?o) = xsd:string || DATATYPE(?o) = rdf:langString))\n FILTER NOT EXISTS { <http://www.wikidata.org/entity/Q58640536> ?p ?o_en_version . FILTER(isLiteral(?o_en_version) && lang(?o_en_version) = \"en\") } }\n}",
+    "expected": "only_ent_subj_statements"
+  },
+  {
+    "query": "select *\r\nwhere{ wd:Q674952 wdt:P69 wd:Q1641504}",
+    "expected": "single_known_relation_statement"
+  },
+  {
+    "query": "\n SELECT DISTINCT ?v ?label ?desc WHERE {\n VALUES ?v { <http://www.wikidata.org/entity/P6286> }\n OPTIONAL { ?v rdfs:label ?label . FILTER(lang(?label) = \"en\") . } \n OPTIONAL { ?v schema:description ?desc. FILTER(lang(?desc) = \"en\") }. \n } ORDER BY ?v LIMIT 5000 OFFSET 5000\n",
+    "expected": "only_term_statements"
+  },
+  {
+    "query": "\n SELECT ?alias WHERE {\n wd:Q29491883 skos:altLabel ?alias.\n FILTER (LANG(?alias) = \"en\")\n }\n",
+    "expected": "only_term_statements"
+  },
+  {
+    "query": "SELECT DISTINCT * WHERE { wd:Q833 rdfs:label ?label . FILTER (langMatches( lang(?label), \"EN\" ) ) }",
+    "expected": "only_term_statements"
+  },
+  {
+    "query": "SELECT DISTINCT ?label \n WHERE \n {\n {wd:Q3165460 rdfs:label ?label}\n UNION\n {wd:Q3165460 skos:altLabel ?label} \n FILTER(lang(?label)='es' || lang(?label)='en')\n}",
+    "expected": "only_term_statements"
+  },
+  {
+    "query": "SELECT DISTINCT ?label \n WHERE \n {\n {wd:Q3311301 rdfs:label ?label}\n UNION\n {wd:Q3311301 skos:altLabel ?label} \n FILTER(lang(?label)='es' || lang(?label)='en')\n}",
+    "expected": "only_term_statements"
+  },
+  {
+    "query": "SELECT DISTINCT * WHERE { wd:Q41298 rdfs:label ?label . FILTER (langMatches( lang(?label), \"EN\" ) ) }",
+    "expected": "only_term_statements"
+  },
+  {
+    "query": "\n ASK {\n wd:Q19280057 (wdt:P31|wdt:P279*) wd:Q2095. }\n",
+    "expected": "single_known_relation_statement"
+  },
+  {
+    "query": "\n SELECT DISTINCT ?v ?label ?desc WHERE {\n VALUES ?v { <http://www.wikidata.org/entity/Q1322263> }\n OPTIONAL { ?v rdfs:label ?label . FILTER(lang(?label) = \"en\") . } \n OPTIONAL { ?v schema:description ?desc. FILTER(lang(?desc) = \"en\") }. \n } ORDER BY ?v LIMIT 5000 OFFSET 0\n",
+    "expected": "only_term_statements"
+  },
+  {
+    "query": "select *\r\nwhere{ wd:Q763368 wdt:P108 ?x}",
+    "expected": "only_ent_subj_statements"
+  },
+  {
+    "query": "SELECT DISTINCT * WHERE { wd:Q316 rdfs:label ?label . FILTER (langMatches( lang(?label), \"EN\" ) ) }",
+    "expected": "only_term_statements"
+  },
+  {
+    "query": "SELECT ?imagen WHERE { wd:Q209283 wdt:P18 ?imagen }",
+    "expected": "only_ent_subj_statements"
+  },
+  {
+    "query": "select *\r\nwhere{ wd:Q257306 wdt:P27 wd:Q31}",
+    "expected": "single_known_relation_statement"
+  },
+  {
+    "query": "SELECT ?doi { wd:Q60606986 wdt:P356 ?doi }",
+    "expected": "only_ent_subj_statements"
+  },
+  {
+    "query": "SELECT ?doi { wd:Q121979995 wdt:P356 ?doi }",
+    "expected": "only_ent_subj_statements"
+  },
+  {
+    "query": "select *\r\nwhere{ wd:Q256541 wdt:P106 wd:Q333634}",
+    "expected": "single_known_relation_statement"
+  },
+  {
+    "query": "SELECT DISTINCT * WHERE { wd:Q43513 rdfs:label ?label . FILTER (langMatches( lang(?label), \"EN\" ) ) }",
+    "expected": "only_term_statements"
+  },
+  {
+    "query": "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n\nSELECT ?p ?o WHERE {\n { <http://www.wikidata.org/entity/Q17457631> ?p ?o . FILTER(isLiteral(?o) && DATATYPE(?o) != xsd:string && DATATYPE(?o) != rdf:langString) } UNION\n { <http://www.wikidata.org/entity/Q17457631> ?p ?o . FILTER(isLiteral(?o) && lang(?o) = \"en\") } UNION\n { <http://www.wikidata.org/entity/Q17457631> ?p ?o . FILTER(isLiteral(?o) && !langMatches(lang(?o), \"en\") && (DATATYPE(?o) = xsd:string || DATATYPE(?o) = rdf:langString))\n FILTER NOT EXISTS { <http://www.wikidata.org/entity/Q17457631> ?p ?o_en_version . FILTER(isLiteral(?o_en_version) && lang(?o_en_version) = \"en\") } }\n}",
+    "expected": "only_ent_subj_statements"
+  },
+  {
+    "query": "\n SELECT ?label\n WHERE {\n wd:Q83091248 rdfs:label ?label .\n FILTER(LANG(?label) = \"en\")\n }\n",
+    "expected": "only_term_statements"
+  },
+  {
+    "query": "SELECT DISTINCT * WHERE { wd:Q4920542 rdfs:label ?label . FILTER (langMatches( lang(?label), \"EN\" ) ) }",
+    "expected": "only_term_statements"
+  },
+  {
+    "query": "\n SELECT ?lat ?long WHERE {\n wd:Q1604373 wdt:P625 ?coord .\n BIND(strafter(str(?coord), \"Point(\") AS ?coordPoint) .\n BIND(strbefore(?coordPoint, \" \") AS ?long) .\n BIND(strafter(?coordPoint, \" \") AS ?lat) .\n }\n",
+    "expected": "only_ent_subj_statements"
+  },
+  {
+    "query": "select *\r\nwhere{ wd:Q1253640 wdt:P31 wd:Q22687}",
+    "expected": "single_known_relation_statement"
+  },
+  {
+    "query": "SELECT DISTINCT * WHERE { wd:Q3757 rdfs:label ?label . FILTER (langMatches( lang(?label), \"EN\" ) ) }",
+    "expected": "only_term_statements"
+  },
+  {
+    "query": "SELECT ?srcLabel\n WHERE \n {\n BIND(wd:Q667 AS ?src) .\n ?src rdfs:label ?srcLabel .\n FILTER(LANG(?srcLabel) = \"en\")\n }",
+    "expected": "only_term_statements"
+  },
+  {
+    "query": "\n SELECT *\n WHERE\n {\n wd:Q64826893 rdfs:label ?label .\n\n } LIMIT 1\n",
+    "expected": "only_term_statements"
+  },
+  {
+    "query": "select * {wd:Q10950148 wdt:P625 ?o}",
+    "expected": "only_ent_subj_statements"
+  },
+  {
+    "query": "\n SELECT ?wiki_qid ?label WHERE {\n VALUES ?wiki_qid { wd:Q35003776 wd:Q35003782 wd:Q35003785 wd:Q35003787 wd:Q35003793 wd:Q35003799 wd:Q35003805 wd:Q35003815 wd:Q35003816 wd:Q35003823 wd:Q35003832 wd:Q35003837 wd:Q35003842 wd:Q35003847 wd:Q35003848 wd:Q35003855 wd:Q35003859 wd:Q35003873 wd:Q35003878 wd:Q35003882 wd:Q35003883 wd:Q35003889 wd:Q35003892 wd:Q35003894 wd:Q35003901 wd:Q35003908 wd:Q35003914 wd:Q35003919 wd:Q35003926 wd:Q35003933 wd:Q35003937 wd:Q35003943 wd:Q35003946 wd:Q35003950 wd:Q35003959 wd:Q35003998 wd:Q35004037 wd:Q35004044 wd:Q35004051 wd:Q35004072 wd:Q35004073 wd:Q35004078 wd:Q35004079 wd:Q35004083 wd:Q35004088 wd:Q35004092 wd:Q35004094 wd:Q35004096 wd:Q35004103 wd:Q35004108 wd:Q35004113 wd:Q35004115 wd:Q35004116 wd:Q35004118 wd:Q35004121 wd:Q35004126 wd:Q35004130 wd:Q35004141 wd:Q35004144 wd:Q35004147 wd:Q35004148 wd:Q35004155 wd:Q35004157 wd:Q35004161 wd:Q35004162 wd:Q35004168 wd:Q35004170 wd:Q35004174 wd:Q35004180 wd:Q35004184 wd:Q35004185 wd:Q35004191 wd:Q35004196 wd:Q35004202 wd:Q35004203 wd:Q35004207 wd:Q35004213 wd:Q35004228 wd:Q35004233 wd:Q35004240 wd:Q35004241 wd:Q35004244 wd:Q35004245 wd:Q35004250 wd:Q35004253 wd:Q35004254 wd:Q35004260 wd:Q35004261 wd:Q35004266 wd:Q35004267 wd:Q35004273 wd:Q35004276 wd:Q35004278 wd:Q35004283 wd:Q35004288 wd:Q35004289 wd:Q35004293 wd:Q35004295 wd:Q35004296 wd:Q35004301 wd:Q35004303 wd:Q35004309 wd:Q35004315 wd:Q35004343 wd:Q35004347 wd:Q35004362 wd:Q35004369 wd:Q35004375 wd:Q35004382 wd:Q35004389 wd:Q35004393 wd:Q35004398 wd:Q35004399 wd:Q35004405 wd:Q35004410 wd:Q35004429 wd:Q35004434 wd:Q3500444 wd:Q35004448 wd:Q35004449 wd:Q35004455 wd:Q35004458 wd:Q35004465 wd:Q35004467 wd:Q35004469 wd:Q35004471 wd:Q35004475 wd:Q35004480 wd:Q35004482 wd:Q35004485 wd:Q35004491 wd:Q35004496 wd:Q35004502 wd:Q35004506 wd:Q35004509 wd:Q35004517 wd:Q35004519 wd:Q35004522 wd:Q35004526 wd:Q35004527 wd:Q35004533 wd:Q35004547 wd:Q35004552 wd:Q35004554 wd:Q35004558 wd:Q35004562 wd:Q35004568 wd:Q35004579 wd:Q35004584 wd:Q35004586 wd:Q35004590 wd:Q35004594 wd:Q35004605 wd:Q35004614 wd:Q35004619 wd:Q35004620 wd:Q35004627 wd:Q35004632 wd:Q35004651 wd:Q35004657 wd:Q35004660 wd:Q35004662 wd:Q35004668 wd:Q35004673 wd:Q35004680 wd:Q35004681 wd:Q35004682 wd:Q35004686 wd:Q35004687 wd:Q35004693 wd:Q35004694 wd:Q35004695 wd:Q35004697 wd:Q35004700 wd:Q35004709 wd:Q35004715 wd:Q35004729 wd:Q35004733 wd:Q35004737 wd:Q35004739 wd:Q35004745 wd:Q35004746 wd:Q35004752 wd:Q35004757 wd:Q35004764 wd:Q35004770 wd:Q35004776 wd:Q35004781 wd:Q35004794 wd:Q35004802 wd:Q35004808 wd:Q35004813 wd:Q35004827 wd:Q35004829 wd:Q35004832 wd:Q35004839 wd:Q35004843 wd:Q35004844 wd:Q35004845 wd:Q35004852 wd:Q35004868 wd:Q35004873 wd:Q35004880 wd:Q35004884 wd:Q35004889 wd:Q35004890 wd:Q35004891 wd:Q35004896 wd:Q35004903 wd:Q35004908 wd:Q35004915 wd:Q35004918 wd:Q35004923 wd:Q35004925 wd:Q35004929 wd:Q35004934 wd:Q35004936 wd:Q35004942 wd:Q35004946 wd:Q35004958 wd:Q35004963 wd:Q35004967 wd:Q35004974 wd:Q35004981 wd:Q35004984 wd:Q35004986 wd:Q35004991 wd:Q35004996 wd:Q35004997 wd:Q35005002 wd:Q35005010 wd:Q35005023 wd:Q35005028 wd:Q35005034 wd:Q35005048 wd:Q35005053 wd:Q35005057 wd:Q35005058 wd:Q35005063 wd:Q35005077 wd:Q35005080 wd:Q35005089 wd:Q35005095 wd:Q35005103 wd:Q35005110 wd:Q35005115 wd:Q35005116 wd:Q35005120 wd:Q35005123 wd:Q35005134 wd:Q35005139 wd:Q35005145 wd:Q35005154 wd:Q35005157 wd:Q35005162 wd:Q35005165 wd:Q35005167 wd:Q35005172 wd:Q35005188 wd:Q35005194 wd:Q35005200 wd:Q35005204 wd:Q35005206 wd:Q35005214 wd:Q35005220 wd:Q35005225 wd:Q35005228 wd:Q35005229 wd:Q35005234 wd:Q35005235 wd:Q35005247 wd:Q35005251 wd:Q35005253 wd:Q35005258 wd:Q35005263 wd:Q35005269 wd:Q35005273 wd:Q35005278 wd:Q35005282 wd:Q35005287 wd:Q35005291 wd:Q35005296 wd:Q35005297 wd:Q35005308 wd:Q35005312 wd:Q35005318 wd:Q35005319 wd:Q35005324 wd:Q35005325 wd:Q35005330 wd:Q35005335 wd:Q35005340 wd:Q35005343 wd:Q35005347 wd:Q35005348 wd:Q35005353 wd:Q35005357 wd:Q35005360 wd:Q35005362 wd:Q35005367 }\n ?wiki_qid rdfs:label ?label.\n FILTER(LANG(?label) = \"en\")\n }\n",
+    "expected": "only_term_statements"
+  },
+  {
+    "query": "select *\r\nwhere{ wd:Q207947 wdt:P2003 ?x}",
+    "expected": "only_ent_subj_statements"
+  },
+  {
+    "query": "select *\r\nwhere{ wd:Q2343409 wdt:P106 wd:Q483501}",
+    "expected": "single_known_relation_statement"
+  },
+  {
+    "query": "select *\r\nwhere{ wd:Q1042804 wdt:P19 wd:Q35765}",
+    "expected": "single_known_relation_statement"
+  },
+  {
+    "query": "SELECT ?doi { wd:Q91596563 wdt:P356 ?doi }",
+    "expected": "only_ent_subj_statements"
+  },
+  {
+    "query": "select *\r\nwhere{ wd:Q164351 wdt:P512 ?x}",
+    "expected": "only_ent_subj_statements"
+  },
+  {
+    "query": "SELECT ?o WHERE { wd:Q42 p:P31 ?o }",
+    "expected": "includes_instance_or_subclass_statement"
+  },
+  {
+    "query": "SELECT ?o WHERE { wd:Q42 wdt:P279 ?o }",
+    "expected": "includes_instance_or_subclass_statement"
+  },
+  {
+    "query": "SELECT ?o WHERE { wd:Q42 wdt:P31/wdt:P279* ?o }",
+    "expected": "includes_instance_or_subclass_statement"
+  },
+  {
+    "query": "SELECT ?o WHERE { wd:Q42 p:P279+ ?o }",
+    "expected": "includes_instance_or_subclass_statement"
+  },
+  {
+    "query": "SELECT ?o WHERE { wd:Q42 wdt:P31? ?o }",
+    "expected": "includes_instance_or_subclass_statement"
+  },
+  {
+    "query": "SELECT ?o WHERE { wd:Q42 ?p wd:Q23 }",
+    "expected": "single_unknown_relation_statement"
+  },
+  {
+    "query": "SELECT ?q ?qLabel ?title ?published_in ?doi ?pmid ?topic ?pub_date WHERE {\nVALUES ?q { wd:Q56993996 wd:Q104584213 } .\nOPTIONAL { ?q wdt:P1476 ?title } .\nOPTIONAL { ?q wdt:P1433 ?published_in } .\nOPTIONAL { ?q wdt:P356 ?doi } .\nOPTIONAL { ?q wdt:P698 ?pmid }.\nOPTIONAL { ?q wdt:P921 ?topic }.\nOPTIONAL { ?q wdt:P577 ?pub_date }.\nSERVICE wikibase:label { bd:serviceParam wikibase:language '[AUTO_LANGUAGE],en'. }\n}",
+    "expected": "unclassified"
+  },
+  {
+    "query": "SELECT ?item ?itemLabel WHERE { ?item skos:altLabel ?itemLabel. ?item wdt:P32 wd:Q146}",
+    "expected": "unclassified"
+  }
+]

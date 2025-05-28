@@ -279,13 +279,13 @@ wikibase.queryService.ui.queryHelper.SelectorBox = ( function ( $, wikibase ) {
 	SELF.prototype._sparqlApi = null;
 
 	/**
-	 * @property {wikibase.queryService.ui.queryHelper.SparqlQuery}
+	 * @property {wikibase.queryService.services.SparqlQuery}
 	 * @private
 	 */
 	SELF.prototype._query = null;
 
 	/**
-	 * @param {wikibase.queryService.ui.queryHelper.SparqlQuery} query
+	 * @param {wikibase.queryService.services.SparqlQuery} query
 	 */
 	SELF.prototype.setQuery = function ( query ) {
 		this._query = query;

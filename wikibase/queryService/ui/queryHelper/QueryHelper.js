@@ -33,7 +33,7 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function ( $, wikibase, _ )
 		this._api = api || new wikibase.queryService.api.Wikibase();
 		this._selectorBox = selectorBox
 			|| new wikibase.queryService.ui.queryHelper.SelectorBox( this._api, sparqlApi );
-		this._query = new wikibase.queryService.ui.queryHelper.SparqlQuery();
+		this._query = new wikibase.queryService.services.SparqlQuery();
 	}
 
 	/**
@@ -55,7 +55,7 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function ( $, wikibase, _ )
 	SELF.prototype._changeListener = null;
 
 	/**
-	 * @property {wikibase.queryService.ui.queryHelper.SparqlQuery}
+	 * @property {wikibase.queryService.services.SparqlQuery}
 	 * @private
 	 */
 	SELF.prototype._query = null;

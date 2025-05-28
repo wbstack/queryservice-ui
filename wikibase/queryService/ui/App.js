@@ -840,6 +840,7 @@ wikibase.queryService.ui.App = ( function ( $, window, _, Cookies, moment ) {
 		this._editor.save();
 		this._updateQueryUrl();
 		this._updateTitle();
+		this._classifyQuery();
 
 		$( '#execute-button' ).prop( 'disabled', true );
 		if ( this._isEmptyQuery() ) {
@@ -862,6 +863,16 @@ wikibase.queryService.ui.App = ( function ( $, window, _, Cookies, moment ) {
 				$( '#cancel-button' ).prop( 'disabled', true );
 			} );
 		}
+	};
+
+	/**
+	 * @private
+	 */
+	SELF.prototype._classifyQuery = function () {
+		var query = this._editor.getValue();
+		var classifier = new wikibase.queryService.services.SparqlClassifier( query );
+		// eslint-disable-next-line no-console
+		console.log( 'Query type: ' + classifier.classify() ); // jshint ignore:line
 	};
 
 	/**
