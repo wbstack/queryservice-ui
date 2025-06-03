@@ -25,7 +25,9 @@ wikibase.queryService.RdfNamespaces = {};
 			prv: 'http://www.wikidata.org/prop/reference/value/',
 			prn: 'http://www.wikidata.org/prop/reference/value-normalized/',
 			wdno: 'http://www.wikidata.org/prop/novalue/',
-			wdata: 'http://www.wikidata.org/wiki/Special:EntityData/'
+			wdata: 'http://www.wikidata.org/wiki/Special:EntityData/',
+			wdsubgraph: 'https://query.wikidata.org/subgraph/',
+			mwapi: 'https://www.mediawiki.org/ontology#API/'
 		},
 		W3C: {
 			rdfs: 'http://www.w3.org/2000/01/rdf-schema#',
