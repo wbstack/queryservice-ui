@@ -32,7 +32,7 @@ wikibase.queryService.services.SparqlClassifier = ( function ( $, wikibase, spar
 			return 'invalid_query';
 		}
 
-		var triples = this._collectTriples();
+		var triples = this._queryParser.getTriples();
 		var flags = this._TriplesAnalyzer.analyze( triples );
 
 		if ( flags.predsAreTerms ) {
@@ -56,18 +56,6 @@ wikibase.queryService.services.SparqlClassifier = ( function ( $, wikibase, spar
 		}
 
 		return 'unclassified';
-	};
-
-	/**
-	 * Collect triples from query and subqueries
-	 *
-	 * @return {object[]}
-	 */
-	SELF.prototype._collectTriples = function () {
-		var triples = this._queryParser.getTriples();
-		var subTriples = this._queryParser.getSubTriples();
-
-		return triples.concat( subTriples );
 	};
 
 	return SELF;

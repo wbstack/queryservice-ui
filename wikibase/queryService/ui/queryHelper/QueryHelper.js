@@ -161,14 +161,6 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function ( $, wikibase, _ )
 		}
 
 		this._triples = this._query.getTriples();
-
-		var subqueries = this._query.getSubQueries();
-		while ( subqueries.length > 0 ) {
-			var q = subqueries.pop();
-			this._triples = this._triples.concat( q.getTriples() );
-			subqueries.concat( q.getSubQueries() );
-		}
-
 		this._isSimpleMode = this._isSimpleQuery();
 		$element.html( this._getHtml() );
 	};
