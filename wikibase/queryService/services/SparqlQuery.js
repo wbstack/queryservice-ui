@@ -269,38 +269,6 @@ wikibase.queryService.services.SparqlQuery = ( function ( $, wikibase, sparqljs,
 	};
 
 	/**
-	 * Get triples defined in this query
-	 *
-	 * @return {wikibase.queryService.services.SparqlQuery[]}
-	 */
-	SELF.prototype.getSubQueries = function () {
-		var queries = [];
-
-		function findSubqueriesInGroup( group ) {
-			$.each( group.patterns, function ( k, v ) {
-				switch ( v.type ) {
-					case 'query':
-						queries.push( new SELF( v ) );
-						break;
-					case 'group':
-						findSubqueriesInGroup( v );
-						break;
-				}
-			} );
-		}
-
-		$.each( this._query.where, function ( k, v ) {
-			if ( v.type === 'group' ) {
-				findSubqueriesInGroup( v );
-			} else if ( v.type === 'query' ) {
-				queries.push( new SELF( v ) );
-			}
-		} );
-
-		return queries;
-	};
-
-	/**
 	 * Add a triple to the query
 	 *
 	 * @param {string} subject
