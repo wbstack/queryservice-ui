@@ -2,7 +2,7 @@ var wikibase = window.wikibase || {};
 wikibase.queryService = wikibase.queryService || {};
 wikibase.queryService.services = wikibase.queryService.services || {};
 
-wikibase.queryService.services.SparqlQuery = ( function ( $, wikibase, sparqljs ) {
+wikibase.queryService.services.SparqlQuery = ( function ( $, wikibase, sparqljs, traverse ) {
 	'use strict';
 
 	/**
@@ -210,75 +210,24 @@ wikibase.queryService.services.SparqlQuery = ( function ( $, wikibase, sparqljs 
 	 *
 	 * @return {Object}
 	 */
-	SELF.prototype.getTriples = function ( node, isOptional ) {
-		var triples = [];
-		if ( !node ) {
-			node = this._query.where;
-		}
-		if ( !isOptional ) {
-			isOptional = false;
-		}
-
+	SELF.prototype.getTriples = function () {
 		var self = this;
-		$.each( node, function ( k, v ) {
-			if ( v.type && v.type === 'bgp' ) {
-				triples = triples.concat( self._createTriples( v.triples, isOptional ) );
-			}
-			if ( v.type && v.type === 'optional' ) {
-				triples = triples.concat( self.getTriples( v.patterns, true ) );
-			}
-			if ( v.type && v.type === 'union' ) {
-				triples = triples.concat( self.getTriples( v.patterns, false ) );
-			}
-			if ( v.type && v.type === 'minus' ) {
-				triples = triples.concat( self.getTriples( v.patterns, false ) );
-			}
-		} );
 
-		return triples;
-	};
+		return traverse( this._query ).reduce(
+			function ( acc, node ) {
+				// Triples within SERVICE aren't relevant for the query helper or the classification,
+				// so we skip them for now.
+				if ( node.triples && this.parent.parent.node.type !== 'service' ) {
+					return acc.concat( self._createTriples(
+						node.triples,
+						this.parent.parent.node.type === 'optional'
+					) );
+				}
 
-	/**
-	 * Get triples defined in subgroups and subqueries of the query
-	 *
-	 * @return {Object}
-	 */
-	SELF.prototype.getSubTriples = function ( node, isOptional ) {
-		var triples = [];
-		if ( !node ) {
-			node = this._query.where;
-		}
-		if ( !isOptional ) {
-			isOptional = false;
-		}
-
-		var subqueries = this.getSubQueries();
-		while ( subqueries.length > 0 ) {
-			var q = subqueries.pop();
-			triples = triples.concat( q.getTriples() );
-			subqueries = subqueries.concat( q.getSubQueries() );
-		}
-
-		var self = this;
-		$.each( node, function ( k, v ) {
-			if ( v.type && v.type === 'group' ) {
-				triples = triples.concat( self.getTriples( v.patterns, isOptional ) );
-			}
-			if ( v.type && v.type === 'optional' ) {
-				triples = triples.concat( self.getSubTriples( v.patterns, true ) );
-			}
-			if ( v.type && v.type === 'union' ) {
-				triples = triples.concat( self.getSubTriples( v.patterns, false ) );
-			}
-			if ( v.type && v.type === 'filter' ) {
-				triples = triples.concat( self.getTriples( v.expression.args, false ) );
-			}
-			if ( v.type && v.type === 'minus' ) {
-				triples = triples.concat( self.getSubTriples( v.patterns, false ) );
-			}
-		} );
-
-		return triples;
+				return acc;
+			},
+			[]
+		);
 	};
 
 	/**
@@ -501,4 +450,4 @@ wikibase.queryService.services.SparqlQuery = ( function ( $, wikibase, sparqljs 
 	};
 
 	return SELF;
-}( jQuery, wikibase, sparqljs ) );
+}( jQuery, wikibase, sparqljs, traverse ) );

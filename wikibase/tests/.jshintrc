@@ -50,6 +50,7 @@
 		"dimple": false,
 		"wellknown": false,
 		"Map": false,
-		"MathJax": false
+		"MathJax": false,
+		"traverse": false
 	}
 }
