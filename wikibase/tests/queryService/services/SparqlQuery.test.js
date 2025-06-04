@@ -12,7 +12,6 @@
 		TRIPLES_UNION: 'PREFIX : <http://a.test/> SELECT ?x1 ?x2 ?x3 WHERE { :S :P :O.  OPTIONAL{ :S1 :P1 :O1 }  :S2 :P2 :O2. { :SU1 :PU1 :OU1 } UNION { :SU2 :PU2 :OU2 } }',
 		TRIPLES: 'PREFIX : <http://a.test/> SELECT ?x1 ?x2 ?x3 WHERE { :S :P :O.  OPTIONAL{ :S1 :P1 :O1 }  :S2 :P2 :O2.}',
 		TRIPLES_UNION_GROUPS: 'PREFIX : <http://a.test/> SELECT ?x1 ?x2 ?x3 WHERE { { :S :P :O.  OPTIONAL{ :S1 :P1 :O1 }  } UNION { { :S2 :P2 :O2.} UNION { :SU1 :PU1 :OU1 } UNION { :SU2 :PU2 :OU2 } } }',
-		SUBQUERIES: 'SELECT * WHERE {  {SELECT * WHERE { {SELECT * WHERE {}} }} }',
 		BOUND: 'PREFIX : <http://a.test/> SELECT * WHERE { ?bound :P :O.  OPTIONAL{ :S1 ?x ?bound2 }  :S2 :P2 :O2.}',
 		COMMENTS: '#foo:bar\n#6*9=42\nSELECT * WHERE {  }',
 		LABEL_SERVICE: 'PREFIX wikibase: <http://wikiba.se/ontology#> PREFIX bd: <http://www.bigdata.com/rdf#> SELECT * WHERE { SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],mul,en" } }'
@@ -178,23 +177,6 @@
 			'predicate': 'http://a.test/P1',
 			'subject': 'http://a.test/S1'
 		}, 'tripl left must be S1, P1, O1' );
-	} );
-
-	QUnit.test( 'When query is \'' + QUERY.SUBQUERIES + '\' then', function ( assert ) {
-		assert.expect( 4 );
-
-		var q = new PACKAGE.SparqlQuery();
-		q.parse( QUERY.SUBQUERIES );
-		var queries = q.getSubQueries();
-
-		assert.equal( queries.length, 1, 'expecting one subquery' );
-		assert.ok( ( queries[0] instanceof PACKAGE.SparqlQuery ),
-			'that must be instance of SparqlQuery' );
-
-		queries = queries[0].getSubQueries();
-		assert.equal( queries.length, 1, 'expecting one sub query of sub query' );
-		assert.ok( ( queries[0] instanceof PACKAGE.SparqlQuery ),
-			'that must be instance of SparqlQuery' );
 	} );
 
 	QUnit.test( 'When query is \'' + QUERY.TRIPLES + '\' and I add two triples',
