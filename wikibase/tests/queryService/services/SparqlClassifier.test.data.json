@@ -220,6 +220,30 @@
     "expected": "includes_instance_or_subclass_statement"
   },
   {
+    "query": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX wikibase: <http://wikiba.se/ontology#>\nPREFIX wdt: <http://www.wikidata.org/prop/direct/>\nPREFIX wd: <http://www.wikidata.org/entity/>\nSELECT DISTINCT ?relatedId ?propLabel ?relatedLabel WHERE {\n  {\n    SELECT ?prop ?relatedId ?relatedLabel {\n      ?item wdt:P691|wdt:P9299 \"jn20000701479\" .\n      ?related wdt:P691|wdt:P9299 ?relatedId .\n      ?item ?prop ?related .\n      ?item wdt:P31 wd:Q5 .\n      ?related wdt:P31 wd:Q5 .\n      SERVICE wikibase:label { bd:serviceParam wikibase:language \"cs\". }\n    } LIMIT 100\n  }\n  ?property wikibase:directClaim ?prop .\n  optional { ?property rdfs:label ?propLabel filter(lang(?propLabel)=\"cs\"). }\n}",
+    "expected": "includes_instance_or_subclass_statement"
+  },
+  {
+    "query": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX wikibase: <http://wikiba.se/ontology#>\nPREFIX wdt: <http://www.wikidata.org/prop/direct/>\nPREFIX wd: <http://www.wikidata.org/entity/>\nSELECT DISTINCT ?relatedId ?propLabel ?relatedLabel WHERE {\n  {\n    SELECT ?prop ?relatedId ?relatedLabel {\n      ?item wdt:P691|wdt:P9299 \"pna2006370689\" .\n      ?related wdt:P691|wdt:P9299 ?relatedId .\n      ?item ?prop ?related .\n      ?item wdt:P31 wd:Q5 .\n      ?related wdt:P31 wd:Q5 .\n      SERVICE wikibase:label { bd:serviceParam wikibase:language \"cs\". }\n    } LIMIT 100\n  }\n  ?property wikibase:directClaim ?prop .\n  optional { ?property rdfs:label ?propLabel filter(lang(?propLabel)=\"cs\"). }\n}",
+    "expected": "includes_instance_or_subclass_statement"
+  },
+  {
+    "query": "SELECT DISTINCT ?item ?itemLabel ?itemDescription ( COUNT ( DISTINCT ?wikisource ) as ?wikisourceFullWork ) ( COUNT ( DISTINCT ?iaID ) as ?iaDownloads ) ( COUNT ( DISTINCT ?download ) as ?otherDownloads ) \nWHERE \n{  \n  { SELECT DISTINCT ?item \n   WHERE\n     { \n       VALUES ?languages { \"es\" \"en\" }.                                                                                                           \n       ?item ( wdt:P170 | wdt:P50 | wdt:P57 | wdt:P58 | wdt:P84 | wdt:P86 | wdt:P87 | wdt:P110 | wdt:P676 | wdt:P943 | wd:P175 | wd:P9191 | wd:P10837 ) wd:Q57223579 . \n       ?item rdfs:label ?itemLabel .\n       FILTER ( LANG( ?itemLabel ) = ?languages ) . \n       MINUS { \n         VALUES ?typeOfItem { wd:Q3658341 wd:Q187931 wd:Q3375722 } \n         ?item wdt:P31 ?typeOfItem . } \n     } \n  }   \n  OPTIONAL { ?item wdt:P724 ?iaID . }\n  OPTIONAL { ?item wdt:P953 ?download . }\n  OPTIONAL {\n  ?wikisource schema:about ?item .\n  ?wikisource schema:isPartOf <https://es.wikisource.org/> . }  \n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"es, en\" . } \n} \nGROUP BY ?item ?itemLabel ?itemDescription \nORDER BY ASC ( ?itemLabel )",
+    "expected": "includes_instance_or_subclass_statement"
+  },
+  {
+    "query": "SELECT ?item (?itemLabel as ?title)    ?imdb ?article ?instanceofLabel \n\n(GROUP_CONCAT(DISTINCT ?actorLabel; SEPARATOR=\"|\") AS ?actors)\n(GROUP_CONCAT(DISTINCT ?directorLabel; SEPARATOR=\"|\") AS ?directors)\n(GROUP_CONCAT(DISTINCT ?releasedate; SEPARATOR=\"|\") AS ?releasedates)\n\nWHERE {\n  ?item wdt:P345 ?imdb .\n  FILTER(?imdb = \"tt6148376\")\n  \n  #?item wdt:P31 wd:Q11424 .                      #instance of a Film\n  ?item wdt:P31 ?instanceof .\n  \n  OPTIONAL {?item wdt:P577 ?releasedate.} \n  OPTIONAL {?item wdt:P57 ?director. }\n  OPTIONAL {?item wdt:P161 ?actor. }\n   \n  OPTIONAL { \n      ?article schema:about ?item .\n      ?article schema:inLanguage \"en\" .\n      ?article schema:isPartOf <https://en.wikipedia.org/> .\n    }\n\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". \n       ?director rdfs:label ?directorLabel.\n       ?actor rdfs:label ?actorLabel.\n       ?item rdfs:label ?itemLabel.\n       ?instanceof rdfs:label ?instanceofLabel.\n  }\n\n}\nGROUP BY ?item ?itemLabel ?imdb ?article ?instanceofLabel",
+    "expected": "includes_instance_or_subclass_statement"
+  },
+  {
+    "query": "SELECT ?property ?propertyLabel ?value ?valueLabel ?qualifier ?qualifierLabel ?qualifierValue ?qualifierValueLabel WHERE {\n      wd:P4188 ?p ?statement .\n      ?statement ?ps ?value .\n      ?property wikibase:claim ?p;\n                wikibase:statementProperty ?ps.\n\n      # Exclude 'described by source' (P1343) from both claim and statement properties\n      FILTER(?p != wdt:P1343 && ?ps != wdt:P1343)\n\n      # Exclude all identifiers\n      FILTER NOT EXISTS {\n          ?property wdt:P31/wdt:P279* wd:Q19847637.\n      }\n\n      OPTIONAL {\n          ?statement ?pq ?qualifierValue .\n          ?qualifier wikibase:qualifier ?pq .\n      }\n\n      SERVICE wikibase:label { bd:serviceParam wikibase:language '[AUTO_LANGUAGE],en'. }\n    }",
+    "expected": "includes_instance_or_subclass_statement"
+  },
+  {
+    "query": "SELECT DISTINCT ?item ?itemLabel ?commonsSiteLink ?commonsCat WHERE {\n  { ?item rdfs:label 'Kerry'@en } UNION { ?item skos:altLabel 'Kerry'@en }\n  FILTER NOT EXISTS { ?item wdt:P31 wd:Q17362920 } .# ignore Wikimedia duplicated page\n  OPTIONAL { ?commonsSiteLink schema:about ?item ;\n             schema:isPartOf <https://commons.wikimedia.org/> }\n  OPTIONAL { ?item wdt:P373 ?commonsCat }\n  ?item wdt:P625 ?coords .\n\n  FILTER(geof:distance(?coords, \"Point(-9.237117284075852 52.04448094604852)\"^^geo:wktLiteral) < 10)\n  FILTER(?commonsCat || ?commonsSiteLink)\n\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\". }\n}",
+    "expected": "includes_instance_or_subclass_statement"
+  },
+  {
     "query": "SELECT ?o WHERE { wd:Q42 ?p wd:Q23 }",
     "expected": "single_unknown_relation_statement"
   },
@@ -230,5 +254,9 @@
   {
     "query": "SELECT ?item ?itemLabel WHERE { ?item skos:altLabel ?itemLabel. ?item wdt:P32 wd:Q146}",
     "expected": "unclassified"
+  },
+  {
+    "query": "#Cats\nSELEC ?item ?itemLabel\nWHERE\n{\n  ?item wdt:P31 wd:Q146. # Must be a cat\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],mul,en\". } # Helps get the label in your language, if not, then default for all languages, then en language\n}",
+    "expected": "invalid_query"
   }
 ]

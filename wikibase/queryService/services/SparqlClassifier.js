@@ -18,8 +18,6 @@ wikibase.queryService.services.SparqlClassifier = ( function ( $, wikibase, spar
 		this._queryParser = new wikibase.queryService.services.SparqlQuery();
 		this._prefixes = wikibase.queryService.RdfNamespaces.ALL_PREFIXES;
 		this._TriplesAnalyzer = new wikibase.queryService.services.TriplesAnalyzer();
-
-		this._queryParser.parse( this._query, this._prefixes );
 	}
 
 	/**
@@ -28,6 +26,12 @@ wikibase.queryService.services.SparqlClassifier = ( function ( $, wikibase, spar
 	 * @return {array<string>}
 	 */
 	SELF.prototype.classify = function () {
+		try {
+			this._queryParser.parse( this._query, this._prefixes );
+		} catch ( e ) {
+			return 'invalid_query';
+		}
+
 		var triples = this._collectTriples();
 		var flags = this._TriplesAnalyzer.analyze( triples );
 

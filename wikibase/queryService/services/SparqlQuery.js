@@ -230,13 +230,16 @@ wikibase.queryService.services.SparqlQuery = ( function ( $, wikibase, sparqljs 
 			if ( v.type && v.type === 'union' ) {
 				triples = triples.concat( self.getTriples( v.patterns, false ) );
 			}
+			if ( v.type && v.type === 'minus' ) {
+				triples = triples.concat( self.getTriples( v.patterns, false ) );
+			}
 		} );
 
 		return triples;
 	};
 
 	/**
-	 * Get triples defined in subgroups of the query
+	 * Get triples defined in subgroups and subqueries of the query
 	 *
 	 * @return {Object}
 	 */
@@ -249,6 +252,13 @@ wikibase.queryService.services.SparqlQuery = ( function ( $, wikibase, sparqljs 
 			isOptional = false;
 		}
 
+		var subqueries = this.getSubQueries();
+		while ( subqueries.length > 0 ) {
+			var q = subqueries.pop();
+			triples = triples.concat( q.getTriples() );
+			subqueries = subqueries.concat( q.getSubQueries() );
+		}
+
 		var self = this;
 		$.each( node, function ( k, v ) {
 			if ( v.type && v.type === 'group' ) {
@@ -258,6 +268,12 @@ wikibase.queryService.services.SparqlQuery = ( function ( $, wikibase, sparqljs 
 				triples = triples.concat( self.getSubTriples( v.patterns, true ) );
 			}
 			if ( v.type && v.type === 'union' ) {
+				triples = triples.concat( self.getSubTriples( v.patterns, false ) );
+			}
+			if ( v.type && v.type === 'filter' ) {
+				triples = triples.concat( self.getTriples( v.expression.args, false ) );
+			}
+			if ( v.type && v.type === 'minus' ) {
 				triples = triples.concat( self.getSubTriples( v.patterns, false ) );
 			}
 		} );
@@ -327,6 +343,8 @@ wikibase.queryService.services.SparqlQuery = ( function ( $, wikibase, sparqljs 
 		$.each( this._query.where, function ( k, v ) {
 			if ( v.type === 'group' ) {
 				findSubqueriesInGroup( v );
+			} else if ( v.type === 'query' ) {
+				queries.push( new SELF( v ) );
 			}
 		} );
 
