@@ -12,6 +12,7 @@
 		TRIPLES_UNION: 'PREFIX : <http://a.test/> SELECT ?x1 ?x2 ?x3 WHERE { :S :P :O.  OPTIONAL{ :S1 :P1 :O1 }  :S2 :P2 :O2. { :SU1 :PU1 :OU1 } UNION { :SU2 :PU2 :OU2 } }',
 		TRIPLES: 'PREFIX : <http://a.test/> SELECT ?x1 ?x2 ?x3 WHERE { :S :P :O.  OPTIONAL{ :S1 :P1 :O1 }  :S2 :P2 :O2.}',
 		TRIPLES_UNION_GROUPS: 'PREFIX : <http://a.test/> SELECT ?x1 ?x2 ?x3 WHERE { { :S :P :O.  OPTIONAL{ :S1 :P1 :O1 }  } UNION { { :S2 :P2 :O2.} UNION { :SU1 :PU1 :OU1 } UNION { :SU2 :PU2 :OU2 } } }',
+		TRIPLES_GROUP_IN_OPTIONAL: 'PREFIX : <http://a.test/> SELECT ?x1 ?x2 ?x3 WHERE { :S :P :O OPTIONAL { { :S1 :P1 :O1 } } }',
 		BOUND: 'PREFIX : <http://a.test/> SELECT * WHERE { ?bound :P :O.  OPTIONAL{ :S1 ?x ?bound2 }  :S2 :P2 :O2.}',
 		COMMENTS: '#foo:bar\n#6*9=42\nSELECT * WHERE {  }',
 		LABEL_SERVICE: 'PREFIX wikibase: <http://wikiba.se/ontology#> PREFIX bd: <http://www.bigdata.com/rdf#> SELECT * WHERE { SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],mul,en" } }'
@@ -156,6 +157,30 @@
 			'predicate': 'http://a.test/PU2',
 			'object': 'http://a.test/OU2'
 		}, 'triple3 must be SU2, PU2, OU2' );
+	} );
+
+	QUnit.test( 'When query is \'' + QUERY.TRIPLES_GROUP_IN_OPTIONAL + '\' then', function ( assert ) {
+		assert.expect( 5 );
+
+		var q = new PACKAGE.SparqlQuery();
+		q.parse( QUERY.TRIPLES_GROUP_IN_OPTIONAL );
+		var triples = q.getTriples();
+
+		assert.equal( triples.length, 2 );
+
+		assert.deepEqual( triples[0].triple, {
+			'subject': 'http://a.test/S',
+			'predicate': 'http://a.test/P',
+			'object': 'http://a.test/O'
+		}, 'triple0 must be S, P, O' );
+		assert.equal( triples[0].optional, false, 'triple0 must not be optional' );
+
+		assert.deepEqual( triples[1].triple, {
+			'object': 'http://a.test/O1',
+			'predicate': 'http://a.test/P1',
+			'subject': 'http://a.test/S1'
+		}, 'triple1 must be S1, P1, O1' );
+		assert.equal( triples[1].optional, true, 'triple1 must be optional' );
 	} );
 
 	QUnit.test( 'When query is \'' + QUERY.TRIPLES + '\' and I delete 2 triples then', function (

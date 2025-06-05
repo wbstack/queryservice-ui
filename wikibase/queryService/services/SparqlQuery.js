@@ -212,15 +212,18 @@ wikibase.queryService.services.SparqlQuery = ( function ( $, wikibase, sparqljs,
 	 */
 	SELF.prototype.getTriples = function () {
 		var self = this;
+		function hasParentOfType( node, type ) {
+			return !!node.parent && ( node.parent.node.type === type || hasParentOfType( node.parent, type ) );
+		}
 
 		return traverse( this._query ).reduce(
 			function ( acc, node ) {
 				// Triples within SERVICE aren't relevant for the query helper or the classification,
 				// so we skip them for now.
-				if ( node.triples && this.parent.parent.node.type !== 'service' ) {
+				if ( node.triples && !hasParentOfType( this, 'service' ) ) {
 					return acc.concat( self._createTriples(
 						node.triples,
-						this.parent.parent.node.type === 'optional'
+						hasParentOfType( this, 'optional' )
 					) );
 				}
 
