@@ -157,5 +157,5 @@
 	"wdqs-embed-button-edit-code-title": "使用SPARQL编辑器编辑此查询",
 	"wdqs-embed-explorer-button-incoming": "显示传入链接",
 	"wdqs-embed-explorer-button-outgoing": "显示传出链接",
-	"wdqs-app-graph-split-banner-content": "您的查询是否包含描述科学论文的项目？即将出现的图分割会对此产生影响。请透过<a href=\"https://www.wikidata.org/wiki/Special:MyLanguage/Wikidata:SPARQL_query_service/WDQS_backend_update/September_2024_scaling_update\">此公告</a>来了解更多。"
+	"wdqs-app-graph-split-banner-content": "您的查询是否包含描述科学论文的项目？图分割会影响您的查询。请在此<a href=\"https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/WDQS_graph_split\">帮助页面</a>来了解更多。"
 }
