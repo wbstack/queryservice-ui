@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Aue Nai",
-			"Htawmonzel"
+			"Htawmonzel",
+			"咽頭べさ"
 		]
 	},
 	"wdqs-app-button-examples": "ဥပမာဂမၠိုင်",
@@ -10,8 +11,8 @@
 	"wdqs-app-button-help": "ရီု",
 	"wdqs-app-button-run": "ဗလး",
 	"wdqs-app-button-run-title": "Execute ဂလာန်သၟာန် (<CTRL> + <ENTER>)",
-	"wdqs-app-button-clear": "ဖအး",
-	"wdqs-app-button-clear-title": "ဖအး ဂလာန်သၟာန်",
+	"wdqs-app-button-clear": "ဖ္အး",
+	"wdqs-app-button-clear-title": "ဖ္အး ဂလာန်သၟာန်",
 	"wdqs-app-button-restore-title": "ကလေင်ကေတ် ဂလာန်သၟာန် ကၠာဂှ်",
 	"wdqs-app-button-display": "ဗဗဵု",
 	"wdqs-app-button-display-title": "ဗဗဵု မထ္ၜး နကဵု သ္ၚိအင်၊ ဗီုရုပ်",
