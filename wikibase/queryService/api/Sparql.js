@@ -156,7 +156,10 @@ wikibase.queryService.api.Sparql = ( function ( $ ) {
 		var self = this,
 			deferred = $.Deferred(),
 			settings = {
-				headers: { Accept: 'application/sparql-results+json' },
+				headers: {
+					Accept: 'application/sparql-results+json',
+					'Api-User-Agent': 'query-service-ui (' + window.location.protocol + '//' + window.location.host + ')'
+				},
 				data: data
 			};
 		function done( data, textStatus, request ) {
