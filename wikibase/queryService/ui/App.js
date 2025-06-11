@@ -878,10 +878,10 @@ wikibase.queryService.ui.App = ( function ( $, window, _, Cookies, moment ) {
 	 * @private
 	 */
 	SELF.prototype._classifyQuery = function () {
+		var classifier = new wikibase.queryService.services.SparqlClassifier();
 		var query = this._editor.getValue();
-		var classifier = new wikibase.queryService.services.SparqlClassifier( query );
 		// eslint-disable-next-line no-console
-		console.log( 'Query type: ' + classifier.classify() ); // jshint ignore:line
+		console.log( 'Query type: ' + classifier.classify( query ) ); // jshint ignore:line
 	};
 
 	/**

@@ -2,7 +2,7 @@ var wikibase = window.wikibase || {};
 wikibase.queryService = wikibase.queryService || {};
 wikibase.queryService.services = wikibase.queryService.services || {};
 
-wikibase.queryService.services.SparqlClassifier = ( function ( $, wikibase, sparqljs ) {
+wikibase.queryService.services.SparqlClassifier = ( function ( $, wikibase ) {
 	'use strict';
 
 	/**
@@ -11,10 +11,8 @@ wikibase.queryService.services.SparqlClassifier = ( function ( $, wikibase, spar
 	 * @license GNU GPL v2+
 	 *
 	 * @constructor
-	 * @param {string} query
 	 */
-	function SELF( query ) {
-		this._query = query || '';
+	function SELF() {
 		this._queryParser = new wikibase.queryService.services.SparqlQuery();
 		this._prefixes = wikibase.queryService.RdfNamespaces.ALL_PREFIXES;
 		this._TriplesAnalyzer = new wikibase.queryService.services.TriplesAnalyzer();
@@ -23,11 +21,12 @@ wikibase.queryService.services.SparqlClassifier = ( function ( $, wikibase, spar
 	/**
 	 * Classifies the SPARQL query
 	 *
-	 * @return {array<string>}
+	 * @param {string} query
+	 * @return {string}
 	 */
-	SELF.prototype.classify = function () {
+	SELF.prototype.classify = function ( query ) {
 		try {
-			this._queryParser.parse( this._query, this._prefixes );
+			this._queryParser.parse( query, this._prefixes );
 		} catch ( e ) {
 			return 'invalid_query';
 		}
@@ -59,4 +58,4 @@ wikibase.queryService.services.SparqlClassifier = ( function ( $, wikibase, spar
 	};
 
 	return SELF;
-}( jQuery, wikibase, sparqljs ) );
+}( jQuery, wikibase ) );

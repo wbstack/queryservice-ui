@@ -5,20 +5,12 @@
 
 	var PACKAGE = wb.queryService.services;
 
-	QUnit.test( 'When instantiating new SparqlClassifier then', function ( assert ) {
-		assert.expect( 2 );
-		var q = new PACKAGE.SparqlClassifier();
-
-		assert.ok( true, 'must not throw an error' );
-		assert.ok( ( q instanceof PACKAGE.SparqlClassifier ), 'object must be type of SparqlClassifier' );
-	} );
-
 	fetch( 'queryService/services/SparqlClassifier.test.data.json' )
 		.then( response => response.json() )
 		.then( testData => {
 			QUnit.test.each( 'When instantiated with classified queries then', testData, function ( assert, fixture ) {
-				var q = new PACKAGE.SparqlClassifier( fixture.query );
-				var classifications = q.classify();
+				var q = new PACKAGE.SparqlClassifier();
+				var classifications = q.classify( fixture.query );
 				assert.deepEqual(
 					classifications,
 					fixture.expected,
