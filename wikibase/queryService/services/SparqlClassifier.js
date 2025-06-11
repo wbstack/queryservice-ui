@@ -57,5 +57,17 @@ wikibase.queryService.services.SparqlClassifier = ( function ( $, wikibase ) {
 		return 'unclassified';
 	};
 
+	/**
+	 * @param {string} query
+	 * @return {boolean}
+	 */
+	SELF.prototype.isSimpleQuery = function ( query ) {
+		return [
+			'only_term_statements',
+			'single_known_relation_statement',
+			'only_ent_subj_statements'
+		].includes( this.classify( query ) );
+	};
+
 	return SELF;
 }( jQuery, wikibase ) );
