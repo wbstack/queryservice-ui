@@ -39,7 +39,7 @@
 	"wdqs-app-help-request-query": "Solicitar uma consulta",
 	"wdqs-app-help-portal": "Portal de ajuda",
 	"wdqs-app-help-manual": "Manual do utilizador",
-	"wdqs-app-help-examples": "Consultas de exemplo",
+	"wdqs-app-help-examples": "Consultas Exemplo",
 	"wdqs-app-query-builder-name": "Construtor de Consultas",
 	"wdqs-app-query-builder-banner-content": "Precisa de ajuda para criar uma consulta? Pode criar consultas sem ter de escrever SPARQL no novo <a>Construtor de Consultas</a>.",
 	"wdqs-app-query-builder-example-banner-content": "Pode criar consultas sem ter de escrever SPARQL no <a>Construtor de Consultas</a>.",
