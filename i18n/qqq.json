@@ -79,6 +79,7 @@
 	"wdqs-app-result-csv": "Link message in the footer download dropdown",
 	"wdqs-app-result-svg": "Link message in the footer download dropdown",
 	"wdqs-app-result-html": "Link message in the footer download dropdown",
+	"wdqs-app-result-geojson": "Link message in the footer download dropdown",
 	"wdqs-app-shorturl-page-title": "Title of link message on the left side of the editor",
 	"wdqs-app-editor-placeholder": "Placeholder message in editor box.\n\nThis message has to be displayed left to right. If you are translating into a right-to-left language, you shouldn't write the name \"SPARQL\" in Latin letters.",
 	"wdqs-app-editor-addprefixes": "Button message in the prefix menu",
