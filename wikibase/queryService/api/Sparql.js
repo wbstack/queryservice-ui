@@ -535,6 +535,43 @@ wikibase.queryService.api.Sparql = ( function ( $ ) {
 	};
 
 	/**
+	 * Get the result of the submitted query as GeoJSON
+	 *
+	 * @return {object}
+	 */
+	SELF.prototype.getResultAsGeoJson = function () {
+		var output = [],
+			data = this._rawData;
+
+		output = this._processData( data, function ( row, out ) {
+			// add a new row but missing geometry.coordinates
+			var newRow = { type: 'Feature', geometry: { type: 'Point' }, properties: {} };
+			for ( var rowVar in row ) {
+				var binding = ( row[rowVar] || {} );
+				if ( binding.type === 'literal' && binding.datatype === 'http://www.opengis.net/ont/geosparql#wktLiteral' ) {
+					// extract coordinates from WKT literal
+					var match = binding.value.match( /Point\(([^)]+)\)/ );
+					if ( match && match[1] ) {
+						var coords = match[1].split( ' ' );
+						if ( coords.length === 2 ) {
+							// we've found a valid Point, so add geometry.coordinates
+							newRow.geometry.coordinates = [ parseFloat( coords[0] ), parseFloat( coords[1] ) ];
+						}
+					}
+				} else {
+					newRow.properties[rowVar] = binding.value;
+				}
+			}
+			// check if we have geometry.coordinates, if we do, it's a valid row
+			if ( newRow.geometry.coordinates ) {
+				out.push( newRow );
+			}
+			return out;
+		}, output );
+		return JSON.stringify( { type: 'FeatureCollection', features: output } );
+	};
+
+	/**
 	 * @private
 	 */
 	SELF.prototype._replaceAutoLanguage = function ( query ) {

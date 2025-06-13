@@ -648,6 +648,11 @@ wikibase.queryService.ui.ResultView = ( function ( $, download, window ) {
 				mimetype: 'application/json;charset=utf-8',
 				ext: 'json'
 			},
+			'GeoJSON': {
+				handler: $.proxy( api.getResultAsGeoJson, api ),
+				mimetype: 'application/geo+json;charset=utf-8',
+				ext: 'geojson'
+			},
 			'HTML': {
 				handler: $.proxy( api.getResultHTML, api ),
 				mimetype: 'application/html;charset=utf-8',
