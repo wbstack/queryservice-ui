@@ -605,7 +605,7 @@ wikibase.queryService.ui.ResultView = ( function ( $, download, window ) {
 			}
 		}, queryLinkPopoverOptions ) ).click( function () {
 			self._track( 'buttonClick_shortUrlResult' );
-			self._trackStats( 'buttonClick_total', { name: 'shortUrlResult' } );
+			self._trackStats( 'buttonClick_total', 1, 'c', { name: 'shortUrlResult' } );
 		} );
 
 		$( '#shortUrlTrigger-result-query' ).clickover( $.extend( {
@@ -616,7 +616,7 @@ wikibase.queryService.ui.ResultView = ( function ( $, download, window ) {
 			}
 		}, queryLinkPopoverOptions ) ).click( function () {
 			self._track( 'buttonClick.shortUrlResultQuery' );
-			self._trackStats( 'buttonClick_total', { name: 'shortUrlResultQuery' } );
+			self._trackStats( 'buttonClick_total', 1, 'c', { name: 'shortUrlResultQuery' } );
 		} );
 	};
 
@@ -689,12 +689,12 @@ wikibase.queryService.ui.ResultView = ( function ( $, download, window ) {
 				var data = handler();
 
 				if ( data ) {
-					self._trackStats( 'buttonClick_total', { name: 'download', filename: filename, status: 'success' } );
+					self._trackStats( 'buttonClick_total', 1, 'c', { name: 'download', filename: filename, status: 'success' } );
 					download( data, filename, mimetype );
 				} else {
 					window.console.warn( 'Unable to create ' + filename + ' download' );
 					self._track( 'buttonClick.downloadError.' + filename );
-					self._trackStats( 'buttonClick_total', { name: 'download', filename: filename, status: 'error' } );
+					self._trackStats( 'buttonClick_total', 1, 'c', { name: 'download', filename: filename, status: 'error' } );
 				}
 			};
 		};
@@ -731,7 +731,7 @@ wikibase.queryService.ui.ResultView = ( function ( $, download, window ) {
 					self._drawResult( b.object );
 					self._selectedResultBrowser = key;
 					self._track( 'buttonClick.display.' + key );
-					self._trackStats( 'buttonClick_total', { name: 'display', key: key } );
+					self._trackStats( 'buttonClick_total', 1, 'c', { name: 'display', key: key } );
 					return false;
 				} );
 			} else {
