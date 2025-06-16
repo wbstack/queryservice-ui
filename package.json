@@ -5,7 +5,7 @@
   "scripts": {
     "start": "http-server -o",
     "grunt": "grunt",
-    "test": "grunt test",
+    "test": "grunt test && npm run browser_test",
     "browser_test": "grunt browser_test",
     "build": "grunt build",
     "postinstall": "esm2umd traverse node_modules/neotraverse/dist/legacy/legacy.mjs > node_modules/neotraverse/dist/legacy/legacy.umd.js"
