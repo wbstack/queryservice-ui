@@ -1,4 +1,5 @@
 wikibase/tests/queryService/api/Tracking.test.js
+tests/specs/**
 node_modules/**
 vendor/**
 wikibase/codemirror/addon/tooltip/**
