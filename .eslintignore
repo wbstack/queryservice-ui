@@ -1,0 +1,8 @@
+/dist/
+/build/
+/target/
+/node_modules/
+/vendor/
+/polestar/
+/wikibase/codemirror/addon/
+.gitlab-ci.yml

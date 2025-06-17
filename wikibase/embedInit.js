@@ -1,12 +1,9 @@
 ( function ( $, CONFIG ) {
 	'use strict';
-	$.when(
-		$.ready,
-		CONFIG.getConfig()
-	)
-	.then( function ( documentReady, config ) {
+
+	$.when( CONFIG.getConfig(), $.ready ).then( function ( config ) {
 		function renderEdit( qh, query, $editor, callback ) {
-			qh.setChangeListener( _.debounce( function( v ) {
+			qh.setChangeListener( _.debounce( function ( v ) {
 				callback( v.getQuery() );
 			}, 1500 ) );
 			try {
@@ -17,7 +14,9 @@
 			}
 			if ( /^#TEMPLATE=/m.test( query ) ) {
 				// expand query template popover after allowing some time for labels to load
-				setTimeout( function() { $( '.edit' ).click(); }, 500 );
+				setTimeout( function () {
+					$( '.edit' ).click();
+				}, 500 );
 			}
 		}
 
@@ -27,15 +26,15 @@
 			document.title = config.brand.title;
 		}
 
-		function initToolbarVisibilityHandler() {
-			$( 'body' ).mousemove( function( event ) {
-				var timer;
+		var toolbarVisibilityTimer;
 
-				clearTimeout( timer );
+		function initToolbarVisibilityHandler() {
+			$( 'body' ).mousemove( function ( event ) {
+				clearTimeout( toolbarVisibilityTimer );
 				$( '.toolbar-right' ).addClass( 'toolbar-visible' );
 				$( '.header-toolbar' ).addClass( 'toolbar-visible' );
 
-				timer = window.setTimeout( function() {
+				toolbarVisibilityTimer = window.setTimeout( function () {
 					$( '.toolbar-right' ).removeClass( 'toolbar-visible' );
 					$( '.header-toolbar' ).removeClass( 'toolbar-visible' );
 				}, 1000 );
@@ -70,14 +69,14 @@
 		$.i18n().locale = lang;
 		$.when(
 			config.i18nLoad( lang )
-		).done( function() {
+		).done( function () {
 			$( 'body' ).i18n();
 			$( 'html' ).attr( { lang: lang, dir: $.uls.data.getDir( lang ) } );
 
-			resultView.draw( query ).then( function() {
+			resultView.draw( query ).then( function () {
 				$( '.logo' ).hide();
 			} );
-			renderEdit( qh, query, $editor, function( q ) {
+			renderEdit( qh, query, $editor, function ( q ) {
 				resultView.draw( q );
 				window.location.hash = '#' + encodeURIComponent( q );
 				$( '.edit-link' ).attr( 'href', config.location.index + window.location.hash );
@@ -88,7 +87,7 @@
 
 		$( '#display-button' ).closest( '.navbar' ).addClass( 'dropup' );
 
-		$( '#expand-type-switch' ).change( function() {
+		$( '#expand-type-switch' ).change( function () {
 			if ( $( this ).prop( 'checked' ) ) {
 				$( '.expand-type' ).attr( 'title', $.i18n( 'wdqs-embed-explorer-button-incoming' ) );
 			} else {
@@ -96,7 +95,7 @@
 			}
 		} );
 
-		$( 'a.result-browser' ).click( function( e ) {
+		$( 'a.result-browser' ).click( function ( e ) {
 			if ( $( this ).text() !== 'Graph' ) {
 				$( '.expand-type' ).hide();
 			} else {
@@ -106,28 +105,28 @@
 		} );
 
 		initToolbarVisibilityHandler();
-		$( '.header-toolbar' ).hover( function() {
+		$( '.header-toolbar' ).hover( function () {
 			$( '.header-toolbar' ).addClass( 'hovered' );
 			$( '.toolbar-label' ).css( 'display', 'block' );
-			}, function() {
-				$( '.toolbar-label' ).css( 'display', 'none' );
-				$( '.header-toolbar' ).removeClass( 'hovered' );
+		}, function () {
+			$( '.toolbar-label' ).css( 'display', 'none' );
+			$( '.header-toolbar' ).removeClass( 'hovered' );
 		} );
 
-		$( window ).on( 'hashchange', function( e ) {
+		$( window ).on( 'hashchange', function ( e ) {
 			$( '.edit-link' ).attr( 'href', config.location.index + window.location.hash );
 			query = decodeURIComponent( window.location.hash.substr( 1 ) );
 			qh.setQuery( query );
 			qh.draw( $editor );
 		} );
 
-		$( '.edit' ).on( 'click', function( e ) {
+		$( '.edit' ).on( 'click', function ( e ) {
 			e.preventDefault();
 			$( '.toolbar-right' ).toggleClass( 'hovered' );
 		} ).popover( {
-				placement: 'bottom',
-				'html': true,
-				'content': $editor
+			placement: 'bottom',
+			'html': true,
+			'content': $editor
 		} );
 
 		$( '.download-dropdown' ).on( 'show.bs.dropdown', function () {
@@ -140,4 +139,3 @@
 
 	} );
 }( jQuery, CONFIG ) );
-

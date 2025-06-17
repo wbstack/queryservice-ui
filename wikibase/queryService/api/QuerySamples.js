@@ -24,9 +24,8 @@ wikibase.queryService.api.QuerySamples = ( function ( $ ) {
 		this._apiServer = settings.server;
 		this._apiUrl = this._apiServer + settings.apiPath;
 		this._pageTitle = settings.pageTitle;
-		this._pageUrl = this._apiServer + settings.pagePathElement + "Special:MyLanguage/" + this._pageTitle;
+		this._pageUrl = this._apiServer + settings.pagePathElement + 'Special:MyLanguage/' + this._pageTitle;
 	}
-
 
 	/**
 	 * @type {string}
@@ -98,14 +97,14 @@ wikibase.queryService.api.QuerySamples = ( function ( $ ) {
 	 *
 	 * @param {Element} element Header element
 	 * @return {null|Element} Header element
-     * @private
-     */
+	 * @private
+	 */
 	SELF.prototype._findPrevHeader = function ( element ) {
-		var tag = element.prop( 'tagName' );
+		var tag = element.children( ':first' ).prop( 'tagName' );
 		if ( tag[0] !== 'H' && tag[0] !== 'h' ) {
 			return null;
 		}
-		return this._findPrev( element, 'h' + ( tag.substr( 1 ) - 1 ) );
+		return this._findPrev( element, '.mw-heading' + ( tag.substr( 1 ) - 1 ) );
 	};
 
 	/**
@@ -114,8 +113,8 @@ wikibase.queryService.api.QuerySamples = ( function ( $ ) {
 	 * @param {Element} element
 	 * @param {string} selector
 	 * @return {Element}
-     * @private
-     */
+	 * @private
+	 */
 	SELF.prototype._findPrev = function ( element, selector ) {
 		var prev = element.prev().filter( selector );
 		if ( prev.length > 0 ) {
@@ -148,25 +147,23 @@ wikibase.queryService.api.QuerySamples = ( function ( $ ) {
 			self = this;
 		div.innerHTML = html;
 		// Find all SPARQL Templates
-		var examples = $( div ).find( '.mw-highlight' ).map( function() {
+		var examples = $( div ).find( '.mw-highlight' ).map( function () {
 			var $this = $( this );
 
 			$this.find( '.lineno' ).remove();
 
 			var query = $this.text().trim();
-
 			// Find preceding title element
-			var titleEl = self._findPrev( $this, 'h2,h3,h4,h5,h6,h7' );
+			var titleEl = self._findPrev( $this, '.mw-heading2,.mw-heading3,.mw-heading4,.mw-heading5,.mw-heading6,.mw-heading7' );
 			if ( !titleEl || !titleEl.length ) {
 				return null;
 			}
-			var title = titleEl.text().trim();
-
+			var title = titleEl.children( ':first' ).text().trim();
 			return {
-				title:    title,
-				query:    query,
-				href:     self._pageUrl + '#' + encodeURIComponent( title.replace( / /g, '_' ) ).replace( /%/g, '.' ),
-				tags:     self._extractTagsFromSPARQL( query ),
+				title: title,
+				query: query,
+				href: self._pageUrl + '#' + encodeURIComponent( title.replace( / /g, '_' ) ).replace( /%/g, '.' ),
+				tags: self._extractTagsFromSPARQL( query ),
 				category: self._findPrevHeader( titleEl ).text().trim()
 			};
 		} ).get();
@@ -179,7 +176,7 @@ wikibase.queryService.api.QuerySamples = ( function ( $ ) {
 	 *
 	 * @param {string} language
 	 */
-	SELF.prototype.setLanguage = function( language ) {
+	SELF.prototype.setLanguage = function ( language ) {
 		this._language = language;
 	};
 
@@ -188,7 +185,7 @@ wikibase.queryService.api.QuerySamples = ( function ( $ ) {
 	 *
 	 * @return {string} language
 	 */
-	SELF.prototype.getLanguage = function() {
+	SELF.prototype.getLanguage = function () {
 		return this._language;
 	};
 
@@ -197,7 +194,7 @@ wikibase.queryService.api.QuerySamples = ( function ( $ ) {
 	 *
 	 * @return {string} URL
 	 */
-	SELF.prototype.getExamplesPageUrl = function() {
+	SELF.prototype.getExamplesPageUrl = function () {
 		return this._pageUrl;
 	};
 

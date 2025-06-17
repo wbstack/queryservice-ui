@@ -69,18 +69,6 @@
 							</button>
 						</li>
 						<li class="dropdown">
-							<div class="btn-group navbar-btn" id="query-builder-dd">
-								<a target="_blank" href="https://query.wikidata.org/querybuilder/" class="btn btn-default dropdown-toggle query-builder-toggle" id="query-builder-toggle">
-									<span data-i18n="wdqs-app-query-builder-name" id="query-builder-label"></span>
-								</a>
-								<div class="dropdown-menu query-builder">
-									<strong><p data-i18n="wdqs-app-query-builder-dd-title"></p></strong>
-									<p data-i18n="wdqs-app-query-builder-dd-copy"></p>
-									<a class="query-builder-toggle" target="_blank" href="https://query.wikidata.org/querybuilder/"><img src="./wikibase/queryService/ui/304px_querybuilder_final.gif" /></a>
-								</div>
-							</div>
-						</li>
-						<li class="dropdown">
 							<div class="btn-group navbar-btn">
 								<a href="https://www.wikidata.org/wiki/Special:MyLanguage/Wikidata:SPARQL_query_service/Wikidata_Query_Help" target="_blank" class="btn btn-default">
 									<span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> <span data-i18n="wdqs-app-button-help" id="help-label"></span>
@@ -122,6 +110,13 @@
 									<li role="separator" class="divider"></li>
 									<li><a target="_blank" rel="noopener" href="https://tools.wmflabs.org/hay/directory/#/search/wikidata">Wikimedia Toolforge</a></li>
 								</ul>
+							</div>
+						</li>
+						<li class="dropdown">
+							<div class="btn-group navbar-btn">
+								<a target="_blank" href="https://query.wikidata.org/querybuilder/" class="btn btn-default dropdown-toggle query-builder-toggle" id="query-builder-toggle">
+									<span data-i18n="wdqs-app-query-builder-name" id="query-builder-label"></span>
+								</a>
 							</div>
 						</li>
 					</ul>
@@ -179,8 +174,11 @@
 								</div>
 							</div>
 							<div class="toolbar-bottom">
-								<button type="submit" class="btn btn-info" id="execute-button" data-toggle="tooltip" data-placement="top" data-i18n="[title]wdqs-app-button-run-title">
-									<span class="fa fa-play" aria-hidden="true"></span>
+								<button type="submit" class="cdx-button cdx-button--icon-only cdx-button--size-large cdx-button--action-progressive cdx-button--weight-primary query-action-button" id="execute-button" data-toggle="tooltip" data-placement="top" data-i18n="[title]wdqs-app-button-run-title">
+									<span class="cdx-button__icon cdx-css-icon--play"></span>
+								</button>
+								<button class="cdx-button cdx-button--icon-only cdx-button--size-large cdx-button--action-destructive cdx-button--weight-primary query-action-button" id="cancel-button" data-toggle="tooltip" data-placement="top" data-i18n="[title]wdqs-app-button-cancel-title" disabled>
+									<span class="cdx-button__icon cdx-css-icon--stop"></span>
 								</button>
 							</div>
 						</div>
@@ -203,8 +201,6 @@
 								<textarea class="queryEditor" name="query" data-i18n="[placeholder]wdqs-app-editor-placeholder" placeholder="(Input a SPARQL query or choose a query example)"></textarea>
 							</div>
 						</div>
-					</div>
-					<div class="navbar navbar-default query-helper-tag-cloud query-helper-hidden">
 					</div>
 					<div class="status navbar navbar-default toolbar">
 						<div class="navbar-right">
@@ -267,6 +263,7 @@
 								    <span class="glyphicon glyphicon-link" aria-hidden="true"></span><span data-i18n="wdqs-app-button-link"></span><span class="caret"></span>
 								  </a>
 								  <ul class="dropdown-menu">
+									<li><a href="#" id="shortUrlTrigger-result-query" target="_blank" class="shortUrlTrigger resultQuery" data-i18n="[title]wdqs-app-result-shorturl-query-title" data-toggle="popover"><span data-i18n="wdqs-app-result-shorturl-query"></span></a></li>
 									<li><a href="#" class="shortUrlTrigger result" target="_blank"  data-i18n="[title]wdqs-app-result-shorturl-title" data-toggle="popover"><span data-i18n="wdqs-app-result-shorturl"></span></a></li>
 									<li><a target="_blank" class="queryUri" data-i18n="[title]wdqs-app-result-endpoint-title"><span data-i18n="wdqs-app-result-endpoint"></span></a></li>
 									<li><a href="#" class="embed result" target="_blank" data-toggle="popover" data-i18n="wdqs-app-result-embed"></a></li>
@@ -352,6 +349,12 @@
 									<kbd><kbd>ctrl</kbd>+<kbd>enter</kbd></kbd>
 								</th>
 								<td data-i18n="wdqs-dialog-key-shortcut-run-query"></td>
+							</tr>
+							<tr>
+								<th scope="row">
+									<kbd><kbd>ctrl</kbd>+<kbd>escape</kbd></kbd>
+								</th>
+								<td data-i18n="wdqs-dialog-key-shortcut-cancel-query"></td>
 							</tr>
 							<tr>
 								<th scope="row">
@@ -515,12 +518,14 @@
 
 	<!-- build:js js/wdqs.min.js -->
 	<script src="wikibase/config.js"></script>
+	<script src="wikibase/queryService/VariableNames.js"></script>
 	<script src="wikibase/queryService/ui/App.js"></script>
 	<script src="wikibase/queryService/ui/toolbar/ActionBar.js"></script>
 	<script src="wikibase/queryService/ui/i18n/LanguageSelector.js"></script>
 	<script src="wikibase/queryService/ui/i18n/getMessage.js"></script>
 	<script src="wikibase/queryService/ui/editor/hint/Sparql.js"></script>
 	<script src="wikibase/queryService/ui/editor/hint/Rdf.js"></script>
+	<script src="wikibase/queryService/ui/editor/tooltip/TooltipRepository.js"></script>
 	<script src="wikibase/queryService/ui/editor/tooltip/Rdf.js"></script>
 	<script src="wikibase/queryService/ui/editor/Editor.js"></script>
 	<script src="wikibase/queryService/ui/queryHelper/QueryHelper.js"></script>
@@ -553,6 +558,7 @@
 	<script src="wikibase/queryService/api/Sparql.js"></script>
 	<script src="wikibase/queryService/api/CodeSamples.js"></script>
 	<script src="wikibase/queryService/api/QuerySamples.js"></script>
+	<script src="wikibase/queryService/api/EntityInLanguageCache.js"></script>
 	<script src="wikibase/queryService/api/Wikibase.js"></script>
 	<script src="wikibase/queryService/api/Tracking.js"></script>
 	<script src="wikibase/queryService/api/UrlShortener.js"></script>

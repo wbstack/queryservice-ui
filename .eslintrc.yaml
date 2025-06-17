@@ -1,3 +1,4 @@
+# eslint-disable
 {
   root: true,
   extends: [
@@ -16,15 +17,6 @@
   ],
   rules: {
 #    compat/compat: error,
-#    indent: [
-#      error,
-#      tab,
-#      {
-#        CallExpression: {
-#          arguments: first
-#        }
-#      }
-#    ],
     no-jquery/no-global-selector: off,
     no-underscore-dangle: off,
 #    no-use-before-define: [
@@ -40,62 +32,36 @@
     wrap-iife: off,
 
 #    rules deactivated because they conflict with the current code
-    array-bracket-spacing: off,
-    array-callback-return: off,
-    block-spacing: off,
-    comma-dangle: off,
-    comma-spacing: off,
+    block-scoped-var: off,
     computed-property-spacing: off,
-    es/no-math-trunc: off,
-    eqeqeq: off,
-    indent: off,
-    key-spacing: off,
-    keyword-spacing: off,
-    max-statements-per-line: off,
     mediawiki/class-doc: off,
-    new-cap: off,
-    new-parens: off,
-    no-console: off,
-    no-control-regex: off,
     no-empty-character-class: off,
-    no-fallthrough: off,
     no-implicit-globals: off,
-    no-misleading-character-class: off,
-    no-mixed-spaces-and-tabs: off,
-    no-multi-spaces: off,
     no-multi-str: off,
-    no-multiple-empty-lines: off,
     no-new: off,
-    no-prototype-builtins: off,
     no-redeclare: off,
-    no-restricted-syntax: off,
-    no-restricted-properties: off,
+    no-shadow: off,
     no-tabs: off,
     no-undef: off,
-    no-use-before-define: off,
-    no-useless-call: off,
+    no-unreachable-loop: off,
     no-useless-concat: off,
     no-useless-escape: off,
-    no-unreachable: off,
     no-unused-vars: off,
-    no-whitespace-before-property: off,
-    object-curly-spacing: off,
-    quotes: off,
     quote-props: off,
-    space-before-blocks: off,
-    spaced-comment: off,
-    semi-spacing: off,
-    switch-colon-spacing: off,
-    semi: off,
-    space-infix-ops: off,
-    space-before-function-paren: off,
-    space-in-parens: off,
+    compat/compat: off,
+    es-x/no-array-prototype-includes: off,
+    es-x/no-array-prototype-keys: off,
+    es-x/no-array-prototype-values: off,
+    es-x/no-math-trunc: off,
+    es-x/no-string-prototype-endswith: off,
+    es-x/no-string-prototype-includes: off,
+    es-x/no-string-prototype-startswith: off,
+    es-x/no-symbol-prototype-description: off,
     jsdoc/require-param: off,
     jsdoc/require-returns: off,
     jsdoc/check-types: off,
     jsdoc/no-undefined-types: off,
     jsdoc/newline-after-description: off,
-    jsdoc/check-alignment: off,
     jsdoc/check-tag-names: off,
     jsdoc/valid-types: off,
     no-jquery/no-proxy: off,
@@ -111,5 +77,15 @@
     no-jquery/no-fade: off,
     no-jquery/no-map-util: off,
     no-jquery/no-class-state: off,
-  }
+    unicorn/prefer-date-now: off,
+    unicorn/prefer-string-slice: off,
+  },
+  overrides: [
+    {
+      files: "*.json",
+      rules: {
+        indent: off
+      }
+    }
+  ]
 }

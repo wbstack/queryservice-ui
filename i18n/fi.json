@@ -9,7 +9,8 @@
 			"SMAUG",
 			"Silvonen",
 			"Stryn",
-			"Surjection"
+			"Surjection",
+			"Yupik"
 		]
 	},
 	"wdqs-app-button-examples": "Esimerkkejä",
@@ -38,8 +39,6 @@
 	"wdqs-app-help-manual": "Käyttöohje",
 	"wdqs-app-help-examples": "Esimerkkikyselyt",
 	"wdqs-app-query-builder-name": "Kyselyn rakennustyökalu",
-	"wdqs-app-query-builder-dd-title": "Tee kyselyitä ilman SPARQL:ää",
-	"wdqs-app-query-builder-dd-copy": "Luo kyselyitä visuaalisesti muutamalla klikkauksella. Tuntemusta SPARQL:stä ei tarvita.",
 	"wdqs-app-query-builder-banner-content": "Tarvitsetko apua kyselyn luomisessa? Voit tehdä kyselyitä ilman SPARQL:in kirjoitusta uudessa <a>Kyselyin rakennustyökalussa</a>.",
 	"wdqs-app-query-builder-example-banner-content": "Voit luoda kyselyitä ilman SPARQL:in kirjoittamista <a>Kyselyn rakennustyökalussa</a>",
 	"wdqs-app-help-datamodel": "RDF-tietomalli",
@@ -92,7 +91,7 @@
 	"wdqs-app-resultbrowser-tree-map": "Puukartta",
 	"wdqs-app-resultbrowser-tree": "Puu",
 	"wdqs-app-resultbrowser-timeline": "Aikajana",
-	"wdqs-app-resultbrowser-dimensions": "Mitat",
+	"wdqs-app-resultbrowser-dimensions": "Rinnakkaiskoordinaatit",
 	"wdqs-app-resultbrowser-graph": "Kaavio",
 	"wdqs-app-toast-leave-fullscreen": "Paina [esc] poistuaksesi kokoruututilasta",
 	"wdqs-app-urlshortener-bad-service": "Virheellinen URL-lyhennepalvelu määrityksissä",

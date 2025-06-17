@@ -1,0 +1,55 @@
+{
+	// This file is basically a copy of the root-level one, plus the `"esversion": 9,` directive.
+	// You will want to keep them in sync.
+	"esversion": 9,
+	"camelcase": true,
+	"curly": true,
+	"eqeqeq": true,
+	"immed": true,
+	"latedef": true,
+	"newcap": true,
+	"supernew": true,
+	"shadow": false,
+	"noarg": true,
+	"noempty": true,
+	"nonew": false, //TODO fix code to adhere
+	"quotmark": false, // sometimes double quotes make sense, e.g. "foo's" is better readable than 'foo\'s'
+	"trailing": true,
+	"undef": true,
+	"unused": "vars", // we want to allow unused function parameters
+	"laxbreak": true,
+	"laxcomma": false,
+	"onevar": false,
+	"bitwise": true,
+	"forin": false,
+	"regexp": true,
+	"strict": true,
+	"scripturl": true,
+
+	// Environment
+	"browser": true,
+
+	"globals": {
+		"jQuery": false,
+		"wikibase": true,
+		"CodeMirror": false,
+		"WikibaseRDFTooltip": false,
+		"download": false,
+		"EXPLORER": false,
+		"JSON": false,
+		"QUnit": false,
+		"sinon": false,
+		"L": false,
+		"CONFIG": true,
+		"d3": false,
+		"sparqljs": false,
+		"_": false,
+		"Cookies": false,
+		"vis": false,
+		"moment": false,
+		"dimple": false,
+		"wellknown": false,
+		"Map": false,
+		"MathJax": false
+	}
+}

@@ -4,7 +4,7 @@ wikibase.queryService.ui = wikibase.queryService.ui || {};
 wikibase.queryService.ui.resultBrowser = wikibase.queryService.ui.resultBrowser || {};
 wikibase.queryService.ui.resultBrowser.helper = wikibase.queryService.ui.resultBrowser.helper || {};
 
-wikibase.queryService.ui.resultBrowser.helper.FormatterHelper = ( function( $, moment ) {
+wikibase.queryService.ui.resultBrowser.helper.FormatterHelper = ( function ( $, moment ) {
 	'use strict';
 
 	var COMMONS_FILE_PATH = 'http://commons.wikimedia.org/wiki/special:filepath/',
@@ -15,17 +15,17 @@ wikibase.queryService.ui.resultBrowser.helper.FormatterHelper = ( function( $, m
 		DATATYPE_MATHML = 'http://www.w3.org/1998/Math/MathML';
 
 	var NUMBER_TYPES = [
-			'http://www.w3.org/2001/XMLSchema#double', 'http://www.w3.org/2001/XMLSchema#float',
-			'http://www.w3.org/2001/XMLSchema#decimal', 'http://www.w3.org/2001/XMLSchema#integer',
-			'http://www.w3.org/2001/XMLSchema#long', 'http://www.w3.org/2001/XMLSchema#int',
-			'http://www.w3.org/2001/XMLSchema#short',
-			'http://www.w3.org/2001/XMLSchema#nonNegativeInteger',
-			'http://www.w3.org/2001/XMLSchema#positiveInteger',
-			'http://www.w3.org/2001/XMLSchema#unsignedLong',
-			'http://www.w3.org/2001/XMLSchema#unsignedInt',
-			'http://www.w3.org/2001/XMLSchema#unsignedShort',
-			'http://www.w3.org/2001/XMLSchema#nonPositiveInteger',
-			'http://www.w3.org/2001/XMLSchema#negativeInteger'
+		'http://www.w3.org/2001/XMLSchema#double', 'http://www.w3.org/2001/XMLSchema#float',
+		'http://www.w3.org/2001/XMLSchema#decimal', 'http://www.w3.org/2001/XMLSchema#integer',
+		'http://www.w3.org/2001/XMLSchema#long', 'http://www.w3.org/2001/XMLSchema#int',
+		'http://www.w3.org/2001/XMLSchema#short',
+		'http://www.w3.org/2001/XMLSchema#nonNegativeInteger',
+		'http://www.w3.org/2001/XMLSchema#positiveInteger',
+		'http://www.w3.org/2001/XMLSchema#unsignedLong',
+		'http://www.w3.org/2001/XMLSchema#unsignedInt',
+		'http://www.w3.org/2001/XMLSchema#unsignedShort',
+		'http://www.w3.org/2001/XMLSchema#nonPositiveInteger',
+		'http://www.w3.org/2001/XMLSchema#negativeInteger'
 	];
 
 	/**
@@ -45,7 +45,7 @@ wikibase.queryService.ui.resultBrowser.helper.FormatterHelper = ( function( $, m
 	/**
 	 * @static
 	 */
-	SELF.initMoment = function() {
+	SELF.initMoment = function () {
 		// override default formats of en locale to match Wikibase
 		moment.updateLocale( 'en', {
 			longDateFormat: {
@@ -59,14 +59,14 @@ wikibase.queryService.ui.resultBrowser.helper.FormatterHelper = ( function( $, m
 	/**
 	 * @return {wikibase.queryService.ui.resultBrowser.helper.Options}
 	 */
-	SELF.prototype.getOptions = function() {
+	SELF.prototype.getOptions = function () {
 		return this._options;
 	};
 
 	/**
 	 * @param {wikibase.queryService.ui.resultBrowser.helper.Options} options
 	 */
-	SELF.prototype.setOptions = function( options ) {
+	SELF.prototype.setOptions = function ( options ) {
 		this._options = options;
 	};
 
@@ -77,11 +77,11 @@ wikibase.queryService.ui.resultBrowser.helper.FormatterHelper = ( function( $, m
 	 * @param {boolean} embed media files
 	 * @return {jQuery} element
 	 */
-	SELF.prototype.formatRow = function( row, embed ) {
+	SELF.prototype.formatRow = function ( row, embed ) {
 		var self = this,
 			$result = $( '<div/>' );
 
-		$.each( row, function( key, value ) {
+		$.each( row, function ( key, value ) {
 			if ( self._isLabelField( key, row ) || self._isHiddenField( key ) ) {
 				return;
 			}
@@ -101,7 +101,7 @@ wikibase.queryService.ui.resultBrowser.helper.FormatterHelper = ( function( $, m
 	 * @return {boolean}
 	 * @private
 	 */
-	SELF.prototype._isLabelField = function( key, row ) {
+	SELF.prototype._isLabelField = function ( key, row ) {
 		return key.endsWith( 'Label' ) && typeof row[key.slice( 0, -5 )] !== 'undefined';
 	};
 
@@ -110,7 +110,7 @@ wikibase.queryService.ui.resultBrowser.helper.FormatterHelper = ( function( $, m
 	 * @return {boolean}
 	 * @private
 	 */
-	SELF.prototype._isHiddenField = function( key ) {
+	SELF.prototype._isHiddenField = function ( key ) {
 		return this.getOptions().getColumnNames( 'hide', [] ).indexOf( key ) !== -1;
 	};
 
@@ -120,7 +120,7 @@ wikibase.queryService.ui.resultBrowser.helper.FormatterHelper = ( function( $, m
 	 * @return {string|null}
 	 * @private
 	 */
-	SELF.prototype._getLabel = function( row, key ) {
+	SELF.prototype._getLabel = function ( row, key ) {
 		var field = row[key + 'Label'];
 		return field && field.value || null;
 	};
@@ -133,7 +133,7 @@ wikibase.queryService.ui.resultBrowser.helper.FormatterHelper = ( function( $, m
 	 * @param {boolean} [embed] media files
 	 * @return {jQuery} element
 	 */
-	SELF.prototype.formatValue = function( data, title, embed ) {
+	SELF.prototype.formatValue = function ( data, title, embed ) {
 		var value = data.value,
 			$html = $( '<span>' );
 
@@ -146,71 +146,72 @@ wikibase.queryService.ui.resultBrowser.helper.FormatterHelper = ( function( $, m
 		}
 
 		switch ( data.datatype || data.type ) {
-		case TYPE_URI:
-			if ( /^javascript:/.test( value ) ) {
-				// don’t treat JavaScript URIs as URIs
-				data = $.extend( {}, data, { datatype: DATATYPE_STRING } );
-				return this.formatValue( data, title, embed );
-			}
+			case TYPE_URI:
+				if ( /^javascript:/.test( value ) ) {
+					// don’t treat JavaScript URIs as URIs
+					data = $.extend( {}, data, { datatype: DATATYPE_STRING } );
+					return this.formatValue( data, title, embed );
+				}
 
-			var $link = $( '<a>' ).attr( { title: title, href: value, target: '_blank', class: 'item-link', rel: 'noopener' } );
-			$html.append( $link );
+				var $link = $( '<a>' ).attr( { title: title, href: value, target: '_blank', class: 'item-link', rel: 'noopener' } );
+				$html.append( $link );
 
-			if ( this.isCommonsResource( value ) ) {
-				$link.attr( 'href', this.getCommonsResourceFullUrl( value ) );
-				$link.attr( 'title', title + ': commons:' + this.getCommonsResourceFileName( value ) );
-				if ( embed ) {
-					$link.click( this.handleCommonResourceItem );
-					$link.append(
+				if ( this.isCommonsResource( value ) ) {
+					$link.attr( 'href', this.getCommonsResourceFullUrl( value ) );
+					$link.attr( 'title', title + ': commons:' + this.getCommonsResourceFileName( value ) );
+					if ( embed ) {
+						$link.click( this.handleCommonResourceItem );
+						$link.append(
 							$( '<img>' ).attr( 'src',
-									this.getCommonsResourceThumbnailUrl( value, '120' ) ) )
+								this.getCommonsResourceThumbnailUrl( value, '120' ) ) )
 							.width( '120' );
-				} else {
-					$link.attr( { href: COMMONS_FILE_PATH_MEDIAVIEWER.replace( /{FILENAME}/g,
+					} else {
+						$link.attr( { href: COMMONS_FILE_PATH_MEDIAVIEWER.replace( /{FILENAME}/g,
 							this.getCommonsResourceFileName( value ) ) } );
-					$link.text( 'commons:' +
+						$link.text( 'commons:' +
 							decodeURIComponent( this.getCommonsResourceFileName( value ) ) );
-					$html.prepend( this.createGalleryButton( value, title ), ' ' );
-				}
-			} else {
-				$link.text( data.label || this.abbreviateUri( value ) );
+						$html.prepend( this.createGalleryButton( value, title ), ' ' );
+					}
+				} else {
+					$link.text( data.label || this.abbreviateUri( value ) );
 
-				if ( this.isEntityUri( value ) ) {
-					$html.prepend( this.createExploreButton( value ), ' ' );
+					if ( this.isEntityUri( value ) ) {
+						$html.prepend( this.createExploreButton( value ), ' ' );
+					}
 				}
-			}
-			break;
-		case DATATYPE_DATETIME:
-			if ( !title ) {
-				title = wikibase.queryService.ui.i18n.getMessage( 'wdqs-app-result-formatter-title-datetime', 'Raw ISO timestamp' );
-			}
-			var $dateLabel = $( '<span>' ).text( this._formatDate( value ) );
-			$dateLabel.attr( 'title', title + ': ' + value );
-			$html.append( $dateLabel );
-			break;
-
-		case DATATYPE_MATHML:
-			try {
-				$html.append(
-					MathJax.mathml2chtml(
-						value
-							.replace( /caligraphic/g, 'calligraphic' ) // work around https://github.com/mathjax/MathJax/issues/2214
-					)
-				);
 				break;
-			} catch ( e ) {
-				window.console.error( 'Invalid MathML', e );
-				// fall through to default case, escaping and displaying the raw value
-			} // jshint ignore:line
+			case DATATYPE_DATETIME:
+				if ( !title ) {
+					title = wikibase.queryService.ui.i18n.getMessage( 'wdqs-app-result-formatter-title-datetime', 'Raw ISO timestamp' );
+				}
+				var $dateLabel = $( '<span>' ).text( this._formatDate( value ) );
+				$dateLabel.attr( 'title', title + ': ' + value );
+				$html.append( $dateLabel );
+				break;
 
-		default:
-			var $label = $( '<span>' ).text( value );
-			if ( data['xml:lang'] ) {
-				$label.attr( 'title', title + ': ' + value + '@' + data['xml:lang'] );
-			} else {
-				$label.attr( 'title', title + ': ' + value );
-			}
-			$html.append( $label );
+			case DATATYPE_MATHML:
+				try {
+					$html.append(
+						MathJax.mathml2chtml(
+							value
+								.replace( /caligraphic/g, 'calligraphic' ) // work around https://github.com/mathjax/MathJax/issues/2214
+						)
+					);
+					break;
+				} catch ( e ) {
+					window.console.error( 'Invalid MathML', e );
+					// fall through to default case, escaping and displaying the raw value
+				} // jshint ignore:line
+
+			// eslint-ignore-line no-fallthrough
+			default:
+				var $label = $( '<span>' ).text( value );
+				if ( data['xml:lang'] ) {
+					$label.attr( 'title', title + ': ' + value + '@' + data['xml:lang'] );
+				} else {
+					$label.attr( 'title', title + ': ' + value );
+				}
+				$html.append( $label );
 		}
 
 		return $html;
@@ -221,9 +222,9 @@ wikibase.queryService.ui.resultBrowser.helper.FormatterHelper = ( function( $, m
 	 * @return {string}
 	 * @private
 	 */
-	SELF.prototype._formatDate = function( dateTime ) {
+	SELF.prototype._formatDate = function ( dateTime ) {
 		var isBce = false,
-			positiveDate = dateTime.replace( /^(?:-\d+|\+?0+\b)/, function( year ) {
+			positiveDate = dateTime.replace( /^(?:-\d+|\+?0+\b)/, function ( year ) {
 				isBce = true;
 				return Math.abs( year ) + 1;
 			} ),
@@ -252,11 +253,11 @@ wikibase.queryService.ui.resultBrowser.helper.FormatterHelper = ( function( $, m
 	 * @param {string} dateTime
 	 * @return {Object}
 	 */
-	SELF.prototype.parseDate = function( dateTime ) {
+	SELF.prototype.parseDate = function ( dateTime ) {
 		// Add leading plus sign if it's missing
 		dateTime = dateTime.replace( /^(?![+-])/, '+' );
 		// Pad years to 6 digits
-		dateTime = dateTime.replace( /^([+-]?)(\d{1,5}\b)/, function( $0, $1, $2 ) {
+		dateTime = dateTime.replace( /^([+-]?)(\d{1,5}\b)/, function ( $0, $1, $2 ) {
 			return $1 + ( '00000' + $2 ).slice( -6 );
 		} );
 		// Remove timezone
@@ -271,7 +272,7 @@ wikibase.queryService.ui.resultBrowser.helper.FormatterHelper = ( function( $, m
 	 * @param {string} uri
 	 * @return {boolean}
 	 */
-	SELF.prototype.isEntityUri = function( uri ) {
+	SELF.prototype.isEntityUri = function ( uri ) {
 		return typeof uri === 'string'
 			&& /\/entity\/(Q|P|L|M)[0-9]+$/.test( uri );
 	};
@@ -281,14 +282,14 @@ wikibase.queryService.ui.resultBrowser.helper.FormatterHelper = ( function( $, m
 	 *
 	 * @return {jQuery}
 	 */
-	SELF.prototype.createExploreButton = function( url ) {
+	SELF.prototype.createExploreButton = function ( url ) {
 		var $button = $( '<a>' )
 			.attr( {
 				href: url,
 				title: 'Explore item', // TODO i18n
 				class: 'explore glyphicon glyphicon-search',
 				tabindex: '-1',
-				'aria-hidden': 'true',
+				'aria-hidden': 'true'
 			} );
 		$button.click( $.proxy( this.handleExploreItem, this ) );
 
@@ -301,7 +302,7 @@ wikibase.queryService.ui.resultBrowser.helper.FormatterHelper = ( function( $, m
 	 * @param {string} url
 	 * @return {boolean}
 	 */
-	SELF.prototype.isCommonsResource = function( url ) {
+	SELF.prototype.isCommonsResource = function ( url ) {
 		return url.toLowerCase().startsWith( COMMONS_FILE_PATH.toLowerCase() );
 	};
 
@@ -311,7 +312,7 @@ wikibase.queryService.ui.resultBrowser.helper.FormatterHelper = ( function( $, m
 	 * @param {string} url
 	 * @return {string}
 	 */
-	SELF.prototype.getCommonsResourceFileName = function( url ) {
+	SELF.prototype.getCommonsResourceFileName = function ( url ) {
 		// FIXME: Dots in the constant must be escaped before using it as a regex!
 		var regExp = new RegExp( COMMONS_FILE_PATH, 'ig' );
 
@@ -324,7 +325,7 @@ wikibase.queryService.ui.resultBrowser.helper.FormatterHelper = ( function( $, m
 	 * @param {string} uri
 	 * @return {string}
 	 */
-	SELF.prototype.getCommonsResourceFullUrl = function( uri ) {
+	SELF.prototype.getCommonsResourceFullUrl = function ( uri ) {
 		if ( !this.isCommonsResource( uri ) ) {
 			return uri;
 		}
@@ -339,7 +340,7 @@ wikibase.queryService.ui.resultBrowser.helper.FormatterHelper = ( function( $, m
 	 * @param {number} [width]
 	 * @return {string}
 	 */
-	SELF.prototype.getCommonsResourceThumbnailUrl = function( uri, width ) {
+	SELF.prototype.getCommonsResourceThumbnailUrl = function ( uri, width ) {
 		if ( !this.isCommonsResource( uri ) ) {
 			return uri;
 		}
@@ -354,7 +355,7 @@ wikibase.queryService.ui.resultBrowser.helper.FormatterHelper = ( function( $, m
 	 * @param {string} galleryId
 	 * @return {jQuery}
 	 */
-	SELF.prototype.createGalleryButton = function( url, galleryId ) {
+	SELF.prototype.createGalleryButton = function ( url, galleryId ) {
 		var fileName = this.getCommonsResourceFileName( url ),
 			thumbnail = this.getCommonsResourceThumbnailUrl( url, 900 );
 
@@ -378,7 +379,7 @@ wikibase.queryService.ui.resultBrowser.helper.FormatterHelper = ( function( $, m
 	 * @param {string} uri
 	 * @return {string}
 	 */
-	SELF.prototype.abbreviateUri = function( uri ) {
+	SELF.prototype.abbreviateUri = function ( uri ) {
 		var prefixes = wikibase.queryService.RdfNamespaces.ALL_PREFIXES,
 			ns,
 			length = 0,
@@ -395,7 +396,39 @@ wikibase.queryService.ui.resultBrowser.helper.FormatterHelper = ( function( $, m
 		if ( longestNs ) {
 			return longestNs + ':' + uri.substr( length );
 		} else {
-			return '<' + uri + '>';
+			var forDisplay;
+			try {
+				var decoded = decodeURI( uri );
+				forDisplay = decoded.replace(
+					/* eslint-disable prefer-regex-literals, es-x/no-regexp-u-flag, es-x/no-regexp-unicode-property-escapes */
+					/*
+					 * use the RegExp constructor instead of a literal so that,
+					 * in browsers without /u support, we only get a runtime exception,
+					 * not a syntax error on the whole file;
+					 * because we catch this error and have a valid fallback for it,
+					 * using /u and \p{} is fine even if we still want to support IE11
+					 */
+					new RegExp( '\\p{Z}|\\p{C}', 'gu' ),
+					/* eslint-enable */
+					function ( codepoint ) {
+						if (
+							codepoint === '\u200B' || // U+200B ZERO WIDTH SPACE (ZWSP)
+							codepoint === '\u200C' || // U+200C ZERO WIDTH NON-JOINER (ZWNJ)
+							codepoint === '\u200D' // U+200D ZERO WIDTH JOINER (ZWJ)
+						) {
+							// don’t encode these, allow them in decoded form
+							return codepoint;
+						} else {
+							// don’t allow Separator or Other characters in decoded form
+							return encodeURIComponent( codepoint );
+						}
+					}
+				);
+			} catch ( _ ) {
+				// e.g. decode error, or Unicode RegExp not supported (IE11)
+				forDisplay = uri;
+			}
+			return '<' + forDisplay + '>';
 		}
 	};
 
@@ -403,7 +436,7 @@ wikibase.queryService.ui.resultBrowser.helper.FormatterHelper = ( function( $, m
 	 * Handler for explore links
 	 */
 	var offsetCounter = 100;
-	SELF.prototype.handleExploreItem = function( e ) {
+	SELF.prototype.handleExploreItem = function ( e ) {
 		var $currentDialog = $( '#explorer-dialogs .explorer-dialog' ).clone();
 		var url = $( e.target ).attr( 'href' );
 		var $dialog = $currentDialog.dialog( {
@@ -419,7 +452,7 @@ wikibase.queryService.ui.resultBrowser.helper.FormatterHelper = ( function( $, m
 			drag: function ( e ) {
 				$dialog.children( 'div.explorer-body' ).css( 'visibility', 'hidden' );
 				$( 'body' ).addClass( 'disable-selection' );
-				$dialog.mousemove( function( event ) {
+				$dialog.mousemove( function ( event ) {
 					if ( event.pageY < 30 ) {
 						$dialog.css( 'top', '10px' );
 					}
@@ -440,8 +473,8 @@ wikibase.queryService.ui.resultBrowser.helper.FormatterHelper = ( function( $, m
 		} );
 		e.preventDefault();
 		var lang = $.i18n && $.i18n().locale || 'en',
-		query = 'SELECT ?item ?itemLabel WHERE { BIND( <' + url + '> as ?item ).	SERVICE wikibase:label { bd:serviceParam wikibase:language "' + lang + '" } }',
-		embedUrl = 'embed.html#' + encodeURIComponent( '#defaultView:Graph\n' + query );
+			query = 'SELECT ?item ?itemLabel WHERE { BIND( <' + url + '> as ?item ).	SERVICE wikibase:label { bd:serviceParam wikibase:language "' + lang + '" } }',
+			embedUrl = 'embed.html#' + encodeURIComponent( '#defaultView:Graph\n' + query );
 		var top = $( window ).scrollTop() + 200;
 		$dialog.children( 'div.explorer-body' ).html( $( '<iframe frameBorder="0" scrolling="no"></iframe>' ).attr( 'src', embedUrl ) );
 		$dialog.css( 'left', offsetCounter );
@@ -454,7 +487,7 @@ wikibase.queryService.ui.resultBrowser.helper.FormatterHelper = ( function( $, m
 	/**
 	 * Handler for commons resource links
 	 */
-	SELF.prototype.handleCommonResourceItem = function( e ) {
+	SELF.prototype.handleCommonResourceItem = function ( e ) {
 		e.preventDefault();
 
 		$( this ).ekkoLightbox( {
@@ -469,13 +502,13 @@ wikibase.queryService.ui.resultBrowser.helper.FormatterHelper = ( function( $, m
 	 * @param {Object} cell
 	 * @return {boolean}
 	 */
-	SELF.prototype.isLabel = function( cell ) {
+	SELF.prototype.isLabel = function ( cell ) {
 		if ( !cell ) {
 			return false;
 		}
 
 		return 'xml:lang' in cell
-			|| ( cell.type === 'literal' && ( !cell.datatype || cell.datatype === DATATYPE_STRING )  );
+			|| ( cell.type === 'literal' && ( !cell.datatype || cell.datatype === DATATYPE_STRING ) );
 	};
 
 	/**
@@ -484,7 +517,7 @@ wikibase.queryService.ui.resultBrowser.helper.FormatterHelper = ( function( $, m
 	 * @param {Object} cell
 	 * @return {boolean}
 	 */
-	SELF.prototype.isNumber = function( cell ) {
+	SELF.prototype.isNumber = function ( cell ) {
 		return cell
 			&& cell.datatype
 			&& NUMBER_TYPES.indexOf( cell.datatype ) !== -1;
@@ -496,7 +529,7 @@ wikibase.queryService.ui.resultBrowser.helper.FormatterHelper = ( function( $, m
 	 * @param {Object} cell
 	 * @return {boolean}
 	 */
-	SELF.prototype.isDateTime = function( cell ) {
+	SELF.prototype.isDateTime = function ( cell ) {
 		return cell
 			&& cell.datatype === DATATYPE_DATETIME;
 	};
@@ -507,7 +540,7 @@ wikibase.queryService.ui.resultBrowser.helper.FormatterHelper = ( function( $, m
 	 * @param {Object} cell
 	 * @return {boolean}
 	 */
-	SELF.prototype.isEntity = function( cell ) {
+	SELF.prototype.isEntity = function ( cell ) {
 		return cell
 			&& cell.value
 			&& this.isEntityUri( cell.value );
@@ -546,7 +579,7 @@ wikibase.queryService.ui.resultBrowser.helper.FormatterHelper = ( function( $, m
 	 * @param {string} color as six hex digits (no #)
 	 * @return {Number} luminance of the color, or NaN if the color string is invalid
 	 */
-	SELF.prototype.calculateLuminance = function( color ) {
+	SELF.prototype.calculateLuminance = function ( color ) {
 		var r = parseInt( color.substr( 1, 2 ), 16 ) / 255,
 			g = parseInt( color.substr( 3, 2 ), 16 ) / 255,
 			b = parseInt( color.substr( 5, 2 ), 16 ) / 255;

@@ -36,11 +36,11 @@
 	"wdqs-app-help-queryhelper": "مساعد لونكيط",
 	"wdqs-app-logout": "خرج",
 	"wdqs-app-tools-edit-items": "بدّل لقوانين",
-	"wdqs-app-tools-query-data": "اونكيط على لبيانات",
+	"wdqs-app-tools-query-data": "ؤنكيط على الضونيات",
 	"wdqs-app-tools-enhance-ui": "دفع لانطيرفاص لما حسن",
 	"wdqs-app-tools-visualize-data": "تصور لبيانات",
 	"wdqs-app-tools-list-properties": "ليستة د لمميزات",
-	"wdqs-app-tools-lexicographical-data": "بيانات قاموسية",
+	"wdqs-app-tools-lexicographical-data": "ضونيات قاموسية",
 	"wdqs-app-tools-for-programmers": "ديال لموبرمجين(ات)",
 	"wdqs-app-footer-help": "برك <i>[CTRL-SPACE]</i> باش تأكتيڤي لأوطو مسالية",
 	"wdqs-app-footer-updated-ago": "لبيانات تميزاجورات $1",
@@ -90,7 +90,7 @@
 	"wdqs-dialog-examples-preview-result": "فْلِي النتيجة",
 	"wdqs-dialog-key-shortcut-title": "راكورات ديال لكلاڤيي",
 	"wdqs-dialog-key-shortcut-run-query": "خدّم لونكيط",
-	"wdqs-dialog-key-shortcut-esc": "خرج من بلاصت لكتبا/بلاصت لكتبا.",
+	"wdqs-dialog-key-shortcut-esc": "خرج من لموضع لحالي د لكتبة.",
 	"wdqs-dialog-key-shortcut-show-shortcut-help": "ورّي مساعد راكور لكلاڤيي ديال هاد لپاج",
 	"wdqs-dialog-key-shortcut-focus-textarea": "ركّز على بلاصت لكتبا ديال لونكيط",
 	"wdqs-dialog-key-shortcut-jump-to-result": "دوز لنتيجة ديال لونكيط",
@@ -128,6 +128,6 @@
 	"wdqs-embed-button-edit-query-title": "عدّل هاد لونكيط بمساعد لونكيط",
 	"wdqs-embed-button-edit-code": "بدّل سباركل",
 	"wdqs-embed-button-edit-code-title": "عدّل هاد لونكيط بمساعد سپاركل",
-	"wdqs-embed-explorer-button-incoming": "ورّي الروابط لي جات",
-	"wdqs-embed-explorer-button-outgoing": "ورّي الروابط لي مشات"
+	"wdqs-embed-explorer-button-incoming": "ورّي الليانات لي داخلين",
+	"wdqs-embed-explorer-button-outgoing": "ورّي الليانات لي خارجين"
 }

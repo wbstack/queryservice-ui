@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
+			"Adriendelucca",
 			"Dishual",
 			"Fulup",
 			"Gwenn-Ael",
+			"Kadwallan",
 			"VIGNERON",
 			"Y-M D"
 		]
@@ -33,6 +35,7 @@
 	"wdqs-app-help-portal": "Porched skoazellañ",
 	"wdqs-app-help-manual": "Levr implijer",
 	"wdqs-app-help-examples": "Rekedoù skouerioù",
+	"wdqs-app-query-builder-name": "Saver reketoù",
 	"wdqs-app-help-datamodel": "Skouer roadennoù RDF",
 	"wdqs-app-help-prefixes": "Roll rakgerioù",
 	"wdqs-app-help-copy": "Titouroù war an aotre-implijout",
@@ -49,6 +52,7 @@
 	"wdqs-app-footer-updated-ago": "Roadennoù hizivaet $1",
 	"wdqs-app-result-shorturl": "URL berr war-zu an disoc'h",
 	"wdqs-app-result-shorturl-title": "URL berr war-zu an disoc'h-se",
+	"wdqs-app-result-shorturl-query": "URL berr etrezek ar reked",
 	"wdqs-app-result-rawgraphs": "Digeriñ e RAWGraphs.io",
 	"wdqs-app-result-rawgraphs-title": "Krouiñ ur graf gant roadennoù disoc'het dre RAWGraphs.io",
 	"wdqs-app-result-embed": "Enframmañ an disoc'h",
@@ -113,7 +117,7 @@
 	"wdqs-ve-anything": "netra",
 	"wdqs-ve-any": "forzh pehini",
 	"wdqs-ve-or": "pe",
-	"wdqs-ve-subtype": "Is-doare",
+	"wdqs-ve-subtype": "Isseurt",
 	"wdqs-ve-sb-suggestions": "Kinnigoù",
 	"wdqs-ve-sb-other": "All",
 	"wdqs-action-query": "Seveniñ ar reked",

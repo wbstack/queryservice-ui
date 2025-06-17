@@ -1,11 +1,7 @@
-( function( $, CONFIG, moment ) {
+( function ( $, CONFIG, moment ) {
 	'use strict';
 
-	$.when(
-		$.ready,
-		CONFIG.getConfig()
-	)
-	.then( function ( _, config ) {
+	$.when( CONFIG.getConfig(), $.ready ).then( function ( config ) {
 		var wb = wikibase.queryService,
 			lang = Cookies.get( 'lang' ) ? Cookies.get( 'lang' ) : config.language,
 			app;
@@ -44,7 +40,7 @@
 
 			$.when(
 				config.i18nLoad( lang )
-			).done( function() {
+			).done( function () {
 				$( '.wikibase-queryservice' ).i18n();
 				$( '#keyboardShortcutHelpModal' ).i18n();
 				$( '.wdqs-app-query-builder-banner-content' ).i18n();
@@ -90,9 +86,10 @@
 
 		var isTopWindow = window.top === window;
 
+		var tooltipRepository = wb.ui.editor.tooltip.TooltipRepository( api, lang, $ );
 		var rdfHint = new wb.ui.editor.hint.Rdf( api ),
-				rdfTooltip = new wb.ui.editor.tooltip.Rdf( api ),
-				editor = new wb.ui.editor.Editor( rdfHint, null, rdfTooltip, { focus: isTopWindow } );
+			rdfTooltip = new wb.ui.editor.tooltip.Rdf( tooltipRepository ),
+			editor = new wb.ui.editor.Editor( rdfHint, null, rdfTooltip, { focus: isTopWindow } );
 
 		if ( config.prefixes ) {
 			wb.RdfNamespaces.addPrefixes( config.prefixes );
@@ -104,11 +101,12 @@
 
 		setLanguage( lang, false, afterLanguageChange );
 
-		languageSelector.setChangeListener( function( lang ) {
+		languageSelector.setChangeListener( function ( lang ) {
 			api.setLanguage( lang );
 			sparqlApi.setLanguage( lang );
 			sparqlApiHelper.setLanguage( lang );
 			querySamplesApi.setLanguage( lang );
+			tooltipRepository.setLanguage( lang );
 			setLanguage( lang, true, afterLanguageChange );
 		} );
 

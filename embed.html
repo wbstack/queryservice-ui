@@ -4,7 +4,6 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Wikidata Query Service</title>
 
 <!-- build:css css/embed.style.min.css -->
 <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
@@ -185,12 +184,13 @@ body {
 
 .toolbar-right {
 	position: fixed;
-	right: -97px;
+	right: -147px;
 	top: 26vh;
 	z-index: 1000;
 	padding-top: 0.5em;
+	padding-bottom: 0.5em;
 	opacity: 0;
-	width: 150px;
+	width: 200px;
 }
 .toolbar-right:hover, .hovered {
 	transition: 0.4s;
@@ -199,6 +199,10 @@ body {
 	border: #ddd 1px solid;
 	right: 0;
 	z-index: 1500; /* needs to be between 1000 (tiny map in map view) and 2000 (value dropdown of edit visually) */
+}
+
+.toolbar-right:not(:hover):not(.hovered) .query-total {
+	visibility: hidden;
 }
 
 .toolbar-right-item {
@@ -381,7 +385,7 @@ body {
 					</ul>
 				</li>
 				<li>
-					<span class="query-total"><span class="label label-default" id="response-summary"></span></span>
+					<span class="query-total toolbar-right-icon"><span class="label label-default" id="response-summary"></span></span>
 				</li>
 			</ul>
 		</div>
@@ -500,6 +504,7 @@ body {
 
 	<!-- build:js js/embed.wdqs.min.js -->
 	<script src="wikibase/config.js"></script>
+	<script src="wikibase/queryService/VariableNames.js"></script>
 	<script src="wikibase/queryService/ui/i18n/getMessage.js"></script>
 	<script src="wikibase/queryService/ui/dialog/QueryExampleDialog.js"></script>
 	<script src="wikibase/queryService/ui/ResultView.js"></script>
@@ -525,6 +530,7 @@ body {
 	<script src="wikibase/queryService/ui/resultBrowser/PolestarResultBrowser.js"></script>
 	<script src="wikibase/queryService/api/Sparql.js"></script>
 	<script src="wikibase/queryService/api/QuerySamples.js"></script>
+	<script src="wikibase/queryService/api/EntityInLanguageCache.js"></script>
 	<script src="wikibase/queryService/api/Wikibase.js"></script>
 	<script src="wikibase/queryService/api/Tracking.js"></script>
 	<script src="wikibase/queryService/api/UrlShortener.js"></script>
