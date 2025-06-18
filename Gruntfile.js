@@ -286,7 +286,7 @@ module.exports = function ( grunt ) {
 		var done = this.async();
 		var spawn = require( 'child_process' ).spawn;
 
-		var serverProcess = spawn( 'node_modules/.bin/http-server', [ '-p', '8082' ], {
+		var serverProcess = spawn( 'node_modules/.bin/http-server', [ '-p', '8082', '--silent' ], {
 			stdio: [ process.stdin, process.stdout, process.stderr ]
 		} );
 
