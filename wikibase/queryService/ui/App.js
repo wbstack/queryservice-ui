@@ -908,10 +908,12 @@ wikibase.queryService.ui.App = ( function ( $, window, _, Cookies, moment ) {
 
 		$( '#simple-query-modal' ).modal( 'show' );
 		$( '#continue-running-query' ).one( 'click', function () {
+			this._trackStats( 'buttonClick_total', 1, 'c', { name: 'runQueryAnyway' } );
 			$( '#simple-query-modal' ).modal( 'hide' );
 			self._runQuery();
 		} );
 		$( '#learn-alternatives' ).one( 'click', function () {
+			this._trackStats( 'buttonClick_total', 1, 'c', { name: 'learnAboutAlternatives' } );
 			$( '#simple-query-modal' ).modal( 'hide' );
 		} );
 	};
