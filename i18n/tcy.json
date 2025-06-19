@@ -2,14 +2,16 @@
 	"@metadata": {
 		"authors": [
 			"BHARATHESHA ALASANDEMAJALU",
+			"ChiK",
 			"Chidananda Kampa",
+			"Pragathi. BH",
 			"VASANTH S.N.",
 			"Vishwanatha Badikana"
 		]
 	},
 	"wdqs-app-button-examples": "ಉದಾರ್ಮೆಲು",
 	"wdqs-app-button-prefixes": "ದುಂಬುದ ಪದೊ",
-	"wdqs-app-button-help": "ಸಹಾಯೊ",
+	"wdqs-app-button-help": "ಸಕಾಯೊ",
 	"wdqs-app-button-run": "ನಾಡ್",
 	"wdqs-app-button-run-title": "ಪ್ರಶ್ನೆನ್ ಕಾರ್ಯಗತಗೊಳಿಸಲೆ (<ಕಂಟ್ರೋಲ್> + <ಎಂಟರ್>)",
 	"wdqs-app-button-clear": "ಮಾಜಲೇ",
@@ -32,7 +34,7 @@
 	"wdqs-app-help-datamodel": "ಅರ್.ಡಿ.ಎಫ್. ಅಂಕಿ ಅಂಸೊ ಮಾದರಿ",
 	"wdqs-app-help-prefixes": "ದುಂಬುದ ಪದೊಕುಲೆ ಪಟ್ಟಿ",
 	"wdqs-app-help-copy": "ಲೈಸನ್ಸ್‌ದ ಮಾಹಿತಿ",
-	"wdqs-app-help-queryhelper": "ಪ್ರಶ್ನೆ ಸಕಾಯೊ",
+	"wdqs-app-help-queryhelper": "ಪ್ರಶ್ನೆ ಸಹಾಯೊ",
 	"wdqs-app-footer-help": "ಸ್ವಯಂಪೂರ್ಣತೆನ್ ಸಕ್ರಿಯ ಮಲ್ಪುಲೆ <i>[ಕಂಟ್ರೋಲ್-ಸ್ಪೇಸ್]</i> ಒತ್ತ್‌ಲೆ.",
 	"wdqs-app-footer-updated-ago": "$1 ದುಂಬುದ ಅಂಕಿ ಅಂಸೊ ಮಾಹಿತಿನ್ ಮಿತ್ತ್‌ ಪಾಡ್ಲೆ",
 	"wdqs-app-result-shorturl": "ಎಲ್ಯ ಯು.ಅರ್.ಎಲ್.ಡ್ದ್ ಫಲಿತಾಂಸೊಗು",
@@ -86,7 +88,7 @@
 	"wdqs-dialog-key-shortcut-focus-show": "ಪ್ರಶ್ನೆ ಸಕಾಯೊಡು \"ಸೋದನೆ\" ಗುಂಡಿದ ಮಿತ್ತ್ ದೃಸ್ಟಿ ದೀಲೆ",
 	"wdqs-dialog-key-shortcut-focus-limit": "ಪ್ರಶ್ನೆ ಸಕಾಯೊಗು \"ಮಿತಿ\" ಗುಂಡಿನ್ ಒತ್ತ್‌ಲೆ.",
 	"wdqs-dialog-key-shortcut-show-example": "ಉದಾರ್ಮೆನ್ ತೋಜಾಲೆ.",
-	"wdqs-dialog-key-shortcut-help-menu": "ಸಕಾಯೊ ಪರಿವಿಡಿದ ಅಂತರೊ",
+	"wdqs-dialog-key-shortcut-help-menu": "ಸಹಾಯೊ ಪರಿವಿಡಿದ ಅಂತರೊ",
 	"wdqs-dialog-key-shortcut-show-language": "ಬಾಸೆದ ಪರಿವಿಡಿನ್ ತೋಜಾಲೆ.",
 	"wdqs-dialog-key-shortcut-close-button": "ಮುಚ್ಚಿಲೆ",
 	"wdqs-ve-filter": "ಅರಿಪೆ",
@@ -117,5 +119,6 @@
 	"wdqs-embed-button-edit-code": "ಸಂಕೇತೊನು ಸಂಪೊಲಿಪುಲೆ",
 	"wdqs-embed-button-edit-code-title": "ಈ ಪ್ರಶ್ನೆನ್ ಎಸ್ ಪಿ ಎ ಆರ್ ಕ್ಯು ಎಲ್ ಸಂಪಾದಕೊಡು ಸಂಪೊಲಿಪುಲೆ",
 	"wdqs-embed-explorer-button-incoming": "ಉಲಾಯಿ ಬರ್ಪುನ ಕೊಂಡಿಲೆನ್ ತೋಜಾಲೆ",
-	"wdqs-embed-explorer-button-outgoing": "ಪಿದಾಯಿ ಪೋಪುನ ಕೊಂಡಿಲೆನ್ ತೋಜಾಲೆ"
+	"wdqs-embed-explorer-button-outgoing": "ಪಿದಾಯಿ ಪೋಪುನ ಕೊಂಡಿಲೆನ್ ತೋಜಾಲೆ",
+	"wdqs-app-graph-split-banner-content": "ನಿಕ್ಲೆನ ಪ್ರಶ್ನೆಡ್ ವೈಜ್ಞಾನಿಕ ಲೇಖನೊಲೆನ್ ವಿವರಿಸವುನ ಐಟಂಲು ಉಂಡಾ? ಬರ್ಪಿನ ಗ್ರಾಫ್ ಸ್ಪ್ಲಿಟ್ ನಿಕ್ಲೆನ್ ಪರಿಣಾಮ ಬೀರುಂಡು. ದಯಮಲ್ತ್ <a href=\"https://www.wikidata.org/wiki/Special:MyLanguage/Wikidata:SPARQL_query_service/WDQS_backend_update/September_2024_scaling_update\">ಈ ಪ್ರಕಟಣೆಡ್</a> ಉಂದೆತ ಬಗ್ಗೆ ಜಾಸ್ತಿ ತೆರಿಯೊನೊಲಿ."
 }

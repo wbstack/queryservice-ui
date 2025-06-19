@@ -29,21 +29,21 @@ wikibase.queryService.ui.Banner = ( function ( $, download, window ) {
 	}
 
 	/**
-	* @property {jQuery}
-	* @private
-	*/
+	 * @property {jQuery}
+	 * @private
+	 */
 	SELF.prototype._$element = null;
 
 	/**
-	* @property {string}
-	* @private
-	*/
+	 * @property {string}
+	 * @private
+	 */
 	SELF.prototype._storageKey = null;
 
 	/**
-	* @property {Function}
-	* @private
-	*/
+	 * @property {Function}
+	 * @private
+	 */
 	SELF.prototype._onDismiss = null;
 
 	/**
@@ -52,10 +52,10 @@ wikibase.queryService.ui.Banner = ( function ( $, download, window ) {
 	SELF.prototype.trackingNamespace = 'wikibase.queryService.ui.';
 
 	/**
-	  * Initialize private members and call delegate to specific init methods
-	  *
-	  * @private
-	  */
+	 * Initialize private members and call delegate to specific init methods
+	 *
+	 * @private
+	 */
 	SELF.prototype._init = function ( withHelpMessage ) {
 		var isDismissed = localStorage.getItem( this._storageKey ) === DISMISSED;
 
@@ -67,7 +67,7 @@ wikibase.queryService.ui.Banner = ( function ( $, download, window ) {
 			.attr( {
 				class: 'close',
 				type: 'button',
-				'aria-label': 'Dismiss',
+				'aria-label': 'Dismiss'
 			} ).html( '<span aria-hidden="true">×</span>' ).on( 'click', ( function () {
 				this.dismiss();
 			} ).bind( this ) );
@@ -84,7 +84,6 @@ wikibase.queryService.ui.Banner = ( function ( $, download, window ) {
 		this._$element = banner;
 		this._renderBanner( this._$element );
 	};
-
 
 	/**
 	 * Dismiss the banner

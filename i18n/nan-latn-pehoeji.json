@@ -1,16 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"A-lú-mih",
-			"Luuva",
-			"Yoxem",
-			"進也"
+			"Winston Sung"
 		]
 	},
-	"wdqs-app-button-examples": "範例",
 	"wdqs-app-button-prefixes": "Chiap-thâu-gú",
-	"wdqs-app-button-help": "說明",
-	"wdqs-app-button-run": "走",
 	"wdqs-app-button-run-title": "Chip-hêng cha-sûn (<CTRL> + <ENTER>)",
 	"wdqs-app-button-clear": "Piàⁿ-chheng",
 	"wdqs-app-button-display": "Tián-sī",
