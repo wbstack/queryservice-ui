@@ -143,5 +143,11 @@
 	"wdqs-embed-button-edit-code-title": "Edit this query with the SPARQL editor",
 	"wdqs-embed-explorer-button-incoming": "Show incoming links",
 	"wdqs-embed-explorer-button-outgoing": "Show outgoing links",
-	"wdqs-app-graph-split-banner-content": "Does your query include Items describing scientific articles? The graph split affects your queries. Please learn more about it on this <a href=\"https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/WDQS_graph_split\">help page</a>."
+	"wdqs-app-graph-split-banner-content": "Does your query include Items describing scientific articles? The graph split affects your queries. Please learn more about it on this <a href=\"https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/WDQS_graph_split\">help page</a>.",
+	"wdqs-app-simplequerymodal-button-run-query": "Run query anyway",
+	"wdqs-app-simplequerymodal-button-learn-alternatives": "Learn about alternatives",
+	"wdqs-app-simplequerymodal-title": "Review needed",
+	"wdqs-app-simplequerymodal-content-intro": "The query service might not be the optimal choice for getting the information you require.",
+	"wdqs-app-simplequerymodal-content-recommendation": "We recommend exploring our alternative data access methods to find the one more suited to your needs."
+
 }

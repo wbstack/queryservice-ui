@@ -445,6 +445,23 @@
 		</div>
 	</div>
 
+	<!-- Simple query Modal -->
+	<div class="modal fade simple-query-modal" id="simple-query-modal" tabindex="-1" role="dialog" aria-labelledby="simple-query-modal-label" data-backdrop="static" data-keyboard="false">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-body">
+					<h4 class="modal-title" id="simple-query-modal-label" data-i18n="wdqs-app-simplequerymodal-title">Review needed</h4>
+					<p data-i18n="wdqs-app-simplequerymodal-content-intro"></p>
+					<p data-i18n="wdqs-app-simplequerymodal-content-recommendation"></p>
+					<div class="btn-group-wrapper">
+						<button class="btn btn-default modal-btn" id="continue-running-query" data-dismiss="modal" data-i18n="wdqs-app-simplequerymodal-button-run-query"></button>
+						<a class="btn btn-primary modal-btn" id="learn-alternatives" target="_blank" href="https://www.wikidata.org/wiki/Wikidata:Data_access" role="button" data-i18n="wdqs-app-simplequerymodal-button-learn-alternatives" ></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<!-- JS files -->
 	<!-- build:js js/vendor.min.js -->
 	<script src="node_modules/jquery/dist/jquery.js"></script>

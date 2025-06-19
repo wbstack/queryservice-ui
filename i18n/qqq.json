@@ -153,5 +153,10 @@
 	"wdqs-embed-button-edit-code-title": "Title for the Edit Code button in embed",
 	"wdqs-embed-explorer-button-incoming": "Title for button to show incoming links",
 	"wdqs-embed-explorer-button-outgoing": "Title for button to show outgoing links",
-	"wdqs-app-graph-split-banner-content": "Message in a banner about the graph split, linking to the announcement."
+	"wdqs-app-graph-split-banner-content": "Message in a banner about the graph split, linking to the announcement.",
+	"wdqs-app-simplequerymodal-button-run-query": "Title for the button to continue running the query despite the warning.",
+	"wdqs-app-simplequerymodal-button-learn-alternatives": "Title for the button that directs users to learn about alternative data access methods.",
+	"wdqs-app-simplequerymodal-title": "Title of the modal that informs users a review is needed before proceeding.",
+	"wdqs-app-simplequerymodal-content-intro": "Introductory message explaining that the current query service may not be the best option.",
+	"wdqs-app-simplequerymodal-content-recommendation": "Follow-up message suggesting that users consider alternative methods better suited to their needs."
 }

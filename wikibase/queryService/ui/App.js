@@ -826,7 +826,8 @@ wikibase.queryService.ui.App = ( function ( $, window, _, Cookies, moment ) {
 	 * @private
 	 */
 	SELF.prototype._handleQuerySubmit = function ( e ) {
-		var self = this;
+		e.preventDefault();
+
 		this._track( 'buttonClick.execute' );
 		this._trackStats( 'buttonClick_total', 1, 'c', { name: 'execute' } );
 
@@ -836,44 +837,83 @@ wikibase.queryService.ui.App = ( function ( $, window, _, Cookies, moment ) {
 			this._hasRunFirstQuery = true;
 		}
 
-		e.preventDefault();
+		if ( this._isEmptyQuery() ) {
+			this._showEmptyQueryError();
+			return;
+		}
+
 		this._editor.save();
 		this._updateQueryUrl();
 		this._updateTitle();
-		this._classifyQuery();
+		var isSimpleQuery = this._isSimpleQuery();
 
-		$( '#execute-button' ).prop( 'disabled', true );
-		if ( this._isEmptyQuery() ) {
-			$( '#query-result' ).hide();
-			$( '#query-error' ).hide();
-			$( '.label-danger' ).hide();
-			$( '#empty-query-error' ).show();
-			$( '#execute-button' ).prop( 'disabled', false );
+		if ( isSimpleQuery ) {
+			this._trackStats( 'simpleQuery_total' );
+		}
+
+		if ( !localStorage.getItem( 'simpleQueryModalShown' ) && isSimpleQuery ) {
+			this._simpleQueryModal();
 		} else {
-			$( '#empty-query-error' ).hide();
-			$( '#cancel-button' ).prop( 'disabled', false );
-			this._resultView.draw( this._editor.getValue() ).catch( function ( error ) {
-				try {
-					self._editor.highlightError( error );
-				} catch ( err ) {
-					// ignore
-				}
-			} ).then( function () {
-				$( '#execute-button' ).prop( 'disabled', false );
-				$( '#cancel-button' ).prop( 'disabled', true );
-			} );
+			this._runQuery();
 		}
 	};
 
 	/**
 	 * @private
 	 */
-	SELF.prototype._classifyQuery = function () {
+	SELF.prototype._isSimpleQuery = function () {
 		var classifier = new wikibase.queryService.services.SparqlClassifier();
 		var query = this._editor.getValue();
-		if ( classifier.isSimpleQuery( query ) ) {
-			this._trackStats( 'simpleQuery_total' );
-		}
+
+		return classifier.isSimpleQuery( query );
+	};
+
+	/**
+	 * @private
+	 */
+	SELF.prototype._runQuery = function () {
+		var self = this;
+
+		$( '#execute-button' ).prop( 'disabled', true );
+		$( '#empty-query-error' ).hide();
+		$( '#cancel-button' ).prop( 'disabled', false );
+		this._resultView.draw( this._editor.getValue() ).catch( function ( error ) {
+			try {
+				self._editor.highlightError( error );
+			} catch ( err ) {
+				// ignore
+			}
+		} ).then( function () {
+			$( '#execute-button' ).prop( 'disabled', false );
+			$( '#cancel-button' ).prop( 'disabled', true );
+		} );
+	};
+
+	/**
+	 * @private
+	 */
+	SELF.prototype._showEmptyQueryError = function () {
+		$( '#query-result, #query-error, .label-danger' ).hide();
+		$( '#empty-query-error' ).show();
+		$( '#execute-button' ).prop( 'disabled', false );
+	};
+
+	/**
+	 * @private
+	 */
+	SELF.prototype._simpleQueryModal = function () {
+		var self = this;
+
+		localStorage.setItem( 'simpleQueryModalShown', 'true' );
+
+		$( '#simple-query-modal' ).modal( 'show' );
+		$( '#continue-running-query' ).one( 'click', function () {
+			$( '#simple-query-modal' ).modal( 'hide' );
+			self._runQuery();
+		} );
+		$( '#learn-alternatives' ).one( 'click', function () {
+			$( '#simple-query-modal' ).modal( 'hide' );
+		} );
 	};
 
 	/**
