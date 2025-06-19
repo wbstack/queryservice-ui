@@ -67,6 +67,7 @@
 	"wdqs-app-result-csv": "Fail CSV",
 	"wdqs-app-result-svg": "Imej SVG",
 	"wdqs-app-result-html": "Jadual HTML",
+	"wdqs-app-result-geojson": "Fail GeoJSON",
 	"wdqs-app-shorturl-page-title": "URL singkat ke halaman ini",
 	"wdqs-app-editor-placeholder": "(Masukkan kueri SPARQL atau pilih contoh kueri)",
 	"wdqs-app-editor-addprefixes": "Tambah Awalan Standard",
@@ -139,5 +140,6 @@
 	"wdqs-embed-button-edit-code": "Sunting SPARQL",
 	"wdqs-embed-button-edit-code-title": "Sunting pertanyaan ini dengan penyunting SPARQL",
 	"wdqs-embed-explorer-button-incoming": "Tunjuk pautan masuk",
-	"wdqs-embed-explorer-button-outgoing": "Tunjuk pautan keluar"
+	"wdqs-embed-explorer-button-outgoing": "Tunjuk pautan keluar",
+	"wdqs-app-graph-split-banner-content": "Adakah pertanyaan anda termasuk Item yang menerangkan rencana saintifik? Pemisahan graf mempengaruhi pertanyaan anda. Sila ketahui lebih lanjut mengenainya di <a href=\"https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/WDQS_graph_split\">laman bantuan</a> ini."
 }

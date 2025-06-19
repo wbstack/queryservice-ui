@@ -72,6 +72,7 @@
 	"wdqs-app-result-csv": "CSV faylı",
 	"wdqs-app-result-svg": "SVG şəkli",
 	"wdqs-app-result-html": "HTML cədvəli",
+	"wdqs-app-result-geojson": "GeoJSON faylı",
 	"wdqs-app-shorturl-page-title": "Bu səhifəyə qısa URL",
 	"wdqs-app-editor-placeholder": "(SPARQL sorğusunu daxil edin və ya bir sorğu nümunəsini seçin)",
 	"wdqs-app-editor-addprefixes": "Standart Prefiks əlavə edin",
@@ -145,5 +146,5 @@
 	"wdqs-embed-button-edit-code-title": "Bu  sorğunu SPARQL redaktəçisi ilə redaktə et",
 	"wdqs-embed-explorer-button-incoming": "Giriş mündəraciyətləri göstər",
 	"wdqs-embed-explorer-button-outgoing": "Çıxan mündəraciyətləri göstər",
-	"wdqs-app-graph-split-banner-content": "Sorğunuza elmi məqalələri təsvir edən maddələr daxildir? Qarşıdan gələn qrafik bölünməsi sizə təsir edəcək. Ətraflı məlumat üçün, zəhmət olmasa, <a href=\"https://www.wikidata.org/wiki/Special:MyLanguage/Wikidata:SPARQL_query_service/WDQS_backend_update/September_2024_scaling_update\">bu elanı</a> oxuyun."
+	"wdqs-app-graph-split-banner-content": "Sorğunuza elmi məqalələri təsvir edən maddələr daxildir? Qrafikin bölünməsi sizə təsir edir. Ətraflı məlumat üçün, zəhmət olmasa, <a href=\"https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/WDQS_graph_split\">kömək səhifəsini</a> oxuyun."
 }
