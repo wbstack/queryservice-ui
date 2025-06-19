@@ -13,6 +13,7 @@
 			"Incelemeelemani",
 			"Joseph",
 			"Kumkumuk",
+			"Leo",
 			"MrSchipunov",
 			"MuratTheTurkish",
 			"Rapsar",
@@ -84,6 +85,7 @@
 	"wdqs-app-result-csv": "CSV dosyası",
 	"wdqs-app-result-svg": "SVG Resim",
 	"wdqs-app-result-html": "HTML tablosu",
+	"wdqs-app-result-geojson": "GeoJSON dosyası",
 	"wdqs-app-shorturl-page-title": "Bu sayfa için kısa URL",
 	"wdqs-app-editor-placeholder": "(Bir SPARQL sorgusu girin ya da örnek bir sorgu seçin)",
 	"wdqs-app-editor-addprefixes": "Standart Önek Ekle",
@@ -157,5 +159,5 @@
 	"wdqs-embed-button-edit-code-title": "Bu sorguyu SPARQL editörüyle düzenleyin",
 	"wdqs-embed-explorer-button-incoming": "Gelen bağlantıları göster",
 	"wdqs-embed-explorer-button-outgoing": "Giden bağlantıları göster",
-	"wdqs-app-graph-split-banner-content": "Sorgunuz bilimsel maddeler açıklayan Öğeler içeriyor mu? Yaklaşan grafik bölünmesi sizi etkileyecektir. Lütfen <a href=\"https://www.wikidata.org/wiki/Special:MyLanguage/Wikidata:SPARQL_query_service/WDQS_backend_update/September_2024_scaling_update\">bu duyuruda</a> bunun hakkında daha fazla bilgi edinin."
+	"wdqs-app-graph-split-banner-content": "Sorgunuz bilimsel maddeleri açıklayan Öğeler içeriyor mu? Grafik bölünmesi sorgularınızı etkiler. Lütfen bu konuda daha fazla bilgi edinmek için bu <a href=\"https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/WDQS_graph_split\">yardım sayfasını</a> ziyaret edin."
 }
