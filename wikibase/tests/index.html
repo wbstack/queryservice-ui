@@ -32,21 +32,31 @@
 	<script src="../../node_modules/d3/d3.js"></script>
 	<script src="../../node_modules/dimple-js/dist/dimple.latest.js"></script>
 	<script src="../../node_modules/js-cookie/src/js.cookie.js"></script>
-	<script src="../../node_modules/vis/dist/vis.js"></script>
+	<script src="../../node_modules/vis-network/dist/vis-network.js"></script>
+	<script src="../../node_modules/vis-timeline/standalone/umd/vis-timeline-graph2d.js"></script>
 	<script src="../../node_modules/moment/min/moment-with-locales.js"></script>
 	<script src="../../node_modules/jstree/dist/jstree.js"></script>
 	<script src="../../node_modules/wellknown/wellknown.js"></script>
 	<script src="../../node_modules/downloadjs/download.js"></script>
+	<script src="../../node_modules/neotraverse/dist/legacy/legacy.umd.js"></script>
 
 	<script src="../../vendor/bootstrap-tags/js/bootstrap-tags.min.js"></script>
+	<script src="../../vendor/sparqljs/dist/sparqljs-browser-min.js"></script>
 	<!-- wikibase -->
 	<script src="../config.js"></script>
+	<script src="../queryService/VariableNames.js"></script>
+	<script src="../queryService/api/EntityInLanguageCache.js"></script>
 	<script src="../queryService/api/Wikibase.js"></script>
 	<script src="../queryService/api/Sparql.js"></script>
 	<script src="../queryService/api/CodeSamples.js"></script>
+	<script src="../queryService/api/Tracking.js"></script>
+	<script src="../queryService/services/SparqlQuery.js"></script>
+	<script src="../queryService/services/SparqlClassifier.js"></script>
+	<script src="../queryService/services/TriplesAnalyzer.js"></script>
 	<script src="../queryService/ui/App.js"></script>
 	<script src="../queryService/ui/editor/hint/Sparql.js"></script>
 	<script src="../queryService/ui/editor/hint/Rdf.js"></script>
+	<script src="../queryService/ui/editor/tooltip/TooltipRepository.js"></script>
 	<script src="../queryService/RdfNamespaces.js"></script>
 	<script src="../queryService/ui/i18n/getMessage.js"></script>
 	<script src="../queryService/ui/resultBrowser/helper/FormatterHelper.js"></script>
@@ -73,11 +83,18 @@
 	<script src="queryService/ui/App.test.js"></script>
 	<script src="queryService/ui/editor/hint/Sparql.test.js"></script>
 	<script src="queryService/ui/editor/hint/Rdf.test.js"></script>
+	<script src="queryService/ui/editor/tooltip/TooltipRepository.test.js"></script>
 	<script src="queryService/ui/resultBrowser/helper/FormatterHelper.test.js"></script>
 	<script src="queryService/ui/resultBrowser/helper/Options.test.js"></script>
 	<script src="queryService/ui/resultBrowser/ResultBrowser.test.js"></script>
 	<script src="queryService/ui/resultBrowser/CoordinateResultBrowser.test.js"></script>
 	<script src="queryService/ui/resultBrowser/ImageResultBrowser.test.js"></script>
 	<script src="queryService/api/CodeSamples.test.js"></script>
+	<script src="queryService/api/Tracking.test.js"></script>
+	<script src="queryService/api/Wikibase.test.js"></script>
+	<script src="queryService/services/SparqlQuery.test.js"></script>
+	<script src="queryService/services/SparqlClassifier.test.js"></script>
+	<script src="queryService/services/TriplesAnalyzer.test.js"></script>
+
 </body>
 </html>

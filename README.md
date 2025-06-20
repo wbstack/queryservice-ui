@@ -26,12 +26,32 @@ npm install wikidata-query-gui
 ## Configuration
 Per default the Wikibase Query Service GUI is configured to be used as a local development test instance. It can be customized by creating a `custom-config.json` in the repository's root dir. This file can be used to override any of the default settings obtained from `default-config.json`.
 
+### Banner Message
+
+The banner message may be configured per site deployment. In order display a banner, add its banner key to the configuration:
+
+```js
+{
+// ...
+  "bannerName": "query-builder",
+// ...
+}
+```
+
+Empty values, falsy values and undefined banner keys will result in the banner not showing.
+
 ## Run tests
 
-Run JSHint, JSCS and QUnit tests.
+Run eslint, JSHint, JSCS and QUnit tests.
 
 ```bash
 $ npm test
+```
+
+Autofix eslint errors
+
+```bash
+$ npm run grunt eslint -- --fix
 ```
 
 ## Debug
@@ -48,20 +68,36 @@ Create a build with bundled and minified files.
 $ npm run build
 ```
 
+## Local development
 
-## Deploy
-Create a build and push it to the deployment branch via git review.
-
-```bash
-$ npm run deploy
+Build image locally:
+```
+DOCKER_BUILDKIT=1 docker build --target production -f .pipeline/blubber.yaml .
 ```
 
-
-Please make sure you have defined a gitreview username:
-```bash
-git config --global --add gitreview.username "[username]"
+Run image:
+```
+docker run -p 8080:8080 <image name>
 ```
 
+Visit `http://127.0.0.1:8080/`
+
+
+## Publish new image version
+
+To create a new image version merge your change into the main branch.
+
+This triggers the publish-image pipeline. Image is available at `docker-registry.wikimedia.org/repos/wmde/wikidata-query-gui:<timestamp>`
+
+
+## Deploy in WMF environment (query.wikidata.org)
+
+After the code changes have been merged and new container image version has been published to [Wikimedia registry](https://docker-registry.wikimedia.org/repos/wmde/wikidata-query-gui/tags/), change the version tag in the Helm chart used for deployments by making and approving the change in `helmfile.d/services/wikidata-query-gui/values.yaml` in WMF's [deployment-charts](https://gerrit.wikimedia.org/g/operations/deployment-charts).
+
+Once the new deployment chart has been created, change the deployment chart version in use on the deployment server following instructions on https://wikitech.wikimedia.org/wiki/Kubernetes/Deployments. A bit more detailed deployment instructions for another service, that could be used for reference, can be found at https://wikitech.wikimedia.org/wiki/Miscweb#Deploy\_to\_Kubernetes/wikikube.
+
+### Usage Metrics
+Usage metrics are only emitted when hosted on query.wikidata.org. They are sent to https://wikidata.org/beacon/stats and https://wikidata.org/beacon/statsv .
 
 ## Components
 ### Editor
