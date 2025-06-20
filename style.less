@@ -623,6 +623,15 @@ div.shortUrl {
 	border-radius: @border-radius-base @border-radius-base 0 0;
 }
 
+@media ( max-width: 640px ) {
+	.simple-query-modal {
+		.btn-group-wrapper {
+			display: flex;
+			flex-direction: column-reverse;
+			justify-content: center;
+		}
+	}
+}
 /**
 	To allow dropdown to function normally in small screens
 	and allow buttons display the same way as in full size
@@ -1032,7 +1041,7 @@ div.jqcloud {
 }
 
 .simple-query-modal {
-	padding-right: 0;
+	padding: 15px;
 
 	.modal-dialog {
 		max-width: 700px;
@@ -1041,18 +1050,20 @@ div.jqcloud {
 	}
 
 	.modal-title {
-		padding-bottom: 30px;
+		padding-bottom: 20px;
 		font-weight: bold;
 	}
 
 	.btn-group-wrapper {
 		display: flex;
+		margin-top: 20px;
 		justify-content: flex-end;
-		gap: 1%;
+		flex-wrap: wrap-reverse;
+		gap: 5px;
 	}
 
 	.modal-btn {
-		margin-top: 30px;
+		text-wrap: wrap;
 	}
 }
 
