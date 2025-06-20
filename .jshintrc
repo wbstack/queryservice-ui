@@ -1,4 +1,5 @@
 {
+	// When you change this file, then also change the file in wikibase/tests/.jshintrc
 	"camelcase": true,
 	"curly": true,
 	"eqeqeq": true,

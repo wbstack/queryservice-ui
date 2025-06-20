@@ -6,7 +6,8 @@
 			"Rockyfelle",
 			"Sabelöga",
 			"Sturban",
-			"WikiPhoenix"
+			"WikiPhoenix",
+			"Yupik"
 		]
 	},
 	"wdqs-app-button-examples": "Exempel",
@@ -34,6 +35,9 @@
 	"wdqs-app-help-portal": "Hjälpportal",
 	"wdqs-app-help-manual": "Användarmanual",
 	"wdqs-app-help-examples": "Exempelförfrågan",
+	"wdqs-app-query-builder-name": "Sökfrågebyggare",
+	"wdqs-app-query-builder-banner-content": "Behöver du hjälp med att skapa en sökfråga? Du kan bygga sökfrågor utan att behöva skriva SPARQL med den nya <a>Sökfrågebyggaren</a>.",
+	"wdqs-app-query-builder-example-banner-content": "Du kan skapa sökfrågor utan att behöva skriva SPARQL med <a>Sökfrågebyggaren</a>",
 	"wdqs-app-help-datamodel": "RDF-datamodell",
 	"wdqs-app-help-prefixes": "Lista över prefix",
 	"wdqs-app-help-copy": "Licensinformation",
@@ -84,7 +88,7 @@
 	"wdqs-app-resultbrowser-tree-map": "Trädkort",
 	"wdqs-app-resultbrowser-tree": "Träd",
 	"wdqs-app-resultbrowser-timeline": "Tidslinje",
-	"wdqs-app-resultbrowser-dimensions": "Dimensioner",
+	"wdqs-app-resultbrowser-dimensions": "Parallella koordinater",
 	"wdqs-app-resultbrowser-graph": "Graf",
 	"wdqs-app-toast-leave-fullscreen": "Tryck på [esc] för att lämna helskärmsläget",
 	"wdqs-app-urlshortener-bad-service": "Fel i konfigurationen av tjänsten för att korta ned webbadresser",

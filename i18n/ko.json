@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"CYAN",
+			"Dr1t jg",
 			"Garam",
 			"In2acous",
 			"Jerrykim306",
@@ -20,6 +21,7 @@
 	"wdqs-app-button-help": "도움말",
 	"wdqs-app-button-run": "동작",
 	"wdqs-app-button-run-title": "쿼리 실행 (CTRL + ENTER)",
+	"wdqs-app-button-cancel-title": "쿼리 중지 (CTRL + ESC)",
 	"wdqs-app-button-clear": "지우기",
 	"wdqs-app-button-clear-title": "쿼리 초기화",
 	"wdqs-app-button-restore-title": "이전 쿼리 복원",
@@ -40,6 +42,7 @@
 	"wdqs-app-help-manual": "사용자 매뉴얼",
 	"wdqs-app-help-examples": "예시 쿼리",
 	"wdqs-app-query-builder-name": "쿼리 빌더",
+	"wdqs-app-query-builder-banner-content": "쿼리 만들기에 도움이 필요하십니까? 새 <a>쿼리 빌더</a>에서 SPARQL을 작성하지 않고 쿼리를 만들 수 있습니다.",
 	"wdqs-app-help-datamodel": "RDF 데이터 모델",
 	"wdqs-app-help-prefixes": "접두사 목록",
 	"wdqs-app-help-copy": "라이선스 정보",
@@ -124,6 +127,7 @@
 	"wdqs-ve-sb-suggestions": "제안",
 	"wdqs-ve-sb-other": "기타",
 	"wdqs-action-query": "쿼리 조회 중",
+	"wdqs-action-stop-query": "이 쿼리는 취소되었습니다",
 	"wdqs-action-render": "결과 출력 중",
 	"wdqs-action-error-display": "결과를 표시할 수 없음",
 	"wdqs-action-timeout": "쿼리 시간 초과 제한에 도달함",

@@ -1,11 +1,13 @@
-FROM node:12 as builder
+FROM node:20 as builder
 
 WORKDIR /src/app
 
 COPY package.json package-lock.json ./
 
+RUN npm install -g npm@latest
+
 # TODO remove the --force from the install...
-RUN npm install --force && npm cache clean --force
+RUN npm install --force && npm update && npm cache clean --force
 
 COPY . .
 

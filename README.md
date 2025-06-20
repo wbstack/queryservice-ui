@@ -48,20 +48,45 @@ Create a build with bundled and minified files.
 $ npm run build
 ```
 
+## Local development
 
-## Deploy
-Create a build and push it to the deployment branch via git review.
-
-```bash
-$ npm run deploy
+Build image locally:
+```
+DOCKER_BUILDKIT=1 docker build --target production -f .pipeline/blubber.yaml .
 ```
 
-
-Please make sure you have defined a gitreview username:
-```bash
-git config --global --add gitreview.username "[username]"
+Run image:
+```
+docker run -p 8080:8080 <image name>
 ```
 
+Visit `http://127.0.0.1:8080/`
+
+
+## Publish new image version
+
+To create a new image version merge your change into the master branch.
+
+This triggers the publish-image pipeline. Image is available at `docker-registry.wikimedia.org/repos/wmde/wikidata-query-gui:<timestamp>`
+
+
+## Deploy (this has to be updated once the wikikube environment is in place)
+To deploy the GUI, [trigger a new build of the deploy repo on Jenkins](https://integration.wikimedia.org/ci/job/wikidata-query-gui-build/).
+
+![Screenshot of the Jenkins dashboard for the build repo. Highlighted are the build buttons in the sidebar with a "1" and the "Build" button in the main part with a "2"](docs/images/triggerDeployBuild.png)
+
+This creates a new open change in the deploy repository: https://gerrit.wikimedia.org/r/q/project:wikidata/query/gui-deploy+status:open
+That change will be based on the [latest commit in the master branch](https://gerrit.wikimedia.org/r/plugins/gitiles/wikidata/query/gui/+log/refs/heads/master), and thus it will include all previous commits.
+Optionally, you can edit the commit message in the Gerrit UI to include the `Bug: Txxxxx` line, to emphasize to which task the change belongs.
+
+You can clone that repository and check out the change locally to test and verify it.
+
+As that repository does not have any CI, you need to manually merge the change.
+That means, giving +2 to both the Code Review as well as the Verified label, and then clicking the "Submit" button.
+
+The site will be deployed with the next puppet run, which should happen after at most 30 minutes.
+
+See also: https://wikitech.wikimedia.org/wiki/Wikidata_Query_Service#GUI_deployment_general_notes
 
 ## Components
 ### Editor

@@ -1,5 +1,5 @@
 /* jshint node:true */
-module.exports = function( grunt ) {
+module.exports = function ( grunt ) {
 	'use strict';
 	require( 'load-grunt-tasks' )( grunt );
 	var pkg = grunt.file.readJSON( 'package.json' );
@@ -12,39 +12,40 @@ module.exports = function( grunt ) {
 				jshintrc: true
 			},
 			all: [
-					'**/*.js', '!dist/**', '!' + buildFolder + '/**', '!target/**'
+				'**/*.js', '!dist/**', '!' + buildFolder + '/**', '!target/**'
 			]
 		},
 		eslint: {
-			src: [
-				'**/*.js',
-				'!dist/**',
-				'!' + buildFolder + '/**',
-				'!target/**',
-				'!node_modules/**',
-				'!vendor/**',
-				'!wikibase/tests/**',
-				'!polestar/**',
-				'!wikibase/codemirror/addon/**'
-			]
+			src: '.'
 		},
 		jsonlint: {
 			all: [
-					'**/*.json', '!node_modules/**', '!vendor/**', '!dist/**', '!' + buildFolder + '/**', '!polestar/**', '!target/**'
+				'**/*.json', '!node_modules/**', '!vendor/**', '!dist/**', '!' + buildFolder + '/**', '!polestar/**', '!target/**'
 			]
 		},
+		connect: {
+			server: {
+				options: {
+					port: 8001,
+					base: '.'
+				}
+			}
+		},
 		qunit: {
-			all: [
-				'wikibase/tests/*.html'
-			],
+			all: [ /* see options.urls */ ],
 			options: {
+				urls: [
+					// port 8001 served by 'connect' task above
+					'http://localhost:8001/wikibase/tests/index.html',
+					'http://localhost:8001/wikibase/tests/QueryHelper.html'
+				],
 				puppeteer: {
 					headless: true,
 					/*
 					 * no-sandbox mode is needed to make qunit work with docker.
 					 * It would be nice to do this optionally, so local test runs are still sandboxed...
 					 */
-					args: ['--no-sandbox', '--disable-setuid-sandbox'],
+					args: [ '--no-sandbox', '--disable-setuid-sandbox' ],
 					/*
 					 * In case PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true is set, we
 					 * need a way to set the Chrome path using an environment
@@ -71,24 +72,24 @@ module.exports = function( grunt ) {
 		},
 		banana: {
 			all: 'i18n/',
-					options: {
-						disallowBlankTranslations: false,
-						requireKeyPrefix: 'wdqs-'
-					}
-				},
+			options: {
+				disallowBlankTranslations: false,
+				requireKeyPrefix: 'wdqs-'
+			}
+		},
 		clean: {
 			release: [
 				buildFolder
 			],
 			deploy: [
-					buildFolder + '/*',
-					'!' + buildFolder + '/custom-config.json',
-					'!' + buildFolder + '/.git/**'
+				buildFolder + '/*',
+				'!' + buildFolder + '/custom-config.json',
+				'!' + buildFolder + '/.git/**'
 			]
 		},
 		useminPrepare: {
 			html: [
-					'index.html', 'embed.html'
+				'index.html', 'embed.html'
 			],
 			options: {
 				dest: buildFolder
@@ -99,92 +100,88 @@ module.exports = function( grunt ) {
 		copy: {
 			release: {
 				files: [
-						{// bootstrap icons
-							expand: true,
-							flatten: true,
-							src: [
-								'**/*.{eot,ttf,woff,woff2}'
-							],
-							dest: buildFolder + '/fonts/',
-							filter: 'isFile'
-						},
-						{// uls images
-							expand: true,
-							flatten: true,
-							src: [
-								'**/jquery.uls/images/*.{png,jpg,svg}'
-							],
-							dest: buildFolder + '/images/',
-							filter: 'isFile'
-						},
-						{// jstree
-							expand: true,
-							flatten: true,
-							src: [
-								'**/jstree/**/*.{png,gif}'
-							],
-							dest: buildFolder + '/css/',
-							filter: 'isFile'
-						},
-						{// leaflet fullscreen images
-							expand: true,
-							flatten: true,
-							src: [
-								'**/leaflet-fullscreen/**/*.png'
-							],
-							dest: buildFolder + '/css/',
-							filter: 'isFile'
-						},
-						{// leaflet images
-							expand: true,
-							flatten: true,
-							src: [
-								'**/leaflet/dist/images/*.png',
-								'**/leaflet-minimap/dist/images/*.svg'
-							],
-							dest: buildFolder + '/css/images',
-							filter: 'isFile'
-						},{
-							expand: true,
-							cwd: './',
-							src: [
-									'*.html',
-									'logo.svg', 'logo-embed.svg', 'robots.txt', 'favicon.*'
-							],
-							dest: buildFolder
-						},{
-							expand: true,
-							src: [
-								'**/polestar/**'
-							],
-							dest: buildFolder
-						},{
-							expand: true,
-							cwd: './node_modules/mathjax/es5/',
-							src: [
-								'output/chtml/fonts/woff-v2/*.woff'
-							],
-							dest: buildFolder + '/js'
-						},{
-							expand: true,
-							src: [
-								'examples/code/*.txt'
-							],
-							dest: buildFolder,
-							filter: 'isFile'
-						},
-						{// json config
-							expand: false,
-							src: [
-								'default-config.json'
-							],
-							dest: buildFolder + '/default-config.json',
-							filter: 'isFile'
-						},
-						{// query builder dropdown image
-							src: 'wikibase/queryService/ui/304px_querybuilder_final.gif',
-							dest: buildFolder + '/',
-						}
+					{ // bootstrap icons
+						expand: true,
+						flatten: true,
+						src: [
+							'**/*.{eot,ttf,woff,woff2}'
+						],
+						dest: buildFolder + '/fonts/',
+						filter: 'isFile'
+					},
+					{ // uls images
+						expand: true,
+						flatten: true,
+						src: [
+							'**/jquery.uls/images/*.{png,jpg,svg}'
+						],
+						dest: buildFolder + '/images/',
+						filter: 'isFile'
+					},
+					{ // jstree
+						expand: true,
+						flatten: true,
+						src: [
+							'**/jstree/**/*.{png,gif}'
+						],
+						dest: buildFolder + '/css/',
+						filter: 'isFile'
+					},
+					{ // leaflet fullscreen images
+						expand: true,
+						flatten: true,
+						src: [
+							'**/leaflet-fullscreen/**/*.png'
+						],
+						dest: buildFolder + '/css/',
+						filter: 'isFile'
+					},
+					{ // leaflet images
+						expand: true,
+						flatten: true,
+						src: [
+							'**/leaflet/dist/images/*.png',
+							'**/leaflet-minimap/dist/images/*.svg'
+						],
+						dest: buildFolder + '/css/images',
+						filter: 'isFile'
+					}, {
+						expand: true,
+						cwd: './',
+						src: [
+							'*.html',
+							'logo.svg', 'logo-embed.svg', 'robots.txt', 'favicon.*'
+						],
+						dest: buildFolder
+					}, {
+						expand: true,
+						src: [
+							'**/polestar/**'
+						],
+						dest: buildFolder
+					}, {
+						expand: true,
+						cwd: './node_modules/mathjax/es5/',
+						src: [
+							'output/chtml/fonts/woff-v2/*.woff'
+						],
+						dest: buildFolder + '/js'
+					}, {
+						expand: true,
+						src: [
+							'examples/code/*.txt'
+						],
+						dest: buildFolder,
+						filter: 'isFile'
+					},
+					{ // json config
+						expand: false,
+						src: [
+							'default-config.json'
+						],
+						dest: buildFolder + '/default-config.json',
+						filter: 'isFile'
+					}
 				]
 			}
 		},
@@ -213,7 +210,7 @@ module.exports = function( grunt ) {
 				files: [
 					{
 						src: [
-								buildFolder + '/js/*.js', buildFolder + '/css/*.css'
+							buildFolder + '/js/*.js', buildFolder + '/css/*.css'
 						]
 					}
 				]
@@ -221,7 +218,7 @@ module.exports = function( grunt ) {
 		},
 		usemin: {
 			html: [
-					buildFolder + '/index.html', buildFolder + '/embed.html'
+				buildFolder + '/index.html', buildFolder + '/embed.html'
 			]
 		},
 		htmlmin: {
@@ -246,34 +243,25 @@ module.exports = function( grunt ) {
 					shell: '/bin/sh'
 				}
 			},
-			updateRepo: {// updates the gui repo
-				command: 'git remote update && git pull'
-			},
-			cloneDeploy: {// clone gui deploy to build folder
+			cloneDeploy: { // clone gui deploy to build folder
 				command: 'git clone --branch <%= pkg.repository.deploy.branch %>' +
 						' --single-branch https://<%= pkg.repository.deploy.gerrit %>/r/<%= pkg.repository.deploy.repo %> ' +
 						buildFolder
 			},
-			commitDeploy: {// get gui commit message and use it for deploy commit
+			commitDeploy: { // get gui commit message and use it for deploy commit
 				command: [
-						'lastrev=$(git rev-parse HEAD)',
-						'message=$(git log -1 --pretty=%B | grep -v Change-Id)',
-						'newmessage=$(cat <<END\nMerging from $lastrev:\n\n$message\nEND\n)',
-						'cd ' + buildFolder,
-						'curl -Lo .git/hooks/commit-msg https://<%= pkg.repository.deploy.gerrit %>/r/tools/hooks/commit-msg',
-						'chmod u+x .git/hooks/commit-msg',
-						'git add -A', 'git commit -m "$newmessage"',
-						'echo "$newmessage"'
+					'lastrev=$(git rev-parse HEAD)',
+					'message=$(git log -1 --pretty=%B | grep -v Change-Id)',
+					'newmessage=$(cat <<END\nMerging from $lastrev:\n\n$message\nEND\n)',
+					'cd ' + buildFolder,
+					'curl -Lo .git/hooks/commit-msg https://<%= pkg.repository.deploy.gerrit %>/r/tools/hooks/commit-msg',
+					'chmod u+x .git/hooks/commit-msg',
+					'git add -A', 'git commit -m "$newmessage"',
+					'echo "$newmessage"'
 				].join( '&&' )
 			},
-			formatPatchDeploy: {// generate patch file for deploy commit(s)
+			formatPatchDeploy: { // generate patch file for deploy commit(s)
 				command: 'git -C ' + buildFolder + ' format-patch --output-directory .. @{u}'
-			},
-			review: {
-				command: [
-						'cd ' + buildFolder,
-						'git push ssh://<%= pkg.repository.deploy.gerrit %>:29418/<%= pkg.repository.deploy.repo %>.git HEAD:refs/publish/<%= pkg.repository.deploy.branch %>'
-				].join( '&&' )
 			}
 		},
 		'auto_install': {
@@ -284,7 +272,7 @@ module.exports = function( grunt ) {
 		}
 	} );
 
-	grunt.registerTask( 'configDeploy', 'Creates .git-review in build folder', function() {
+	grunt.registerTask( 'configDeploy', 'Creates .git-review in build folder', function () {
 		var file = '[gerrit]\nhost=' + pkg.repository.deploy.gerrit + '\n' +
 			'port=29418\n' +
 			'project=' + pkg.repository.deploy.repo + '.git\n' +
@@ -321,8 +309,11 @@ module.exports = function( grunt ) {
 		} );
 
 	} );
+	grunt.registerTask( 'unit_test', [
+		'connect', 'qunit'
+	] );
 	grunt.registerTask( 'test', [
-		'eslint', 'jshint', 'jsonlint', 'banana', 'stylelint', 'qunit'
+		'eslint', 'jshint', 'jsonlint', 'banana', 'stylelint', 'unit_test'
 	] );
 	grunt.registerTask( 'browser_test', [
 		'wdio'
@@ -335,12 +326,6 @@ module.exports = function( grunt ) {
 	] );
 	grunt.registerTask( 'only_build', [
 		'less', 'copy', 'useminPrepare', 'concat', 'cssmin', 'uglify', 'filerev', 'usemin', 'htmlmin', 'merge-i18n'
-	] );
-	grunt.registerTask( 'build_for_deploy', [
-		'test', 'browser_test', 'clean', 'shell:cloneDeploy', 'clean:deploy', 'only_build'
-	] );
-	grunt.registerTask( 'deploy', [
-		'build_for_deploy', 'shell:commitDeploy', 'shell:review'
 	] );
 	grunt.registerTask( 'security', [
 		'clean', 'shell:cloneDeploy', 'clean:deploy', 'only_build', 'shell:commitDeploy', 'shell:formatPatchDeploy'

@@ -3,15 +3,15 @@ wikibase.queryService = wikibase.queryService || {};
 wikibase.queryService.ui = wikibase.queryService.ui || {};
 wikibase.queryService.ui.queryHelper = wikibase.queryService.ui.queryHelper || {};
 
-wikibase.queryService.ui.queryHelper.SelectorBox = ( function( $, wikibase ) {
+wikibase.queryService.ui.queryHelper.SelectorBox = ( function ( $, wikibase ) {
 	'use strict';
 
 	var SPARQL_TIMEOUT = 4 * 1000;
 
-/*jshint multistr: true */
+	/* jshint multistr: true */
 	var SPARQL_QUERY = {
-			item: {
-				suggest:// Find items that are used with a specifc property
+		item: {
+			suggest: // Find items that are used with a specifc property
 					'SELECT ?id ?label ?description WHERE {\
 					hint:Query hint:optimizer "None".\
 							{\
@@ -24,8 +24,8 @@ wikibase.queryService.ui.queryHelper.SelectorBox = ( function( $, wikibase ) {
 						FILTER((LANG(?description)) = "{LANGUAGE}")\
 					}\
 					LIMIT 100',
-				genericSuggest: function() { // Find items that are most often used with the first selected item of the current query
-					var popularItemsTemplate =// Find items that have topic's main template
+			genericSuggest: function () { // Find items that are most often used with the first selected item of the current query
+				var popularItemsTemplate =// Find items that have topic's main template
 						'SELECT ?id ?label ?description WHERE {\
 						hint:Query hint:optimizer "None".\
 							{\
@@ -38,11 +38,11 @@ wikibase.queryService.ui.queryHelper.SelectorBox = ( function( $, wikibase ) {
 							FILTER((LANG(?description)) = "{LANGUAGE}")\
 						}\
 						LIMIT 100';
-					if ( this._query.getTriples().length === 0 ) {
-						return popularItemsTemplate;
-					}
+				if ( this._query.getTriples().length === 0 ) {
+					return popularItemsTemplate;
+				}
 
-					var template = '{PREFIXES}\n\
+				var template = '{PREFIXES}\n\
 						SELECT ?id ?label ?description ?property (?count as ?rank) WITH {\n\
 							{QUERY}\n\
 						} AS %query WITH {\n\
@@ -69,33 +69,34 @@ wikibase.queryService.ui.queryHelper.SelectorBox = ( function( $, wikibase ) {
 							}\n\
 						}\n\
 						ORDER BY DESC(?count)',
-						variable = this._query.getBoundVariables().shift() || this._query.getTripleVariables().shift(),
-						query = this._query.clone().setLimit( 1000 )
-							.removeService( 'http://wikiba.se/ontology#label' )
-							.addVariable( variable )
-							.getQueryString(),
-						prefixes = query.match( /.*\bPREFIX\b(.*)/gi ).join( '\n' );
+					variable = this._query.getBoundVariables().shift() || this._query.getTripleVariables().shift(),
+					query = this._query.clone().setLimit( 1000 )
+						.removeService( 'http://wikiba.se/ontology#label' )
+						.addVariable( variable )
+						.getQueryString(),
+					prefixes = query.match( /.*\bPREFIX\b(.*)/gi ).join( '\n' );
 
-					query = query.replace( /.*\bPREFIX\b.*/gi, '' );
-					return template.replace( '{QUERY}', query )
-						.replace( '{VARIABLE}', variable )
-						.replace( '{PREFIXES}', prefixes );
-				},
-				search: null,
-// Disable for now as requested by Smalyshev
-//					'SELECT ?id ?label ?description WHERE {\
-//						hint:Query hint:optimizer "None".\
-//							{\
-//								SELECT DISTINCT ?id WHERE { ?i <{PROPERTY_URI}> ?id. }\
-//							}\
-//						?id rdfs:label ?label.\
-//						?id schema:description ?description.\
-//						FILTER((LANG(?label)) = "{LANGUAGE}")\
-//						FILTER((LANG(?description)) = "{LANGUAGE}")\
-//						FILTER(STRSTARTS(LCASE(?label), LCASE("{TERM}")))\
-//					}\
-//					LIMIT 20',
-				instanceOf:// Find items that are used with property 'instance of'
+				query = query.replace( /.*\bPREFIX\b.*/gi, '' );
+				return template.replace( '{QUERY}', query )
+					.replace( '{VARIABLE}', variable )
+					.replace( '{PREFIXES}', prefixes );
+			},
+			search: null,
+			/* Disable for now as requested by Smalyshev
+					'SELECT ?id ?label ?description WHERE {\
+						hint:Query hint:optimizer "None".\
+							{\
+								SELECT DISTINCT ?id WHERE { ?i <{PROPERTY_URI}> ?id. }\
+							}\
+						?id rdfs:label ?label.\
+						?id schema:description ?description.\
+						FILTER((LANG(?label)) = "{LANGUAGE}")\
+						FILTER((LANG(?description)) = "{LANGUAGE}")\
+						FILTER(STRSTARTS(LCASE(?label), LCASE("{TERM}")))\
+					}\
+					LIMIT 20',
+			*/
+			instanceOf: // Find items that are used with property 'instance of'
 					'SELECT ?id ?label ?description WHERE {\
 					hint:Query hint:optimizer "None".\
 						{\
@@ -110,7 +111,7 @@ wikibase.queryService.ui.queryHelper.SelectorBox = ( function( $, wikibase ) {
 					LIMIT 100'
 		},
 		property: {
-			suggest:// Find properties that are used with a specific item
+			suggest: // Find properties that are used with a specific item
 				'SELECT ?id ?label ?description WHERE {\
 				hint:Query hint:optimizer "None".\
 					{\
@@ -127,7 +128,7 @@ wikibase.queryService.ui.queryHelper.SelectorBox = ( function( $, wikibase ) {
 				FILTER((LANG(?description)) = "{LANGUAGE}")\
 				}\
 				LIMIT 100',
-			genericSuggest: function() { // Find properties that are most often used with the first selected item of the current query
+			genericSuggest: function () { // Find properties that are most often used with the first selected item of the current query
 
 				var genericTemplate = // Find properties that are most often used with all items
 				'SELECT ?id ?label ?description (?count as ?rank) WITH {\
@@ -189,25 +190,26 @@ wikibase.queryService.ui.queryHelper.SelectorBox = ( function( $, wikibase ) {
 					.replace( '{PREFIXES}', prefixes );
 			},
 			search: null,
-//			search:// Find properties that are most often used with a specific item and filter with term prefix
-//				'SELECT ?id ?label ?description WHERE {\
-//					{\
-//					SELECT ?id (COUNT(?id) AS ?count) WHERE {\
-//						?i ?prop <{ITEM_URI}>.\
-//						?id ?x ?prop.\
-//						?id rdf:type wikibase:Property.\
-//						}\
-//						GROUP BY ?id\
-//					}\
-//				?id rdfs:label ?label.\
-//				?id schema:description ?description.\
-//				FILTER((LANG(?label)) = "{LANGUAGE}")\
-//				FILTER((LANG(?description)) = "{LANGUAGE}")\
-//				FILTER(STRSTARTS(LCASE(?label), LCASE("{TERM}")))\
-//				}\
-//				ORDER BY DESC(?count)\
-//				LIMIT 20',
-			seeAlso:// Read see also property from a specific property
+			/* Find properties that are most often used with a specific item and filter with term prefix
+				'SELECT ?id ?label ?description WHERE {\
+					{\
+					SELECT ?id (COUNT(?id) AS ?count) WHERE {\
+						?i ?prop <{ITEM_URI}>.\
+						?id ?x ?prop.\
+						?id rdf:type wikibase:Property.\
+						}\
+						GROUP BY ?id\
+					}\
+				?id rdfs:label ?label.\
+				?id schema:description ?description.\
+				FILTER((LANG(?label)) = "{LANGUAGE}")\
+				FILTER((LANG(?description)) = "{LANGUAGE}")\
+				FILTER(STRSTARTS(LCASE(?label), LCASE("{TERM}")))\
+				}\
+				ORDER BY DESC(?count)\
+				LIMIT 20',
+			*/
+			seeAlso: // Read see also property from a specific property
 				'SELECT ?id ?label ?description WHERE {\
 					BIND( <{PROPERTY_URI}> as ?prop).\
 					?props ?x  ?prop.\
@@ -285,7 +287,7 @@ wikibase.queryService.ui.queryHelper.SelectorBox = ( function( $, wikibase ) {
 	/**
 	 * @param {wikibase.queryService.ui.queryHelper.SparqlQuery} query
 	 */
-	SELF.prototype.setQuery = function( query ) {
+	SELF.prototype.setQuery = function ( query ) {
 		this._query = query;
 	};
 
@@ -297,23 +299,20 @@ wikibase.queryService.ui.queryHelper.SelectorBox = ( function( $, wikibase ) {
 	 * @param {Function} listener a function called when value selected
 	 * @param {Object} toolbar {icon:callback}
 	 */
-	SELF.prototype.add = function( $element, triple, listener, toolbar ) {
+	SELF.prototype.add = function ( $element, triple, listener, toolbar ) {
 		switch ( $element.data( 'type' ).toLowerCase() ) {
-		case 'number':
-			this._createInput( $element, listener, toolbar );
-			break;
-		case 'tagcloud':
-			this._createTagCloud( $element, triple, listener, toolbar );
-			break;
-		default:
-			this._createSelect( $element, triple, listener, toolbar );
+			case 'number':
+				this._createInput( $element, listener, toolbar );
+				break;
+			default:
+				this._createSelect( $element, triple, listener, toolbar );
 		}
 	};
 
 	/**
 	 * @private
 	 */
-	SELF.prototype._createInput = function( $element, listener, toolbar ) {
+	SELF.prototype._createInput = function ( $element, listener, toolbar ) {
 		var $input = $( '<input>' ).attr( 'type', $element.data( 'type' ) ),
 			$close = this._getCloseButton(),
 			$toolbar = this._getToolbar( toolbar, $element ),
@@ -324,14 +323,14 @@ wikibase.queryService.ui.queryHelper.SelectorBox = ( function( $, wikibase ) {
 			'global_close': false,
 			'html': true,
 			'sanitize': false,
-			'content': function() {
+			'content': function () {
 				return $content;
 			}
-		} ).click( function( e ) {
+		} ).click( function ( e ) {
 			$input.val( $element.data( 'value' ) || '' );
 		} );
 
-		$input.on( 'keyup mouseup', function() {
+		$input.on( 'keyup mouseup', function () {
 			if ( listener ) {
 				listener( $input.val() );
 			}
@@ -341,63 +340,7 @@ wikibase.queryService.ui.queryHelper.SelectorBox = ( function( $, wikibase ) {
 	/**
 	 * @private
 	 */
-	SELF.prototype._createTagCloud = function( $element, triple, listener, toolbar ) {
-		var self = this,
-			entity = $element.data( 'entity' ),
-			sparql = $element.data( 'sparql' ),
-			tags = [],
-			createTags = function () {
-				tags = [];
-
-				return self._searchEntitiesSparql( null, entity, triple, sparql  ).then(  function ( d ) {
-						d.forEach( function ( t ) {
-							tags.push( {
-								text: t.text,
-								weight: t.data.rank || ( Math.round( Math.random() * 10 ) > 9 ? 5 : Math
-										.round( Math.random() * 3 ) ),
-								link: '#',
-								html: {
-									title: t.data.description + ( t.data.rank ? ' (' + t.data.rank + ')' : '' ),
-									'data-id': t.id
-								},
-								handlers: {
-									click: function ( e ) {
-
-										if ( t.data.propertyId ) {
-											listener( t.id, t.text, t.data.propertyId );
-											return false;
-										}
-
-										self._suggestPropertyId( t.id ).always(
-												function ( propertyId ) {
-													listener( t.id, t.text, propertyId );
-												} );
-										return false;
-									}
-								}
-							} );
-						} );
-					} );
-			};
-
-		createTags().then( function() {
-			if ( tags.length === 0 ) {
-				$element.hide();
-				return;
-			}
-			$element.show();
-			$element.jQCloud( tags, {
-				delayedMode: true,
-				autoResize: true
-			} );
-		} );
-
-	};
-
-	/**
-	 * @private
-	 */
-	SELF.prototype._createSelect = function( $element, triple, listener, toolbar ) {
+	SELF.prototype._createSelect = function ( $element, triple, listener, toolbar ) {
 		var self = this,
 			$select = this._getSelectBox( $element ),
 			$close = this._getCloseButton(),
@@ -414,10 +357,10 @@ wikibase.queryService.ui.queryHelper.SelectorBox = ( function( $, wikibase ) {
 			'global_close': false,
 			'html': true,
 			'sanitize': false,
-			'content': function() {
+			'content': function () {
 				return $content;
 			}
-		} ).click( function( e ) {
+		} ).click( function ( e ) {
 			$select.toggleClass( 'open' );
 
 			if ( !$select.data( 'select2' ) ) {
@@ -432,7 +375,7 @@ wikibase.queryService.ui.queryHelper.SelectorBox = ( function( $, wikibase ) {
 			return false;
 		} );
 
-		$select.change( function( e ) {
+		$select.change( function ( e ) {
 			if ( listener ) {
 				var id = $select.val(),
 					text = $select.find( 'option:selected' ).text(),
@@ -455,15 +398,15 @@ wikibase.queryService.ui.queryHelper.SelectorBox = ( function( $, wikibase ) {
 	/**
 	 * @private
 	 */
-	SELF.prototype._suggestPropertyId = function( id ) {
+	SELF.prototype._suggestPropertyId = function ( id ) {
 		var deferred = $.Deferred(),
-				query = 'SELECT ?id (COUNT(?id) AS ?count) WHERE { { SELECT ?id WHERE {\
-							?i ?prop wd:{ITEM_ID}.\
-							?id wikibase:directClaim ?prop.\
-							?id rdf:type wikibase:Property.\
-							}\
-							LIMIT 10000 } } GROUP BY ?id ORDER BY DESC(?count) LIMIT 1'
-					.replace( '{ITEM_ID}', id );
+			query = 'SELECT ?id (COUNT(?id) AS ?count) WHERE { { SELECT ?id WHERE {\
+						?i ?prop wd:{ITEM_ID}.\
+						?id wikibase:directClaim ?prop.\
+						?id rdf:type wikibase:Property.\
+					}\
+					LIMIT 10000 } } GROUP BY ?id ORDER BY DESC(?count) LIMIT 1'
+				.replace( '{ITEM_ID}', id );
 
 		this._sparqlApi.query( query, ( SPARQL_TIMEOUT / 2 ) ).done( function ( data ) {
 
@@ -473,7 +416,7 @@ wikibase.queryService.ui.queryHelper.SelectorBox = ( function( $, wikibase ) {
 				deferred.reject();
 			}
 
-		} ).fail( function() {
+		} ).fail( function () {
 			deferred.reject();
 		} );
 
@@ -483,17 +426,17 @@ wikibase.queryService.ui.queryHelper.SelectorBox = ( function( $, wikibase ) {
 	/**
 	 * @private
 	 */
-	SELF.prototype._createSelectInline = function( $element, triple, listener ) {
+	SELF.prototype._createSelectInline = function ( $element, triple, listener ) {
 		var $select = this._getSelectBox( $element );
 
 		$element.replaceWith( $select );
 		this._renderSelect2( $select, $element, triple );
 
-		$select.change( function( e ) {
+		$select.change( function ( e ) {
 			if ( listener ) {
 				var id = $select.val(),
 					data = $element.data( 'items' ),
-					propertyId = data && data[id] && data[id].propertyId || null ;
+					propertyId = data && data[id] && data[id].propertyId || null;
 
 				listener( id, $select.find( 'option:selected' ).text(), propertyId );
 			}
@@ -504,7 +447,7 @@ wikibase.queryService.ui.queryHelper.SelectorBox = ( function( $, wikibase ) {
 	/**
 	 * @private
 	 */
-	SELF.prototype._getSelectBox = function( $element ) {
+	SELF.prototype._getSelectBox = function ( $element ) {
 		var id = $element.data( 'id' );
 		var label = $element.text();
 
@@ -519,23 +462,23 @@ wikibase.queryService.ui.queryHelper.SelectorBox = ( function( $, wikibase ) {
 	/**
 	 * @private
 	 */
-	SELF.prototype._getCloseButton = function() {
+	SELF.prototype._getCloseButton = function () {
 		return $( '<a href="#" data-dismiss="clickover">' ).append(
-				'<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' );
+			'<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' );
 	};
 
 	/**
 	 * @private
 	 */
-	SELF.prototype._getToolbar = function( toolbar, $element ) {
+	SELF.prototype._getToolbar = function ( toolbar, $element ) {
 		var $toolbar = $( '<span>' );
 
-		$.each( toolbar, function( icon, callback ) {
+		$.each( toolbar, function ( icon, callback ) {
 			var $link = $( '<a>' ).attr( 'href', '#' );
 			$link.prepend( '<span class="glyphicon glyphicon-' + icon +
 					'" aria-hidden="true"></span>', ' ' );
 
-			$link.click( function() {
+			$link.click( function () {
 				if ( callback() ) {
 					$element.click();// close popover
 				}
@@ -551,36 +494,36 @@ wikibase.queryService.ui.queryHelper.SelectorBox = ( function( $, wikibase ) {
 	/**
 	 * @private
 	 */
-	SELF.prototype._createLookupService = function( $element, triple ) {
+	SELF.prototype._createLookupService = function ( $element, triple ) {
 		var self = this,
 			type = $element.data( 'type' ),
 			sparql = $element.data( 'sparql' );
 
-		return function( params, success, failure ) {
+		return function ( params, success, failure ) {
 			$.when(
-					self._searchEntitiesSparql( params.data.term, type, triple, sparql ),
-					self._searchEntities( params.data.term, type )
-					).done( function ( r1, r2 ) {
+				self._searchEntitiesSparql( params.data.term, type, triple, sparql ),
+				self._searchEntities( params.data.term, type )
+			).done( function ( r1, r2 ) {
 
-					self._addItemMetaData( $element, r1.concat( r2 ) );
+				self._addItemMetaData( $element, r1.concat( r2 ) );
 
-					if ( r1.length > 0 ) {
-						r1 = [ {
-								text: wikibase.queryService.ui.i18n.getMessage( 'wdqs-ve-sb-suggestions', 'Suggestions' ),
-								children: r1
-						} ];
-					}
+				if ( r1.length > 0 ) {
+					r1 = [ {
+						text: wikibase.queryService.ui.i18n.getMessage( 'wdqs-ve-sb-suggestions', 'Suggestions' ),
+						children: r1
+					} ];
+				}
 
-					if ( r2.length > 0 &&  r1.length > 0 ) {
-						r2 = [ {
-							text: wikibase.queryService.ui.i18n.getMessage( 'wdqs-ve-sb-other', 'Other' ),
-							children: r2
-						} ];
-					}
+				if ( r2.length > 0 && r1.length > 0 ) {
+					r2 = [ {
+						text: wikibase.queryService.ui.i18n.getMessage( 'wdqs-ve-sb-other', 'Other' ),
+						children: r2
+					} ];
+				}
 
-					success( {
-						results: r1.concat( r2 )
-					} );
+				success( {
+					results: r1.concat( r2 )
+				} );
 			} );
 		};
 	};
@@ -588,7 +531,7 @@ wikibase.queryService.ui.queryHelper.SelectorBox = ( function( $, wikibase ) {
 	/**
 	 * @private
 	 */
-	SELF.prototype._addItemMetaData = function( $element, items ) {
+	SELF.prototype._addItemMetaData = function ( $element, items ) {
 		var data = {};
 
 		items.forEach( function ( item ) {
@@ -616,9 +559,9 @@ wikibase.queryService.ui.queryHelper.SelectorBox = ( function( $, wikibase ) {
 	 * @param {string} [sparql]
 	 * @return {string}
 	 */
-	SELF.prototype._getSparqlTemplate = function( term, type, triple, sparql ) {
+	SELF.prototype._getSparqlTemplate = function ( term, type, triple, sparql ) {
 		var definition = this._getSparqlTemplateDefinition( term, type, triple, sparql ),
-			template =  typeof definition === 'function' ? definition.apply( this ) : definition;
+			template = typeof definition === 'function' ? definition.apply( this ) : definition;
 
 		if ( sparql ) {
 			template = template.replace( '{SPARQL}', sparql );
@@ -631,7 +574,7 @@ wikibase.queryService.ui.queryHelper.SelectorBox = ( function( $, wikibase ) {
 	 * @private
 	 * @return {string|Function|null}
 	 */
-	SELF.prototype._getSparqlTemplateDefinition = function( term, type, triple, sparql ) {
+	SELF.prototype._getSparqlTemplateDefinition = function ( term, type, triple, sparql ) {
 		if ( sparql ) {
 			if ( term ) {
 				return SPARQL_QUERY.sparql.search;
@@ -650,11 +593,11 @@ wikibase.queryService.ui.queryHelper.SelectorBox = ( function( $, wikibase ) {
 
 		} else {
 			if ( type === 'property' ) {
-				if ( !triple  ) {
+				if ( !triple ) {
 					return query.genericSuggest;
 				}
 
-				if ( triple.object. indexOf( '?' ) === 0  ) {
+				if ( triple.object.indexOf( '?' ) === 0 ) {
 					return query.seeAlso;
 				}
 			} else {
@@ -670,7 +613,7 @@ wikibase.queryService.ui.queryHelper.SelectorBox = ( function( $, wikibase ) {
 	/**
 	 * @private
 	 */
-	SELF.prototype._searchEntitiesSparqlCreateQuery = function( term, type, triple, sparql ) {
+	SELF.prototype._searchEntitiesSparqlCreateQuery = function ( term, type, triple, sparql ) {
 
 		var query = this._getSparqlTemplate( term, type, triple, sparql );
 
@@ -685,8 +628,8 @@ wikibase.queryService.ui.queryHelper.SelectorBox = ( function( $, wikibase ) {
 		if ( query ) {
 			if ( triple ) {
 				query = query
-						.replace( '{PROPERTY_URI}', findFirstStringProperty( triple.predicate ) )
-						.replace( '{ITEM_URI}', triple.object );
+					.replace( '{PROPERTY_URI}', findFirstStringProperty( triple.predicate ) )
+					.replace( '{ITEM_URI}', triple.object );
 			}
 			if ( term ) {
 				query = query.replace( '{TERM}', term );
@@ -701,7 +644,7 @@ wikibase.queryService.ui.queryHelper.SelectorBox = ( function( $, wikibase ) {
 	/**
 	 * @private
 	 */
-	SELF.prototype._searchEntitiesSparql = function( term, type, triple, sparql ) {
+	SELF.prototype._searchEntitiesSparql = function ( term, type, triple, sparql ) {
 		var deferred = $.Deferred();
 
 		var query = this._searchEntitiesSparqlCreateQuery( term, type, triple, sparql );
@@ -709,8 +652,8 @@ wikibase.queryService.ui.queryHelper.SelectorBox = ( function( $, wikibase ) {
 			return deferred.resolve( [] ).promise();
 		}
 
-		this._sparqlApi.query( query, SPARQL_TIMEOUT ).done( function( data ) {
-			var r = data.results.bindings.map( function( d ) {
+		this._sparqlApi.query( query, SPARQL_TIMEOUT ).done( function ( data ) {
+			var r = data.results.bindings.map( function ( d ) {
 				var id = d.id.value.split( '/' ).pop(),
 					propertyId = d.property && d.property.value.split( '/' ).pop() || null;
 				return {
@@ -736,15 +679,15 @@ wikibase.queryService.ui.queryHelper.SelectorBox = ( function( $, wikibase ) {
 	/**
 	 * @private
 	 */
-	SELF.prototype._searchEntities = function( term, type ) {
+	SELF.prototype._searchEntities = function ( term, type ) {
 		var deferred = $.Deferred();
 
 		if ( !term || term.trim() === '' ) {
 			return deferred.resolve( [] ).promise();
 		}
 
-		this._api.searchEntities( term, type ).done( function( data ) {
-			var r = data.search.map( function( d ) {
+		this._api.searchEntities( term, type ).done( function ( data ) {
+			var r = data.search.map( function ( d ) {
 				return {
 					id: d.id,
 					text: d.label,
@@ -760,8 +703,8 @@ wikibase.queryService.ui.queryHelper.SelectorBox = ( function( $, wikibase ) {
 	/**
 	 * @private
 	 */
-	SELF.prototype._renderSelect2 = function( $select, $element, triple ) {
-		var formatter = function( item, li ) {
+	SELF.prototype._renderSelect2 = function ( $select, $element, triple ) {
+		var formatter = function ( item, li ) {
 				if ( !item.data ) {
 					return item.text;
 				}
