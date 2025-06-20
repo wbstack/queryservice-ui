@@ -851,11 +851,7 @@ wikibase.queryService.ui.App = ( function ( $, window, _, Cookies, moment ) {
 			this._trackStats( 'simpleQuery_total' );
 		}
 
-		if ( !localStorage.getItem( 'simpleQueryModalShown' ) && isSimpleQuery ) {
-			this._simpleQueryModal();
-		} else {
-			this._runQuery();
-		}
+		this._runQuery();
 	};
 
 	/**
