@@ -62,6 +62,7 @@
 	"wdqs-app-result-csv": "CSV-Fichier",
 	"wdqs-app-result-svg": "SVG-Bild",
 	"wdqs-app-result-html": "HTML-Tabell",
+	"wdqs-app-result-geojson": "GeoJSON-Fichier",
 	"wdqs-app-shorturl-page-title": "Kuerz-URL op dës Säit",
 	"wdqs-app-editor-placeholder": "(Gitt eng SPARQL-Requête an oder sicht eng Beispillrequête eraus)",
 	"wdqs-app-editor-addprefixes": "Standard-Prefixen derbäisetzen",

@@ -152,5 +152,10 @@
 	"wdqs-embed-button-edit-code-title": "Modifier cette requête avec l’éditeur SPARQL",
 	"wdqs-embed-explorer-button-incoming": "Afficher les liens entrants",
 	"wdqs-embed-explorer-button-outgoing": "Afficher les liens sortants",
-	"wdqs-app-graph-split-banner-content": "Votre requête inclut-elle des éléments décrivant des articles scientifiques ? La division du graphe concerne vos requêtes. Veuillez en apprendre plus à ce sujet sur cette <a href=\"https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/WDQS_graph_split\">page d’aide</a>."
+	"wdqs-app-graph-split-banner-content": "Votre requête inclut-elle des éléments décrivant des articles scientifiques ? La division du graphe concerne vos requêtes. Veuillez en apprendre plus à ce sujet sur cette <a href=\"https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/WDQS_graph_split\">page d’aide</a>.",
+	"wdqs-app-simplequerymodal-button-run-query": "Exécuter la requête quand même",
+	"wdqs-app-simplequerymodal-button-learn-alternatives": "En savoir plus sur les alternatives",
+	"wdqs-app-simplequerymodal-title": "Relecture nécessaire",
+	"wdqs-app-simplequerymodal-content-intro": "Le service de requête n’est peut-être pas le choix optimal pour obtenir les informations dont vous avez besoin.",
+	"wdqs-app-simplequerymodal-content-recommendation": "Nous vous recommandons d’explorer nos méthodes alternatives d’accès aux données pour trouver celle qui correspond le mieux à vos besoins."
 }

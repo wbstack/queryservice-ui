@@ -65,6 +65,7 @@
 	"wdqs-app-result-csv": "File CSV",
 	"wdqs-app-result-svg": "Imagine SVG",
 	"wdqs-app-result-html": "Tabella HTML",
+	"wdqs-app-result-geojson": "File GeoJSON",
 	"wdqs-app-shorturl-page-title": "URL curte a iste pagina",
 	"wdqs-app-editor-placeholder": "(Entra un consulta SPARQL o selige un exemplo de consulta)",
 	"wdqs-app-editor-addprefixes": "Adjunger prefixos standard",
@@ -138,5 +139,10 @@
 	"wdqs-embed-button-edit-code-title": "Modificar iste consulta con le editor SPARQL",
 	"wdqs-embed-explorer-button-incoming": "Monstrar ligamines entrante",
 	"wdqs-embed-explorer-button-outgoing": "Monstrar ligamines sortiente",
-	"wdqs-app-graph-split-banner-content": "Include tu consulta elementos que describe articulos scientific? Le imminente separation del graphicos te concernera. Per favor lege plus sur illo in <a href=\"https://www.wikidata.org/wiki/Special:MyLanguage/Wikidata:SPARQL_query_service/WDQS_backend_update/September_2024_scaling_update\">iste annuncio</a>."
+	"wdqs-app-graph-split-banner-content": "Include tu consulta elementos que describe articulos scientific? Le separation del graphicos affecta tu consultas. Per favor lege plus sur iste <a href=\"https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/WDQS_graph_split\">pagina de adjuta</a>.",
+	"wdqs-app-simplequerymodal-button-run-query": "Executar le consulta nonobstante isto",
+	"wdqs-app-simplequerymodal-button-learn-alternatives": "Discoperir alternativas",
+	"wdqs-app-simplequerymodal-title": "Revision necessari",
+	"wdqs-app-simplequerymodal-content-intro": "Le servicio de consultas pote non esser le melior option pro obtener le information que tu require.",
+	"wdqs-app-simplequerymodal-content-recommendation": "Nos recommenda explorar nostre methodos de accesso alternative pro trovar le methodo que corresponde melio a tu necessitates."
 }

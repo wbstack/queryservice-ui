@@ -148,5 +148,10 @@
 	"wdqs-embed-button-edit-code-title": "Muokkaa tätä kyselyä SPARQL-muokkaimella",
 	"wdqs-embed-explorer-button-incoming": "Näytä saapuvat linkit",
 	"wdqs-embed-explorer-button-outgoing": "Näytä lähtevät linkit",
-	"wdqs-app-graph-split-banner-content": "Sisältääkö kyselysi tieteellisiä artikkeleita kuvaavia kohteita? Graafin jako vaikuttaa kyselyihisi. Lisätietoja tästä löytyy <a href\n=\"https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/WDQS_graph_split\">ohjesivulta</a>."
+	"wdqs-app-graph-split-banner-content": "Sisältääkö kyselysi tieteellisiä artikkeleita kuvaavia kohteita? Graafin jako vaikuttaa kyselyihisi. Lisätietoja tästä löytyy <a href\n=\"https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/WDQS_graph_split\">ohjesivulta</a>.",
+	"wdqs-app-simplequerymodal-button-run-query": "Suorita kysely joka tapauksessa",
+	"wdqs-app-simplequerymodal-button-learn-alternatives": "Lisätietoja vaihtoehdoista",
+	"wdqs-app-simplequerymodal-title": "Arviointia tarvitaan",
+	"wdqs-app-simplequerymodal-content-intro": "Tämä kyselypalvelu ei välttämättä ole optimaalisin vaihtoehto haluamiesi tietojen kyselyyn.",
+	"wdqs-app-simplequerymodal-content-recommendation": "Suosittelemme tutustumaan vaihtoehtoisiin tiedonkyselymenetelmiimme löytääksesi tarpeisiisi parhaiten sopivan vaihtoehdon."
 }

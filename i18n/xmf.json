@@ -61,6 +61,7 @@
 	"wdqs-app-result-csv": "CSV ფაილი",
 	"wdqs-app-result-svg": "SVG სურათი",
 	"wdqs-app-result-html": "HTML რცხილი",
+	"wdqs-app-result-geojson": "GeoJSON ფაილი",
 	"wdqs-app-shorturl-page-title": "თე ხასჷლაშ კუნტა URL",
 	"wdqs-app-editor-placeholder": "(გემშიონით მოთხირი SPARQL-შა ვარდა გეგშაგორით ართ-ართი მოთხირი)",
 	"wdqs-app-editor-addprefixes": "სტანდარტული პრეფიქსეფიშ გეძინა",
