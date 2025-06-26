@@ -51,6 +51,22 @@ Autofix eslint errors
 $ npm run grunt eslint -- --fix
 ```
 
+### Browser tests
+
+It is recommended to use [Fresh](https://www.mediawiki.org/wiki/Fresh) to run the browser tests.
+
+```bash
+$ npm run browser_test
+```
+
+Running browser tests headlessly inside a container can make debugging difficult. You can record videos of the browser running the tests by executing the following commands inside the fresh container:
+```bash
+export DISPLAY=:94
+/usr/bin/Xvfb "$DISPLAY" -screen 0 1280x1024x24 -ac -nolisten tcp &
+
+npm run browser_test
+```
+
 ## Debug
 Start a test server for local debugging. Do not use it in production.
 

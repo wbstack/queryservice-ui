@@ -290,7 +290,7 @@ module.exports = function ( grunt ) {
 			stdio: [ process.stdin, process.stdout, process.stderr ]
 		} );
 
-		var wdioProcess = spawn( 'node_modules/.bin/wdio', [], {
+		var wdioProcess = spawn( 'node_modules/.bin/wdio', [ 'run', 'tests/specs/wdio.conf.js' ], {
 			stdio: [ process.stdin, process.stdout, process.stderr ]
 		} );
 

@@ -1,4 +1,7 @@
-/* globals exports */
+'use strict';
+const { startVideo, stopVideo } = require( 'wdio-mediawiki' );
+
+let ffmpeg;
 exports.config = {
 	//
 	// ====================
@@ -31,8 +34,11 @@ exports.config = {
 		maxInstances: 5,
 		browserName: 'chrome',
 		'goog:chromeOptions': {
-			args: [ '--headless' ]
-		}
+			args: [
+				...( process.env.DISPLAY ? [] : [ '--headless' ] )
+			]
+		},
+		'mw:screenshotPath': __dirname + '/log'
 	} ],
 
 	logLevel: 'error',
@@ -56,5 +62,13 @@ exports.config = {
 	mochaOpts: {
 		ui: 'bdd',
 		timeout: 60000
+	},
+
+	beforeTest: async function ( test ) {
+		ffmpeg = await startVideo( ffmpeg, `${test.parent}-${test.title}` );
+	},
+
+	afterTest: async function () {
+		stopVideo( ffmpeg );
 	}
 };
