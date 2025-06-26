@@ -83,6 +83,7 @@
 	"wdqs-app-result-csv": "ملف CSV",
 	"wdqs-app-result-svg": "صورة SVG",
 	"wdqs-app-result-html": "جدول HTML",
+	"wdqs-app-result-geojson": "ملف GeoJSON",
 	"wdqs-app-shorturl-page-title": "مسار قصير إلى هذه الصفحة",
 	"wdqs-app-editor-placeholder": "(أدخل استعلام سباركل أو قم باختيار مثال استعلام)",
 	"wdqs-app-editor-addprefixes": "إضافة البادئات القياسية",
@@ -156,5 +157,10 @@
 	"wdqs-embed-button-edit-code-title": "تعديل هذا الاستعلام بمحرر سباركل",
 	"wdqs-embed-explorer-button-incoming": "عرض الروابط الواردة",
 	"wdqs-embed-explorer-button-outgoing": "إظهار الروابط الصادرة",
-	"wdqs-app-graph-split-banner-content": "هل يتضمن استعلامك عناصر تصف مقالات علمية؟ يؤثر تقسيم الرسم البياني على استعلاماتك. يُرجى الاطلاع على المزيد حوله في <a href=\"https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/WDQS_graph_split\">صفحة المساعدة</a> هذه."
+	"wdqs-app-graph-split-banner-content": "هل يتضمن استعلامك عناصر تصف مقالات علمية؟ يؤثر تقسيم الرسم البياني على استعلاماتك. يُرجى الاطلاع على المزيد حوله في <a href=\"https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/WDQS_graph_split\">صفحة المساعدة</a> هذه.",
+	"wdqs-app-simplequerymodal-button-run-query": "تشغيل الاستعلام على أي حال",
+	"wdqs-app-simplequerymodal-button-learn-alternatives": "تعرف على البدائل",
+	"wdqs-app-simplequerymodal-title": "المراجعة مطلوبة",
+	"wdqs-app-simplequerymodal-content-intro": "قد لا تكون خدمة الاستعلام هي الخيار الأمثل للحصول على المعلومات التي تحتاجها.",
+	"wdqs-app-simplequerymodal-content-recommendation": "نوصيك باستكشاف طرق الوصول إلى البيانات البديلة لدينا للعثور على الطريقة الأكثر ملاءمة لاحتياجاتك."
 }

@@ -69,6 +69,7 @@
 	"wdqs-app-result-csv": "CSV датотека",
 	"wdqs-app-result-svg": "SVG слика",
 	"wdqs-app-result-html": "HTML табела",
+	"wdqs-app-result-geojson": "GeoJSON датотека",
 	"wdqs-app-shorturl-page-title": "Кратак URL ка овој страници",
 	"wdqs-app-editor-placeholder": "(Унесите SPARQL упит или одаберите пример упита.)",
 	"wdqs-app-editor-addprefixes": "Додај стандардне префиксе",
