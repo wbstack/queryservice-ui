@@ -4,7 +4,6 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Wikidata Query Service</title>
 
 <!-- build:css css/embed.style.min.css -->
 <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
@@ -14,7 +13,6 @@
 <link rel="stylesheet" href="node_modules/codemirror/addon/display/fullscreen.css">
 <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.css">
 <link rel="stylesheet" href="node_modules/select2/dist/css/select2.css">
-<link rel="stylesheet" href="node_modules/vis/dist/vis.css">
 <link rel="stylesheet" href="node_modules/ekko-lightbox/dist/ekko-lightbox.css">
 <link rel="stylesheet" href="node_modules/bootstrap-table/dist/bootstrap-table.css">
 <link rel="stylesheet" href="node_modules/leaflet/dist/leaflet.css">
@@ -185,12 +183,13 @@ body {
 
 .toolbar-right {
 	position: fixed;
-	right: -97px;
+	right: -147px;
 	top: 26vh;
 	z-index: 1000;
 	padding-top: 0.5em;
+	padding-bottom: 0.5em;
 	opacity: 0;
-	width: 150px;
+	width: 200px;
 }
 .toolbar-right:hover, .hovered {
 	transition: 0.4s;
@@ -199,6 +198,10 @@ body {
 	border: #ddd 1px solid;
 	right: 0;
 	z-index: 1500; /* needs to be between 1000 (tiny map in map view) and 2000 (value dropdown of edit visually) */
+}
+
+.toolbar-right:not(:hover):not(.hovered) .query-total {
+	visibility: hidden;
 }
 
 .toolbar-right-item {
@@ -378,10 +381,12 @@ body {
 							<li><a id="downloadHTML" href="#"><span class="fa fa-file-code-o" aria-hidden="true"></span> <span data-i18n="wdqs-app-result-html"></span></a></li>
 							<li role="separator" class="divider"></li>
 							<li><a id="downloadSVG" href="#"><span class="fa fa-file-image-o" aria-hidden="true"></span> <span data-i18n="wdqs-app-result-svg"></span></a></li>
+							<li role="separator" class="divider"></li>
+							<li><a id="downloadGeoJSON" href="#"><span class="fa fa-file-code-o" aria-hidden="true"></span> <span data-i18n="wdqs-app-result-geojson"></span></a></li>
 					</ul>
 				</li>
 				<li>
-					<span class="query-total"><span class="label label-default" id="response-summary"></span></span>
+					<span class="query-total toolbar-right-icon"><span class="label label-default" id="response-summary"></span></span>
 				</li>
 			</ul>
 		</div>
@@ -471,7 +476,8 @@ body {
 	<script src="node_modules/d3/d3.js"></script>
 	<script src="node_modules/dimple-js/dist/dimple.latest.js"></script>
 	<script src="node_modules/js-cookie/src/js.cookie.js"></script>
-	<script src="node_modules/vis/dist/vis.js"></script>
+	<script src="node_modules/vis-network/dist/vis-network.js"></script>
+	<script src="node_modules/vis-timeline/standalone/umd/vis-timeline-graph2d.js"></script>
 	<script src="node_modules/select2/dist/js/select2.js"></script>
 	<script src="node_modules/moment/min/moment-with-locales.js"></script>
 	<script src="node_modules/wellknown/wellknown.js"></script>
@@ -495,11 +501,13 @@ body {
 	<script src="node_modules/@wikimedia/jquery.i18n/src/jquery.i18n.language.js"></script>
 	<script src="node_modules/mathjax/es5/mml-chtml.js"></script>
 	<script src="vendor/bootstrap-tags/js/bootstrap-tags.min.js"></script>
+	<script src="node_modules/neotraverse/dist/legacy/legacy.umd.js"></script>
 
 	<!-- endbuild -->
 
 	<!-- build:js js/embed.wdqs.min.js -->
 	<script src="wikibase/config.js"></script>
+	<script src="wikibase/queryService/VariableNames.js"></script>
 	<script src="wikibase/queryService/ui/i18n/getMessage.js"></script>
 	<script src="wikibase/queryService/ui/dialog/QueryExampleDialog.js"></script>
 	<script src="wikibase/queryService/ui/ResultView.js"></script>
@@ -525,13 +533,18 @@ body {
 	<script src="wikibase/queryService/ui/resultBrowser/PolestarResultBrowser.js"></script>
 	<script src="wikibase/queryService/api/Sparql.js"></script>
 	<script src="wikibase/queryService/api/QuerySamples.js"></script>
+	<script src="wikibase/queryService/api/EntityInLanguageCache.js"></script>
 	<script src="wikibase/queryService/api/Wikibase.js"></script>
+	<script src="wikibase/queryService/api/NoOpTracking.js"></script>
 	<script src="wikibase/queryService/api/Tracking.js"></script>
+	<script src="wikibase/queryService/api/TrackingFactory.js"></script>
 	<script src="wikibase/queryService/api/UrlShortener.js"></script>
 	<script src="wikibase/queryService/RdfNamespaces.js"></script>
+	<script src="wikibase/queryService/services/SparqlClassifier.js"></script>
+	<script src="wikibase/queryService/services/SparqlQuery.js"></script>
+	<script src="wikibase/queryService/services/TriplesAnalyzer.js"></script>
 	<script src="wikibase/queryService/ui/Banner.js"></script>
 	<script src="wikibase/queryService/ui/queryHelper/QueryHelper.js"></script>
-	<script src="wikibase/queryService/ui/queryHelper/SparqlQuery.js"></script>
 	<script src="wikibase/queryService/ui/queryHelper/SelectorBox.js"></script>
 	<script src="wikibase/queryService/ui/queryHelper/QueryTemplate.js"></script>
 	<script src="wikibase/queryService/ui/toolbar/ActionBar.js"></script>

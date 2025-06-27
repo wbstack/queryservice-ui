@@ -2,11 +2,11 @@ var wikibase = window.wikibase || {};
 wikibase.queryService = wikibase.queryService || {};
 wikibase.queryService.ui = wikibase.queryService.ui || {};
 
-wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
+wikibase.queryService.ui.ResultView = ( function ( $, download, window ) {
 	'use strict';
 
 	var PREVIEW_TIMEOUT = 1000,
-        RAWGRAPHS_BASE_URL = 'http://wikidata.rawgraphs.io/?url=',
+		RAWGRAPHS_BASE_URL = 'http://wikidata.rawgraphs.io/?url=',
 		PREVIEW_LIMIT = 20;
 
 	/**
@@ -163,35 +163,40 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 			label: [ 'wdqs-app-resultbrowser-line-chart', 'Line chart' ],
 			class: 'LineChartResultBrowser',
 			object: null,
-			$element: null
+			$element: null,
+			supportsSvgDownload: true
 		},
 		BarChart: {
 			icon: 'fa-bar-chart',
 			label: [ 'wdqs-app-resultbrowser-bar-chart', 'Bar chart' ],
 			class: 'BarChartResultBrowser',
 			object: null,
-			$element: null
+			$element: null,
+			supportsSvgDownload: true
 		},
 		ScatterChart: {
 			icon: 'fa-braille',
 			label: [ 'wdqs-app-resultbrowser-scatter-chart', 'Scatter chart' ],
 			class: 'ScatterChartResultBrowser',
 			object: null,
-			$element: null
+			$element: null,
+			supportsSvgDownload: true
 		},
 		AreaChart: {
 			icon: 'fa-area-chart',
 			label: [ 'wdqs-app-resultbrowser-area-chart', 'Area chart' ],
 			class: 'AreaChartResultBrowser',
 			object: null,
-			$element: null
+			$element: null,
+			supportsSvgDownload: true
 		},
 		BubbleChart: {
 			icon: 'glyphicon-tint',
 			label: [ 'wdqs-app-resultbrowser-bubble-chart', 'Bubble chart' ],
 			class: 'BubbleChartResultBrowser',
 			object: null,
-			$element: null
+			$element: null,
+			supportsSvgDownload: true
 		},
 		TreeMap: {
 			icon: 'glyphicon-th',
@@ -219,7 +224,8 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 			label: [ 'wdqs-app-resultbrowser-dimensions', 'Dimensions' ],
 			class: 'MultiDimensionResultBrowser',
 			object: null,
-			$element: null
+			$element: null,
+			supportsSvgDownload: true
 		},
 		Graph: {
 			icon: 'glyphicon-retweet',
@@ -237,18 +243,24 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 	SELF.prototype.trackingNamespace = 'wikibase.queryService.ui.index.';
 
 	/**
+	 * @property {string}
+	 * It gets overridden by embedInit.js
+	 */
+	SELF.prototype.statsTrackingNamespace = 'wikibase_queryService_ui_index_';
+
+	/**
 	 * Initialize private members and call delegate to specific init methods
 	 *
 	 * @private
 	 */
-	SELF.prototype._init = function() {
+	SELF.prototype._init = function () {
 		if ( !this._trackingApi ) {
-			this._trackingApi = new wikibase.queryService.api.Tracking();
+			this._trackingApi = wikibase.queryService.api.getTrackingServiceBasedOnGlobalContext();
 		}
 
 		this._actionBar = new wikibase.queryService.ui.toolbar.Actionbar( $( '.action-bar' ) );
 
-		this._sparqlQuery = this._query = new wikibase.queryService.ui.queryHelper.SparqlQuery();
+		this._sparqlQuery = this._query = new wikibase.queryService.services.SparqlQuery();
 
 		this._internationalizeCharts();
 
@@ -262,8 +274,8 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 	/**
 	 * @private
 	 */
-	SELF.prototype._internationalizeCharts = function() {
-		$.each( this._resultBrowsers, function( key, chart ) {
+	SELF.prototype._internationalizeCharts = function () {
+		$.each( this._resultBrowsers, function ( key, chart ) {
 			var i18nKey = chart.label[0],
 				fallback = chart.label[1];
 
@@ -274,8 +286,8 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 	/**
 	 * @private
 	 */
-	SELF.prototype._initResultBrowserMenu = function() {
-		$.each( this._resultBrowsers, function( key, b ) {
+	SELF.prototype._initResultBrowserMenu = function () {
+		$.each( this._resultBrowsers, function ( key, b ) {
 			var $element = $( '<li class="result-browser-item"><a class="result-browser" href="#">' +
 					'<span class="toolbar-label">' + b.label + ' ' + '</span>' + '<span class="toolbar-icon ' + b.icon.split( '-', 1 )[0] + ' ' + b.icon + '"></span>' +
 					'</a></li>' );
@@ -290,7 +302,7 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 	 * @param {String} query
 	 * @return {JQuery.Promise}
 	 */
-	SELF.prototype.draw = function( query ) {
+	SELF.prototype.draw = function ( query ) {
 		var self = this,
 			deferred = $.Deferred();
 
@@ -307,7 +319,7 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 				self._handleQueryResult();
 				deferred.resolve();
 			} )
-			.fail( function() {
+			.fail( function () {
 				var error = self._handleQueryError();
 				deferred.reject( error );
 			} );
@@ -316,12 +328,26 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 	};
 
 	/**
+	 * Render a given SPARQL query
+	 */
+	SELF.prototype.cancel = function () {
+		var request = this._sparqlApi.getRequest();
+		request.abort();
+
+		this._actionBar.show( 'wdqs-action-stop-query', '', 'default', false );
+
+		$( '#query-result' ).empty().hide();
+		$( '.result' ).hide();
+		$( '#query-error' ).hide();
+	};
+
+	/**
 	 * Render a preview of the given SPARQL query
 	 *
 	 * @param {String} query
 	 * @return {JQuery.Promise}
 	 */
-	SELF.prototype.drawPreview = function( query ) {
+	SELF.prototype.drawPreview = function ( query ) {
 		var self = this,
 			deferred = $.Deferred(),
 			prefixes = wikibase.queryService.RdfNamespaces.ALL_PREFIXES,
@@ -344,11 +370,11 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 			.done( function () {
 				self._handleQueryResult();
 				deferred.resolve();
-				window.setTimeout( function() {
+				window.setTimeout( function () {
 					self._actionBar.show( 'wdqs-action-preview', '', 'default' );
 				}, 200 );
 			} )
-			.fail( function() {
+			.fail( function () {
 				deferred.reject();
 			} );
 
@@ -358,7 +384,7 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 	/**
 	 * @private
 	 */
-	SELF.prototype._handleQueryError = function() {
+	SELF.prototype._handleQueryError = function () {
 		$( '#execute-button' ).prop( 'disabled', false );
 
 		var error = this._sparqlApi.getError(),
@@ -366,18 +392,18 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 			codes = this._sparqlApi.ERROR_CODES;
 
 		switch ( error.code ) {
-		case codes.TIMEOUT:
-			errorMessageKey = 'wdqs-action-timeout';
-			break;
-		case codes.MALFORMED:
-			errorMessageKey = 'wdqs-action-malformed-query';
-			break;
-		case codes.SERVER:
-			errorMessageKey = 'wdqs-action-server-error';
-			break;
-		default:
-			errorMessageKey = 'wdqs-action-unknow-error';
-			break;
+			case codes.TIMEOUT:
+				errorMessageKey = 'wdqs-action-timeout';
+				break;
+			case codes.MALFORMED:
+				errorMessageKey = 'wdqs-action-malformed-query';
+				break;
+			case codes.SERVER:
+				errorMessageKey = 'wdqs-action-server-error';
+				break;
+			default:
+				errorMessageKey = 'wdqs-action-unknow-error';
+				break;
 		}
 
 		if ( error.debug ) {
@@ -386,14 +412,14 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 
 		this._actionBar.show( errorMessageKey || '', error.message || '', 'danger' );
 		this._track( 'result.error.' + ( errorMessageKey || 'unknown' ) );
-
+		this._trackStats( 'result_error_total', { errorKey: errorMessageKey || 'unknown' } );
 		return error.debug === undefined ? '' : error.debug;
 	};
 
 	/**
 	 * @private
 	 */
-	SELF.prototype._handleQueryResult = function() {
+	SELF.prototype._handleQueryResult = function () {
 		var api = this._sparqlApi;
 
 		$( '#response-summary' ).text(
@@ -407,16 +433,19 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 
 		$( '#execute-button' ).prop( 'disabled', false );
 		var uri = api.getQueryUri();
-        $( '.queryUri' ).attr( 'href', uri );
-        $( '.rawGraphsUri' ).attr( 'href', RAWGRAPHS_BASE_URL + uri );
+		$( '.queryUri' ).attr( 'href', uri );
+		$( '.rawGraphsUri' ).attr( 'href', RAWGRAPHS_BASE_URL + uri );
 
 		var defaultBrowser = this._createResultBrowsers( api.getResultRawData() );
 		this._drawResult( defaultBrowser );
 		this._selectedResultBrowser = null;
 
 		this._track( 'result.resultLength', api.getResultLength() );
+		this._trackStats( 'result_resultLength_total', api.getResultLength() );
 		this._track( 'result.executionTime', api.getExecutionTime(), 'ms' );
+		this._trackStats( 'result_executionTime_seconds', api.getExecutionTime(), 'ms' );
 		this._track( 'result.received.success' );
+		this._trackStats( 'result_received_success_total' );
 
 		return false;
 	};
@@ -425,7 +454,7 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 	 * @private
 	 * @return {Object} default result browser
 	 */
-	SELF.prototype._createResultBrowsers = function( resultData ) {
+	SELF.prototype._createResultBrowsers = function ( resultData ) {
 		var self = this;
 
 		var browserOptions = this._getBrowserOptions();
@@ -433,17 +462,20 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 
 		if ( browserOptions.defaultName !== null ) {
 			this._track( 'result.browser.' + browserOptions.defaultName );
+			this._trackStats( 'result_browser_total', 1, 'c', { name: browserOptions.defaultName } );
 		} else {
 			this._track( 'result.browser.default' );
+			this._trackStats( 'result_browser_total', 1, 'c', { name: 'default' } );
 		}
 
 		// instantiate
-		$.each( this._resultBrowsers, function( key, b ) {
+		$.each( this._resultBrowsers, function ( key, b ) {
 			var instance = new wikibase.queryService.ui.resultBrowser[b.class]();
 			instance.setSparqlApi( self._sparqlApi );
 
 			if ( browserOptions.defaultName === key ) {
 				self._setSelectedDisplayType( b );
+				self._setSvgDownloadVisibility( b );
 				defaultBrowser = instance;
 			}
 
@@ -457,13 +489,16 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 			b.object = instance;
 		} );
 		if ( defaultBrowser === null ) {
-			defaultBrowser = this._resultBrowsers.Table.object;
+			var b = this._resultBrowsers.Table;
+			this._setSelectedDisplayType( b );
+			this._setSvgDownloadVisibility( b );
+			defaultBrowser = b.object;
 		}
 
 		defaultBrowser.resetVisitors();
 
 		// wire up
-		$.each( this._resultBrowsers, function( key, b ) {
+		$.each( this._resultBrowsers, function ( key, b ) {
 			defaultBrowser.addVisitor( b.object );
 			b.object.setResult( resultData );
 		} );
@@ -475,7 +510,7 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 	 * @private
 	 * @return {{defaultName: string?, optionsMap: Map.<string, Object>}}
 	 */
-	SELF.prototype._getBrowserOptions = function() {
+	SELF.prototype._getBrowserOptions = function () {
 		var defaultName = null,
 			optionsMap = new Map(),
 			regex = /#(defaultView|view):(\w+)(\{.*\})?/g,
@@ -483,7 +518,7 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 
 		while ( ( match = regex.exec( this._query ) ) !== null ) {
 			var name = match[2];
-			if ( !this._resultBrowsers.hasOwnProperty( name ) ) {
+			if ( !Object.prototype.hasOwnProperty.call( this._resultBrowsers, name ) ) {
 				continue;
 			}
 			if ( match[1] === 'defaultView' ) {
@@ -508,30 +543,32 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 	/**
 	 * @private
 	 */
-	SELF.prototype._initExamples = function() {
+	SELF.prototype._initExamples = function () {
 		var self = this;
 		new wikibase.queryService.ui.dialog.QueryExampleDialog( $( '#QueryExamples' ),
-				this._querySamplesApi, function( query, title ) {
-					if ( !query || !query.trim() ) {
-						return;
-					}
+			this._querySamplesApi, function ( query, title ) {
+				if ( !query || !query.trim() ) {
+					return;
+				}
 
-					if ( self._editor ) {
-						self._editor.setValue( '#' + title + '\n' + query );
-						$( '#QueryExamples' ).one( 'hidden.bs.modal', function() {
-							setTimeout( function() { self._editor.focus(); }, 0 );
-						} );
-					} else {
-						self.draw( query );
-						window.location.hash = '#' + encodeURIComponent( '#' + title + '\n' + query );
-					}
-				}, this._wikibaseApi, this._queryBuilderUrl );
+				if ( self._editor ) {
+					self._editor.setValue( '#' + title + '\n' + query );
+					$( '#QueryExamples' ).one( 'hidden.bs.modal', function () {
+						setTimeout( function () {
+							self._editor.focus();
+						}, 0 );
+					} );
+				} else {
+					self.draw( query );
+					window.location.hash = '#' + encodeURIComponent( '#' + title + '\n' + query );
+				}
+			}, this._wikibaseApi, this._queryBuilderUrl );
 	};
 
 	/**
 	 * @private
 	 */
-	SELF.prototype._initCodeExamples = function() {
+	SELF.prototype._initCodeExamples = function () {
 		var self = this;
 		if ( !self._codeSamplesApi ) {
 			return;
@@ -547,14 +584,16 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 	/**
 	 * @private
 	 */
-	SELF.prototype._initQueryLinkPopover = function() {
+	SELF.prototype._initQueryLinkPopover = function () {
 		var self = this;
-		$( '.shortUrlTrigger.result' ).clickover( {
+		var queryLinkPopoverOptions = {
 			placement: 'left',
 			'global_close': true,
 			'html': true,
-			'sanitize': false,
-			'content': function() {
+			'sanitize': false
+		};
+		$( '.shortUrlTrigger.result' ).clickover( $.extend( {
+			'content': function () {
 				var queryUrl;
 				if ( self._editor ) {
 					queryUrl = '#' + encodeURIComponent( self._editor.getValue() );
@@ -564,15 +603,27 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 				var $link = $( '<a>' ).attr( 'href', 'embed.html' + queryUrl );
 				return self._shorten.shorten( $link[0].href );
 			}
-		} ).click( function() {
-			self._track( 'buttonClick.shortUrlResult' );
+		}, queryLinkPopoverOptions ) ).click( function () {
+			self._track( 'buttonClick_shortUrlResult' );
+			self._trackStats( 'buttonClick_total', 1, 'c', { name: 'shortUrlResult' } );
+		} );
+
+		$( '#shortUrlTrigger-result-query' ).clickover( $.extend( {
+			'content': function () {
+				var queryUrl = '#' + encodeURIComponent( self._query );
+				var $link = $( '<a>' ).attr( 'href', 'index.html' + queryUrl );
+				return self._shorten.shorten( $link[0].href );
+			}
+		}, queryLinkPopoverOptions ) ).click( function () {
+			self._track( 'buttonClick.shortUrlResultQuery' );
+			self._trackStats( 'buttonClick_total', 1, 'c', { name: 'shortUrlResultQuery' } );
 		} );
 	};
 
 	/**
 	 * @private
 	 */
-	SELF.prototype._initHandlersDownloads = function() {
+	SELF.prototype._initHandlersDownloads = function () {
 		var api = this._sparqlApi;
 		var DOWNLOAD_FORMATS = {
 			'CSV': {
@@ -597,13 +648,18 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 				mimetype: 'application/json;charset=utf-8',
 				ext: 'json'
 			},
+			'GeoJSON': {
+				handler: $.proxy( api.getResultAsGeoJson, api ),
+				mimetype: 'application/geo+json;charset=utf-8',
+				ext: 'geojson'
+			},
 			'HTML': {
 				handler: $.proxy( api.getResultHTML, api ),
 				mimetype: 'application/html;charset=utf-8',
 				ext: 'html'
 			},
 			'SVG': {
-				handler: function() {
+				handler: function () {
 					var $svg = $( '#query-result svg' );
 
 					if ( !$svg.length ) {
@@ -630,17 +686,20 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 		};
 
 		var self = this;
-		var downloadHandler = function( filename, handler, mimetype ) {
-			return function( e ) {
+		var downloadHandler = function ( filename, handler, mimetype ) {
+			return function ( e ) {
 				e.preventDefault();
 
-				// see: http://danml.com/download.html
 				self._track( 'buttonClick.download.' + filename );
-
 				var data = handler();
 
 				if ( data ) {
+					self._trackStats( 'buttonClick_total', 1, 'c', { name: 'download', filename: filename, status: 'success' } );
 					download( data, filename, mimetype );
+				} else {
+					window.console.warn( 'Unable to create ' + filename + ' download' );
+					self._track( 'buttonClick.downloadError.' + filename );
+					self._trackStats( 'buttonClick_total', 1, 'c', { name: 'download', filename: filename, status: 'error' } );
 				}
 			};
 		};
@@ -659,23 +718,25 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 	/**
 	 * @private
 	 */
-	SELF.prototype._handleQueryResultBrowsers = function() {
+	SELF.prototype._handleQueryResultBrowsers = function () {
 		var self = this;
 
-		$.each( this._resultBrowsers, function( key, b ) {
+		$.each( this._resultBrowsers, function ( key, b ) {
 			b.$element.off( 'click' );
 			if ( b.object.isDrawable() ) {
 				b.$element.removeClass( 'result-browser-inactive' );
 				b.$element.css( 'opacity', 1 ).attr( 'href', '#' );
-				b.$element.click( function() {
+				b.$element.click( function () {
 					$( this ).closest( '.open' ).removeClass( 'open' );
 
 					self._setSelectedDisplayType( b );
+					self._setSvgDownloadVisibility( b );
 
 					$( '#query-result' ).html( '' );
 					self._drawResult( b.object );
 					self._selectedResultBrowser = key;
 					self._track( 'buttonClick.display.' + key );
+					self._trackStats( 'buttonClick_total', 1, 'c', { name: 'display', key: key } );
 					return false;
 				} );
 			} else {
@@ -688,8 +749,8 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 	/**
 	 * @private
 	 */
-	SELF.prototype._drawErrorResult = function( resultBrowser ) {
-		var data = _.find( this._resultBrowsers, function( browser ) {
+	SELF.prototype._drawErrorResult = function ( resultBrowser ) {
+		var data = _.find( this._resultBrowsers, function ( browser ) {
 			if ( browser.object === resultBrowser ) {
 				return browser;
 			}
@@ -702,13 +763,13 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 	/**
 	 * @private
 	 */
-	SELF.prototype._drawResult = function( resultBrowser ) {
+	SELF.prototype._drawResult = function ( resultBrowser ) {
 		var self = this;
 
 		$( window ).off( 'scroll.resultBrowser' );
 		$( window ).off( 'resize.resultBrowser' );
-		this._actionBar.show( 'wdqs-action-render', '',  'success', 100 );
-		window.setTimeout( function() {
+		this._actionBar.show( 'wdqs-action-render', '', 'success', 100 );
+		window.setTimeout( function () {
 			try {
 				$( '#query-result' ).show();
 				MathJax.startup.output.clearCache();
@@ -719,7 +780,7 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 				var title = self._query.match( /#title:(.*)/ );
 
 				if ( title && title[ 1 ] ) {
-					self._actionBar.show( title[ 1 ] , '' );
+					self._actionBar.show( title[ 1 ], '' );
 				}
 			} catch ( e ) {
 				self._drawErrorResult( resultBrowser );
@@ -742,7 +803,16 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 	/**
 	 * @private
 	 */
-	SELF.prototype._track = function( metricName, value, valueType ) {
+	SELF.prototype._setSvgDownloadVisibility = function ( browser ) {
+		var elements = $( '#downloadSVG' ).parent( 'li' );
+		elements = elements.add( elements.prev( 'li.divider' ) );
+		elements.toggle( !!browser.supportsSvgDownload );
+	};
+
+	/**
+	 * @private
+	 */
+	SELF.prototype._track = function ( metricName, value, valueType ) {
 		var referrerType = this._getReferrerType();
 		this._trackingApi.track( this.trackingNamespace + 'app.' + metricName, value, valueType );
 		this._trackingApi.track(
@@ -750,6 +820,26 @@ wikibase.queryService.ui.ResultView = ( function( $, download, window ) {
 			value,
 			valueType
 		);
+	};
+
+	/**
+	 * @private
+	 */
+	SELF.prototype._trackStats = function ( metricName, value, valueType, labels ) {
+		var referrerType = this._getReferrerType();
+		if ( !value ) {
+			value = 1;
+		}
+		if ( !valueType ) {
+			valueType = 'c';
+		}
+		if ( !labels ) {
+			labels = {};
+		}
+
+		labels.referrer = referrerType;
+
+		this._trackingApi.trackStats( this.statsTrackingNamespace + 'app_' + metricName, value, valueType, labels );
 	};
 
 	SELF.prototype._getReferrerType = function () {

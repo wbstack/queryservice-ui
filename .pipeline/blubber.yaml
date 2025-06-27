@@ -1,0 +1,33 @@
+# syntax=docker-registry.wikimedia.org/repos/releng/blubber/buildkit:v1.0.0
+version: v4
+base: docker-registry.wikimedia.org/httpd
+runs: { insecurely: false }
+entrypoint: [./entrypoint.sh]
+variants:
+  all-dependencies:
+    base: docker-registry.wikimedia.org/nodejs18-devel
+    node:
+      requirements: [package.json, package-lock.json]
+    apt:
+      packages: [grunt]
+    copies:
+      - from: local
+        source: .
+        destination: .
+  npm-run-build:
+    includes: [all-dependencies]
+    builder:
+      requirements:
+        - from: local
+          source: .
+          destination: .
+      command: [grunt,only_build]
+
+  production:
+    copies:
+      - from: npm-run-build
+        source: /srv/app/build/.
+        destination: ./html/
+      - from: local
+        source: ./production/.
+        destination: ./

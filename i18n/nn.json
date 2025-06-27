@@ -15,6 +15,7 @@
 	"wdqs-app-button-link": "Lenkje",
 	"wdqs-app-footer-updated-ago": "Data oppdatert $1",
 	"wdqs-app-editor-placeholder": "(Skriv inn ei SPARQL-spørjing eller vel ei dømespørjing)",
+	"wdqs-app-resultbrowser-response-summary": "$1 {{PLURAL:$1|resultat}} på $2&nbsp;ms",
 	"wdqs-dialog-examples-preview-query": "Førehandsvis spørjing",
 	"wdqs-dialog-examples-preview-result": "Førehandsvis resultat",
 	"wdqs-ve-show": "Vis",
