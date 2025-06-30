@@ -71,6 +71,7 @@
 	"wdqs-app-result-csv": "קובץ CSV",
 	"wdqs-app-result-svg": "תמונת SVG",
 	"wdqs-app-result-html": "טבלת HTML",
+	"wdqs-app-result-geojson": "קובץ GeoJSON",
 	"wdqs-app-shorturl-page-title": "כתובת מקוצרת אל הדף הזה",
 	"wdqs-app-editor-placeholder": "(יש להזין שאילתת ספארקל או לבחור שאילתה לדוגמה)",
 	"wdqs-app-editor-addprefixes": "הוספת תחיליות תקניות",
@@ -144,5 +145,10 @@
 	"wdqs-embed-button-edit-code-title": "עריכת השאילתה עם עורך SPARQL",
 	"wdqs-embed-explorer-button-incoming": "הצגת קישורים נכנסים",
 	"wdqs-embed-explorer-button-outgoing": "הצגת קישורים יוצאים",
-	"wdqs-app-graph-split-banner-content": "האם השאילתה שלך כוללת פריטים שמתארים מאמרים מדעיים? פיצול הגרף, שיקרה בעתיד הקרוב, ישפיע עליך. אפשר לקרוא עוד על הנושא ב<a href=\"https://www.wikidata.org/wiki/Special:MyLanguage/Wikidata:SPARQL_query_service/WDQS_backend_update/September_2024_scaling_update\">הכרזה הזאת</a>."
+	"wdqs-app-graph-split-banner-content": "האם השאילתה שלך כוללת פריטים שמתארים מאמרים מדעיים? פיצול התרשים משפיע על השאילתות שלך. אפשר לקרוא עוד על הנושא ב<a href=\"https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/WDQS_graph_split\">דף העזרה</a> הזה.",
+	"wdqs-app-simplequerymodal-button-run-query": "להריץ את השאילתה בכל זאת",
+	"wdqs-app-simplequerymodal-button-learn-alternatives": "מידע על חלופות",
+	"wdqs-app-simplequerymodal-title": "דורש סקירה",
+	"wdqs-app-simplequerymodal-content-intro": "שירות השאילתות הוא אולי לא הבחירה המיטבית למשיכת המידע הנחוץ לך.",
+	"wdqs-app-simplequerymodal-content-recommendation": "אנו ממליצים לחקור את שיטות הגישה החלופיות לנתונים כדי למצוא אחת שיותר מתאימה לצרכים שלך."
 }
