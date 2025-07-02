@@ -108,6 +108,28 @@ wikibase.queryService.api.UrlShortener = ( function ( $ ) {
         return deferred;
     };
 
+    /** @return {string} HTML */
+    SELF.prototype._getWikiShort = function( url, server ) {
+        var deferred = $.Deferred();
+        $.ajax( {
+            'method': 'POST',
+            'url': 'https://tinyurl.com/api-create.php',
+            'data': jQuery.param({ 'url': base64Url.toString() })
+        } ).done( function( text ) {
+            var text, html, $element;
+            html = '<!DOCTYPE html><meta charset="utf-8"><pre>' + htmlEscape( text ) + '</pre>';
+            $element = $( '<iframe>' ).attr( {
+                'class': 'shortUrl',
+                'src': 'data:text/html;charset=utf-8,' + encodeURI( html ),
+                'sandbox': ''
+            } );
+            deferred.resolve( $element );
+        } ).fail( function() {
+            deferred.resolve( wikibase.queryService.ui.i18n.getMessage( 'wdqs-app-urlshortener-failed' ) );
+        } );
+        return deferred;
+    };
+
 	/** @return {string} HTML */
 	SELF.prototype._getWikiShort = function ( url, server ) {
 		var deferred = $.Deferred();

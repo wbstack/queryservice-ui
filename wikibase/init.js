@@ -69,6 +69,7 @@
 
 		setBrand( lang );
 		setLogoutLink();
+		setExamplesHelpLink();
 		wb.ui.resultBrowser.helper.FormatterHelper.initMoment();
 
 		$( '#query-form' ).attr( 'action', config.api.sparql.uri );
