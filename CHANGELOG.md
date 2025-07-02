@@ -1,5 +1,9 @@
 # WBStack queryservice-ui
 
+## 1.8
+
+July 2025 updates from upstream (https://phabricator.wikimedia.org/T395426)
+
 ## 1.7
 
 Hide graph builder (https://phabricator.wikimedia.org/T357115)
