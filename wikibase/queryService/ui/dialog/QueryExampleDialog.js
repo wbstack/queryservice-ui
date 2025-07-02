@@ -92,27 +92,6 @@ wikibase.queryService.ui.dialog.QueryExampleDialog = ( function ( $ ) {
 		this._initFilter();
 		this._initExamples();
 
-		function onBannerDismiss() {
-			$( '.navbar' ).css( 'border-top-width', '' );
-		}
-
-		function renderBanner( banner ) {
-			banner.css( 'margin-top', '15px' );
-			$( banner ).insertAfter( '.exampleTable' );
-		}
-
-		var bannerContent = $( '<span>' )
-			.attr( 'data-i18n', '[html]wdqs-app-query-builder-example-banner-content' )
-			.addClass( 'wdqs-app-query-builder-banner-content' )
-			.html( 'You can create queries without having to write SPARQL in the <a>Query Builder</a>' );
-		new wikibase.queryService.ui.Banner(
-			'queryBuilderExampleDialog',
-			renderBanner,
-			onBannerDismiss,
-			true,
-			bannerContent
-		);
-
 		var self = this;
 		this._$element.focus( function () {
 			self._$element.find( '.tableFilter' ).focus();

@@ -37,7 +37,6 @@
 	"wdqs-app-help-examples": "Example Queries",
 	"wdqs-app-query-builder-name": "Query Builder",
 	"wdqs-app-query-builder-banner-content": "Do you need help creating a query? You can build queries without having to write SPARQL in the new <a>Query Builder</a>.",
-	"wdqs-app-query-builder-example-banner-content": "You can create queries without having to write SPARQL in the <a>Query Builder</a>",
 	"wdqs-app-help-datamodel": "RDF Data Model",
 	"wdqs-app-help-prefixes": "List of prefixes",
 	"wdqs-app-help-copy": "Licensing information",

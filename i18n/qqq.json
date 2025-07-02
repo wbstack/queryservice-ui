@@ -47,7 +47,6 @@
 	"wdqs-app-help-examples": "Button message in help dropdown",
 	"wdqs-app-query-builder-name": "Name of the [[wikidata:Wikidata:Query Builder|Wikidata Query Builder]] service.",
 	"wdqs-app-query-builder-banner-content": "Message in Wikidata Query Service top banner linking to the Query Builder service.",
-	"wdqs-app-query-builder-example-banner-content": "Message in banner at the bottom of the examples dialog of the Wikidata Query Service, linking to the Query Builder service.",
 	"wdqs-app-help-datamodel": "Button message in help dropdown",
 	"wdqs-app-help-prefixes": "Button message in help dropdown",
 	"wdqs-app-help-copy": "Link to page with licensing information",
