@@ -23,6 +23,7 @@
 	"wdqs-app-button-help": "Довідка",
 	"wdqs-app-button-run": "Виконати",
 	"wdqs-app-button-run-title": "Виконати запит (CTRL + ENTER)",
+	"wdqs-app-button-cancel-title": "Скасувати запит (CTRL + ESC)",
 	"wdqs-app-button-clear": "Очистити",
 	"wdqs-app-button-clear-title": "Очистити запит",
 	"wdqs-app-button-restore-title": "Відновити попередній запит",
@@ -76,6 +77,7 @@
 	"wdqs-app-result-csv": "CSV-файл",
 	"wdqs-app-result-svg": "Зображення SVG",
 	"wdqs-app-result-html": "HTML-таблиця",
+	"wdqs-app-result-geojson": "Файл GeoJSON",
 	"wdqs-app-shorturl-page-title": "Коротка URL-адреса цієї сторінки",
 	"wdqs-app-editor-placeholder": "(Введіть запит SPARQL або виберіть приклад запиту)",
 	"wdqs-app-editor-addprefixes": "Додати стандартні префікси",
@@ -107,6 +109,7 @@
 	"wdqs-dialog-examples-preview-result": "Попередній перегляд результату",
 	"wdqs-dialog-key-shortcut-title": "Комбінації клавіш",
 	"wdqs-dialog-key-shortcut-run-query": "Виконати запит.",
+	"wdqs-dialog-key-shortcut-cancel-query": "Скасувати запит.",
 	"wdqs-dialog-key-shortcut-esc": "Покинути поточне поле вводу.",
 	"wdqs-dialog-key-shortcut-show-shortcut-help": "Показати скорочення клавіш для поточної сторінки.",
 	"wdqs-dialog-key-shortcut-focus-textarea": "Поставити курсор у поле запиту",
@@ -131,6 +134,7 @@
 	"wdqs-ve-sb-suggestions": "Пропозиції",
 	"wdqs-ve-sb-other": "Інше",
 	"wdqs-action-query": "Виконання запиту",
+	"wdqs-action-stop-query": "Запит скасовано",
 	"wdqs-action-render": "Візуалізація результату",
 	"wdqs-action-error-display": "Не вдалося відобразити результат",
 	"wdqs-action-timeout": "Вичерпано ліміт часу, відведеного на виконання запиту",
@@ -146,5 +150,10 @@
 	"wdqs-embed-button-edit-code": "Редагувати SPARQL-код",
 	"wdqs-embed-button-edit-code-title": "Редагувати цей запит через редактор SPARQL",
 	"wdqs-embed-explorer-button-incoming": "Показати вхідні посилання",
-	"wdqs-embed-explorer-button-outgoing": "Показати вихідні посилання"
+	"wdqs-embed-explorer-button-outgoing": "Показати вихідні посилання",
+	"wdqs-app-graph-split-banner-content": "Чи містить ваш запит елементи, що описують наукові статті? Розбиття графіка впливає на ваші запити. Дізнайтеся більше про це на цій <a href=\"https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/WDQS_graph_split\">сторінці довідки</a> .",
+	"wdqs-app-simplequerymodal-button-run-query": "Все одно виконати запит",
+	"wdqs-app-simplequerymodal-button-learn-alternatives": "Дізнайтеся про альтернативи",
+	"wdqs-app-simplequerymodal-content-intro": "Сервіс запитів може бути не оптимальним вибором для отримання необхідної вам інформації.",
+	"wdqs-app-simplequerymodal-content-recommendation": "Рекомендуємо ознайомитися з нашими альтернативними методами доступу до даних, щоб знайти той, який більше відповідає вашим потребам."
 }
