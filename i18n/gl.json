@@ -145,10 +145,5 @@
 	"wdqs-embed-button-edit-code-title": "Editar esta consulta co editor SPARQL",
 	"wdqs-embed-explorer-button-incoming": "Amosar ligazóns entrantes",
 	"wdqs-embed-explorer-button-outgoing": "Amosar ligazóns saíntes",
-	"wdqs-app-graph-split-banner-content": "A túa consulta inclúe elementos que describen artigos científicos? A división do gráfico afecta as túas consultas. Obtén máis información na <a href=\"https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/WDQS_graph_split\">páxina de axuda</a>.",
-	"wdqs-app-simplequerymodal-button-run-query": "Executar a consulta de todos os xeitos",
-	"wdqs-app-simplequerymodal-button-learn-alternatives": "Máis información sobre as alternativas",
-	"wdqs-app-simplequerymodal-title": "Cómpre unha revisión",
-	"wdqs-app-simplequerymodal-content-intro": "Se cadra, o servizo de consultas non é a opción ideal para obter a información que necesitas.",
-	"wdqs-app-simplequerymodal-content-recommendation": "Recomendámosche que explores os nosos métodos alternativos de acceso a datos para atopar o que mellor se adapte ás túas necesidades."
+	"wdqs-app-graph-split-banner-content": "A túa consulta inclúe elementos que describen artigos científicos? A división do gráfico afecta as túas consultas. Obtén máis información na <a href=\"https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/WDQS_graph_split\">páxina de axuda</a>."
 }

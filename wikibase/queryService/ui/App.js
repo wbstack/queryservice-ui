@@ -845,28 +845,20 @@ wikibase.queryService.ui.App = ( function ( $, window, _, Cookies, moment ) {
 		this._editor.save();
 		this._updateQueryUrl();
 		this._updateTitle();
-		var isSimpleQuery = this._isSimpleQuery();
-
-		if ( isSimpleQuery ) {
-			this._trackStats( 'simpleQuery_total' );
-		}
-
-		if ( !localStorage.getItem( 'simpleQueryModalShown' ) && isSimpleQuery ) {
-			this._trackStats( 'simpleQueryModalShown_total' );
-			this._simpleQueryModal();
-		} else {
-			this._runQuery();
-		}
+		this._classifyQuery();
+		this._runQuery();
 	};
 
 	/**
 	 * @private
 	 */
-	SELF.prototype._isSimpleQuery = function () {
+	SELF.prototype._classifyQuery = function () {
 		var classifier = new wikibase.queryService.services.SparqlClassifier();
 		var query = this._editor.getValue();
 
-		return classifier.isSimpleQuery( query );
+		if ( classifier.isSimpleQuery( query ) ) {
+			this._trackStats( 'simpleQuery_total' );
+		}
 	};
 
 	/**
@@ -897,26 +889,6 @@ wikibase.queryService.ui.App = ( function ( $, window, _, Cookies, moment ) {
 		$( '#query-result, #query-error, .label-danger' ).hide();
 		$( '#empty-query-error' ).show();
 		$( '#execute-button' ).prop( 'disabled', false );
-	};
-
-	/**
-	 * @private
-	 */
-	SELF.prototype._simpleQueryModal = function () {
-		var self = this;
-
-		localStorage.setItem( 'simpleQueryModalShown', 'true' );
-
-		$( '#simple-query-modal' ).modal( 'show' );
-		$( '#continue-running-query' ).one( 'click', function () {
-			self._trackStats( 'buttonClick_total', 1, 'c', { name: 'runQueryAnyway' } );
-			$( '#simple-query-modal' ).modal( 'hide' );
-			self._runQuery();
-		} );
-		$( '#learn-alternatives' ).one( 'click', function () {
-			self._trackStats( 'buttonClick_total', 1, 'c', { name: 'learnAboutAlternatives' } );
-			$( '#simple-query-modal' ).modal( 'hide' );
-		} );
 	};
 
 	/**

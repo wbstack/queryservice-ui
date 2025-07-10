@@ -146,10 +146,5 @@
 	"wdqs-embed-button-edit-code-title": "Bu  sorğunu SPARQL redaktəçisi ilə redaktə et",
 	"wdqs-embed-explorer-button-incoming": "Giriş mündəraciyətləri göstər",
 	"wdqs-embed-explorer-button-outgoing": "Çıxan mündəraciyətləri göstər",
-	"wdqs-app-graph-split-banner-content": "Sorğunuza elmi məqalələri təsvir edən maddələr daxildir? Qrafikin bölünməsi sizə təsir edir. Ətraflı məlumat üçün, zəhmət olmasa, <a href=\"https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/WDQS_graph_split\">kömək səhifəsini</a> oxuyun.",
-	"wdqs-app-simplequerymodal-button-run-query": "Sorğunu yenə də icra et",
-	"wdqs-app-simplequerymodal-button-learn-alternatives": "Alternativlər haqqında məlumat əldə et",
-	"wdqs-app-simplequerymodal-title": "Yoxlanış lazımdır",
-	"wdqs-app-simplequerymodal-content-intro": "Sorğu xidməti tələb etdiyiniz məlumatı əldə etmək üçün optimal seçim olmaya bilər.",
-	"wdqs-app-simplequerymodal-content-recommendation": "Ehtiyaclarınıza daha uyğun olanı tapmaq üçün alternativ məlumat əldə etmə üsullarımızı araşdırmağı tövsiyə edirik."
+	"wdqs-app-graph-split-banner-content": "Sorğunuza elmi məqalələri təsvir edən maddələr daxildir? Qrafikin bölünməsi sizə təsir edir. Ətraflı məlumat üçün, zəhmət olmasa, <a href=\"https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/WDQS_graph_split\">kömək səhifəsini</a> oxuyun."
 }

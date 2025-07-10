@@ -144,6 +144,5 @@
 	"wdqs-embed-button-edit-code": "SPARQL 편집",
 	"wdqs-embed-button-edit-code-title": "SPARQL 편집기로 이 쿼리 편집",
 	"wdqs-embed-explorer-button-incoming": "들어오는 링크 표시",
-	"wdqs-embed-explorer-button-outgoing": "나가는 링크 표시",
-	"wdqs-app-simplequerymodal-title": "검토가 필요합니다"
+	"wdqs-embed-explorer-button-outgoing": "나가는 링크 표시"
 }

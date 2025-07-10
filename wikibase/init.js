@@ -44,7 +44,6 @@
 			).done( function () {
 				$( '.wikibase-queryservice' ).i18n();
 				$( '#keyboardShortcutHelpModal' ).i18n();
-				$( '.simple-query-modal' ).i18n();
 
 				if ( banner ) {
 					$( '.' + banner.i18nKey ).i18n();

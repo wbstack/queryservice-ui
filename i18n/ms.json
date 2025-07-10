@@ -141,10 +141,5 @@
 	"wdqs-embed-button-edit-code-title": "Sunting pertanyaan ini dengan penyunting SPARQL",
 	"wdqs-embed-explorer-button-incoming": "Tunjuk pautan masuk",
 	"wdqs-embed-explorer-button-outgoing": "Tunjuk pautan keluar",
-	"wdqs-app-graph-split-banner-content": "Adakah pertanyaan anda termasuk Item yang menerangkan rencana saintifik? Pemisahan graf mempengaruhi pertanyaan anda. Sila ketahui lebih lanjut mengenainya di <a href=\"https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/WDQS_graph_split\">laman bantuan</a> ini.",
-	"wdqs-app-simplequerymodal-button-run-query": "Jalankan pertanyaan juga",
-	"wdqs-app-simplequerymodal-button-learn-alternatives": "Ketahui tentang cara alternatif",
-	"wdqs-app-simplequerymodal-title": "Semakan diperlukan",
-	"wdqs-app-simplequerymodal-content-intro": "Perkhidmatan pertanyaan mungkin bukan pilihan yang optimum untuk mendapatkan maklumat yang anda perlukan.",
-	"wdqs-app-simplequerymodal-content-recommendation": "Kami mengesyorkan meneroka kaedah akses data alternatif kami untuk mencari kaedah yang lebih sesuai dengan keperluan anda."
+	"wdqs-app-graph-split-banner-content": "Adakah pertanyaan anda termasuk Item yang menerangkan rencana saintifik? Pemisahan graf mempengaruhi pertanyaan anda. Sila ketahui lebih lanjut mengenainya di <a href=\"https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/WDQS_graph_split\">laman bantuan</a> ini."
 }

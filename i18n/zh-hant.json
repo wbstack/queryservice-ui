@@ -141,10 +141,5 @@
 	"wdqs-embed-button-edit-code-title": "以 SPARQL 編輯器來編輯此查詢",
 	"wdqs-embed-explorer-button-incoming": "顯示導入連結",
 	"wdqs-embed-explorer-button-outgoing": "顯示導出連結",
-	"wdqs-app-graph-split-banner-content": "您的查詢項目是否包含描述科學內容的條目？圖表分割會影響到您的查詢。請透過<a href=\"https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/WDQS_graph_split\">說明頁面</a>來了解更多。",
-	"wdqs-app-simplequerymodal-button-run-query": "仍要執行查詢",
-	"wdqs-app-simplequerymodal-button-learn-alternatives": "了解替代方案",
-	"wdqs-app-simplequerymodal-title": "需要檢閱",
-	"wdqs-app-simplequerymodal-content-intro": "查詢服務可能不是取得您所需資訊的最佳選擇。",
-	"wdqs-app-simplequerymodal-content-recommendation": "我們建議您查看我們的替代資料存取方法，以找出更適合您需求的方式。"
+	"wdqs-app-graph-split-banner-content": "您的查詢項目是否包含描述科學內容的條目？圖表分割會影響到您的查詢。請透過<a href=\"https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/WDQS_graph_split\">說明頁面</a>來了解更多。"
 }

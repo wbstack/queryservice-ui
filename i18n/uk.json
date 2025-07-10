@@ -151,9 +151,5 @@
 	"wdqs-embed-button-edit-code-title": "Редагувати цей запит через редактор SPARQL",
 	"wdqs-embed-explorer-button-incoming": "Показати вхідні посилання",
 	"wdqs-embed-explorer-button-outgoing": "Показати вихідні посилання",
-	"wdqs-app-graph-split-banner-content": "Чи містить ваш запит елементи, що описують наукові статті? Розбиття графіка впливає на ваші запити. Дізнайтеся більше про це на цій <a href=\"https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/WDQS_graph_split\">сторінці довідки</a> .",
-	"wdqs-app-simplequerymodal-button-run-query": "Все одно виконати запит",
-	"wdqs-app-simplequerymodal-button-learn-alternatives": "Дізнайтеся про альтернативи",
-	"wdqs-app-simplequerymodal-content-intro": "Сервіс запитів може бути не оптимальним вибором для отримання необхідної вам інформації.",
-	"wdqs-app-simplequerymodal-content-recommendation": "Рекомендуємо ознайомитися з нашими альтернативними методами доступу до даних, щоб знайти той, який більше відповідає вашим потребам."
+	"wdqs-app-graph-split-banner-content": "Чи містить ваш запит елементи, що описують наукові статті? Розбиття графіка впливає на ваші запити. Дізнайтеся більше про це на цій <a href=\"https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/WDQS_graph_split\">сторінці довідки</a> ."
 }

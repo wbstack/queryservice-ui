@@ -138,10 +138,5 @@
 	"wdqs-embed-button-edit-code-title": "Уреди го барањево со SPARQL-уредникот",
 	"wdqs-embed-explorer-button-incoming": "Прикажи дојдовни врски",
 	"wdqs-embed-explorer-button-outgoing": "Прикажи појдовни врски",
-	"wdqs-app-graph-split-banner-content": "Дали вашето барање вклучува предмети кои опишуваат научни статии? Тогаш Поделбата на графиконите ги засега вашите побарувања. Дознајте повеќе за ова на <a href=\"https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/WDQS_graph_split\">помошната страница</a>.",
-	"wdqs-app-simplequerymodal-button-run-query": "Сепак пушти го барањето",
-	"wdqs-app-simplequerymodal-button-learn-alternatives": "Дознајте за алтернативите",
-	"wdqs-app-simplequerymodal-title": "Се бара преглед",
-	"wdqs-app-simplequerymodal-content-intro": "Службата за побарување можеби не е најдобриот начин да дојдете до информаиците што ви требаат",
-	"wdqs-app-simplequerymodal-content-recommendation": "Ви препорачуваме да ги истражите нашите алтернативни начини за пристап до податоци за да го најдете најпогодниот за вашите потреби."
+	"wdqs-app-graph-split-banner-content": "Дали вашето барање вклучува предмети кои опишуваат научни статии? Тогаш Поделбата на графиконите ги засега вашите побарувања. Дознајте повеќе за ова на <a href=\"https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/WDQS_graph_split\">помошната страница</a>."
 }
