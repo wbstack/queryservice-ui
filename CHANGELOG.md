@@ -1,5 +1,10 @@
 # WBStack queryservice-ui
 
+## 1.9
+
+* Fix Query Service examples not loading on Cloud instances ([T399300](https://phabricator.wikimedia.org/T399300))
+* Remove Query Builder notice in Query Service ([T358602](https://phabricator.wikimedia.org/T358602))
+
 ## 1.8
 
 July 2025 updates from upstream (https://phabricator.wikimedia.org/T395426)
