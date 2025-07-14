@@ -36,7 +36,6 @@
 	"wdqs-app-help-examples": "Һорауҙар миҫалы",
 	"wdqs-app-query-builder-name": "Һорау төҙөү ҡоралы",
 	"wdqs-app-query-builder-banner-content": "Һеҙгә һорау төҙөүҙә ярҙам кәрәкме? Һеҙ яңы <a>Query Builder</a> ҡулланып, SPARQL яҙмайынса һорауҙар төҙөй алаһығыҙ.",
-	"wdqs-app-query-builder-example-banner-content": "Һеҙ SPARQL яҙмайынса <a>Query Builder</a> ҡулланып һорауҙар төҙөй алаһығыҙ",
 	"wdqs-app-help-datamodel": "RDF Data моделе",
 	"wdqs-app-help-prefixes": "Префикстар исемлеге",
 	"wdqs-app-help-copy": "Лицензиялау мәғлүмәте",

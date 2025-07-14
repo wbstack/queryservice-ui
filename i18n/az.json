@@ -40,7 +40,6 @@
 	"wdqs-app-help-examples": "Sorğu nümunələri",
 	"wdqs-app-query-builder-name": "Sorğu Yaradıcısı",
 	"wdqs-app-query-builder-banner-content": "Sorğu yaratmaq üçün köməyə ehtiyacınız var? Yeni <a>Sorğu Yaradıcısı</a>nda SPARQL yazmadan sorğular qura bilərsiniz.",
-	"wdqs-app-query-builder-example-banner-content": "<a>Sorğu Yaradıcısı</a>nda SPARQL yazmadan sorğular yarada bilərsiniz",
 	"wdqs-app-help-datamodel": "RDF Data Modeli",
 	"wdqs-app-help-prefixes": "Prefikslərin siyahısı",
 	"wdqs-app-help-copy": "Lisenziya məlumatı",

@@ -35,7 +35,6 @@
 	"wdqs-app-help-examples": "Contoh Pertanyaan",
 	"wdqs-app-query-builder-name": "Pembina Pertanyaan",
 	"wdqs-app-query-builder-banner-content": "Adakah anda memerlukan bantuan mencipta pertanyaan? Anda boleh membina pertanyaan tanpa menulis SPARQL dalam <a>Pembina Pertanyaan</a> baru.",
-	"wdqs-app-query-builder-example-banner-content": "Anda boleh mencipta pertanyaan tanpa menulis SPARQL dalam <a>Pembina Pertanyaan</a>",
 	"wdqs-app-help-datamodel": "Model Data RDF",
 	"wdqs-app-help-prefixes": "Senarai awalan",
 	"wdqs-app-help-copy": "Maklumat perlesenan",

@@ -33,7 +33,6 @@
 	"wdqs-app-help-examples": "Сорау мисаллары",
 	"wdqs-app-query-builder-name": "Сорату төзүчесе",
 	"wdqs-app-query-builder-banner-content": "Сезгә сорашу төзер өчен ярдәм кирәкме? Сез яңа сорашулар ясау коралын SPARQLны белмичә дә куллана аласыз.",
-	"wdqs-app-query-builder-example-banner-content": "Сез яңа сорашулар төзүче коралда SPARQLны язмыйча сорашулар ясый аласыз.",
 	"wdqs-app-help-datamodel": "RDF мәгълүматлар моделе",
 	"wdqs-app-help-prefixes": "Алкушымчалар исемлеге",
 	"wdqs-app-help-copy": "Лицензияләү мәгълүматы",

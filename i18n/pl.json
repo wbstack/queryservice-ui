@@ -46,7 +46,6 @@
 	"wdqs-app-help-examples": "Przykładowe zapytania",
 	"wdqs-app-query-builder-name": "Kreator zapytań",
 	"wdqs-app-query-builder-banner-content": "Potrzebujesz pomocy przy tworzeniu zapytania? Możesz tworzyć zapytania bez konieczności pisania SPARQL w nowym <a>Kreatorze zapytań</a> .",
-	"wdqs-app-query-builder-example-banner-content": "Możesz tworzyć zapytania bez konieczności pisania SPARQL w <a>Kreatorze zapytań</a>",
 	"wdqs-app-help-datamodel": "Model danych RDF",
 	"wdqs-app-help-prefixes": "Lista prefiksów",
 	"wdqs-app-help-copy": "Informacje o licencji",

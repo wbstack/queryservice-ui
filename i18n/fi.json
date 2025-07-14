@@ -42,7 +42,6 @@
 	"wdqs-app-help-examples": "Esimerkkikyselyt",
 	"wdqs-app-query-builder-name": "Kyselyrakentaja",
 	"wdqs-app-query-builder-banner-content": "Tarvitsetko apua kyselyn luomisessa? Voit tehdä kyselyitä ilman SPARQL:in kirjoitusta uudessa <a>Kyselyin rakennustyökalussa</a>.",
-	"wdqs-app-query-builder-example-banner-content": "Voit luoda kyselyitä ilman SPARQL:in kirjoittamista <a>Kyselyrakentajassa</a>",
 	"wdqs-app-help-datamodel": "RDF-tietomalli",
 	"wdqs-app-help-prefixes": "Luettelo etuliitteistä",
 	"wdqs-app-help-copy": "Tietoa lisenssistä",

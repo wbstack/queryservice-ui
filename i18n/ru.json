@@ -48,7 +48,6 @@
 	"wdqs-app-help-examples": "Примеры запросов",
 	"wdqs-app-query-builder-name": "Конструктор запросов",
 	"wdqs-app-query-builder-banner-content": "Вам нужна помощь в создании запроса?\nВы можете создавать запросы без написания SPARQL в новом конструкторе запросов.",
-	"wdqs-app-query-builder-example-banner-content": "Вы можете создавать запросы без написания SPARQL в новом конструкторе запросов.",
 	"wdqs-app-help-datamodel": "Модель данных RDF",
 	"wdqs-app-help-prefixes": "Список префиксов",
 	"wdqs-app-help-copy": "Информация о лицензировании",

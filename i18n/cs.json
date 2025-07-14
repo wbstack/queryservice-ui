@@ -41,7 +41,6 @@
 	"wdqs-app-help-examples": "Příklady dotazů",
 	"wdqs-app-query-builder-name": "Tvůrce dotazů",
 	"wdqs-app-query-builder-banner-content": "Potřebujete pomoc s tvorbou dotazu? Dotazy můžete skládat bez nutnosti psaní SPARQLu v novém <a>Query Builderu</a>.",
-	"wdqs-app-query-builder-example-banner-content": "Dotazy můžete tvořit bez nutnosti psaní SPARQLu v <a>Query Builderu</a>",
 	"wdqs-app-help-datamodel": "Datový model RDF",
 	"wdqs-app-help-prefixes": "Seznam prefixů",
 	"wdqs-app-help-copy": "Informace o licenci",

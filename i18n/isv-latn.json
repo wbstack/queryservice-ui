@@ -33,7 +33,6 @@
 	"wdqs-app-help-examples": "Priklady zapytov",
 	"wdqs-app-query-builder-name": "Konstruktor zapytov",
 	"wdqs-app-query-builder-banner-content": "Jest li vam potrěbna pomoč pri tvorjenju zapyta? S pomočju novogo <a>Konstruktora zapytov</a> možete tvoriti zapyty bez neobhodimosti pisanja SPARQL.",
-	"wdqs-app-query-builder-example-banner-content": "S pomočju novogo <a>Konstruktora zapytov</a> možete tvoriti zapyty bez neobhodimosti pisanja SPARQL.",
 	"wdqs-app-help-datamodel": "Model danyh RDF",
 	"wdqs-app-help-prefixes": "Spisok prědstavok",
 	"wdqs-app-help-copy": "Informacije o licenciji",

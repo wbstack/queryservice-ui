@@ -43,7 +43,6 @@
 	"wdqs-app-help-examples": "Példalekérdezések",
 	"wdqs-app-query-builder-name": "Lekérdezéskészítő",
 	"wdqs-app-query-builder-banner-content": "Segítségre van szükséged a lekérdezés létrehozásához? Lekérdezéseket készíthetsz SPARQL ismerete nélkül is az új <a>Lekérdezéskészítőben</a>.",
-	"wdqs-app-query-builder-example-banner-content": "Létrehozhatsz lekérdezéseket SPARQL ismerete nélkül a <a>Lekérdezéskészítőben</a>",
 	"wdqs-app-help-datamodel": "RDF-adatmodell",
 	"wdqs-app-help-prefixes": "Előtagok listája",
 	"wdqs-app-help-copy": "Licencinformációk",

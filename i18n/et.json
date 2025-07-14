@@ -35,7 +35,6 @@
 	"wdqs-app-help-examples": "Näidispäringud",
 	"wdqs-app-query-builder-name": "Päringukoostur",
 	"wdqs-app-query-builder-banner-content": "Kas vajad päringu koostamisel abi? Ilma SPARQL-i kirjutamata saad päringu koostada uues <a>päringukoosturis</a>.",
-	"wdqs-app-query-builder-example-banner-content": "Ilma SPARQL-i kirjutamata saad päringu koostada <a>päringukoosturis</a>.",
 	"wdqs-app-help-datamodel": "RDF-andmemudel",
 	"wdqs-app-help-prefixes": "Eesliidete loend",
 	"wdqs-app-help-copy": "Litsentsiteave",

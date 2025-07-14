@@ -32,7 +32,6 @@
 	"wdqs-app-help-examples": "నమూనా క్వెరీలు",
 	"wdqs-app-query-builder-name": "క్వెరీ బిల్డర్",
 	"wdqs-app-query-builder-banner-content": "క్వెరీని తయారు చెయ్యడంలో మీకు సాయం కావాలా? SPARQL స్టేట్‌మెంట్లు రాయకుండానే కొత్త <a>Query Builder</a> లో మీరు క్వెరీలను రూపొందించవచ్చు.",
-	"wdqs-app-query-builder-example-banner-content": "SPARQL స్టేట్‌మెంట్లు రాయకుండానే కొత్త <a>Query Builder</a> లో మీరు క్వెరీలను రూపొందించవచ్చు.",
 	"wdqs-app-help-datamodel": "RDF డేటా మోడలు",
 	"wdqs-app-help-prefixes": "ప్రీఫిక్సుల జాబితా",
 	"wdqs-app-help-copy": "లైసెన్సు సమాచారం",

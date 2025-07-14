@@ -33,7 +33,6 @@
 	"wdqs-app-help-examples": "Interogazzion de esempi",
 	"wdqs-app-query-builder-name": "Costrutor de query",
 	"wdqs-app-query-builder-banner-content": "Te gh'hee bisogn de ajut in del creà on query? Te podet costruì ona query senza havégh de scriver in SPARQL in del noeuv<a>Costrutor de query</a> .",
-	"wdqs-app-query-builder-example-banner-content": "Te podet creà ona query senza havvégh de scriver in SPARQL in del  <a>Costrutor de query</a>",
 	"wdqs-app-help-datamodel": "Modell dati RDF",
 	"wdqs-app-help-prefixes": "Lista di prefiss",
 	"wdqs-app-help-copy": "Informazzion sora la licenza",

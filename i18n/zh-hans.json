@@ -52,7 +52,6 @@
 	"wdqs-app-help-examples": "示例查询",
 	"wdqs-app-query-builder-name": "查询生成器",
 	"wdqs-app-query-builder-banner-content": "您在创建查询方面需要帮助吗？您无需编写SPARQL，就可以在新版<a>查询生成器</a>中生成查询。",
-	"wdqs-app-query-builder-example-banner-content": "无需编写SPARQL，您就可以在<a>查询生成器</a>中生成查询。",
 	"wdqs-app-help-datamodel": "RDF数据模型",
 	"wdqs-app-help-prefixes": "前缀列表",
 	"wdqs-app-help-copy": "许可协议信息",

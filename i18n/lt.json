@@ -35,7 +35,6 @@
 	"wdqs-app-help-examples": "Užklausų pavyzdžiai",
 	"wdqs-app-query-builder-name": "Užklausos kūrėjas",
 	"wdqs-app-query-builder-banner-content": "Reikia pagalbos kūriant užklausą? Galite kurti užklausas nerašant SPARQL su nauju <a>Užklausos kūrėju</a>.",
-	"wdqs-app-query-builder-example-banner-content": "Galite kurti užklausas nerašant SPARQL su <a>Užklausos kūrėju</a>.",
 	"wdqs-app-help-datamodel": "RDF duomenų modelis",
 	"wdqs-app-help-prefixes": "Priešdėlių sąrašas",
 	"wdqs-app-help-copy": "Licencijos informacija",

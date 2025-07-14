@@ -39,7 +39,6 @@
 	"wdqs-app-help-examples": "Consultas de exemplo",
 	"wdqs-app-query-builder-name": "Xerador de consultas",
 	"wdqs-app-query-builder-banner-content": "Necesitas axuda para crear unha consulta? Podes crear consultas sen ter que escribir SPARQL no novo <a>xerador de consultas</a>.",
-	"wdqs-app-query-builder-example-banner-content": "Podes crear consultas sen ter que escribir SPARQL no <a>xerador de consultas</a>",
 	"wdqs-app-help-datamodel": "Modelo de datos RDF",
 	"wdqs-app-help-prefixes": "Lista de prefixos",
 	"wdqs-app-help-copy": "Información de licenza",
