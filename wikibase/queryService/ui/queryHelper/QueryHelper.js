@@ -33,7 +33,7 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function ( $, wikibase, _ )
 		this._api = api || new wikibase.queryService.api.Wikibase();
 		this._selectorBox = selectorBox
 			|| new wikibase.queryService.ui.queryHelper.SelectorBox( this._api, sparqlApi );
-		this._query = new wikibase.queryService.services.SparqlQuery();
+		this._query = new wikibase.queryService.ui.queryHelper.SparqlQuery();
 	}
 
 	/**
@@ -55,7 +55,7 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function ( $, wikibase, _ )
 	SELF.prototype._changeListener = null;
 
 	/**
-	 * @property {wikibase.queryService.services.SparqlQuery}
+	 * @property {wikibase.queryService.ui.queryHelper.SparqlQuery}
 	 * @private
 	 */
 	SELF.prototype._query = null;
@@ -161,6 +161,14 @@ wikibase.queryService.ui.queryHelper.QueryHelper = ( function ( $, wikibase, _ )
 		}
 
 		this._triples = this._query.getTriples();
+
+		var subqueries = this._query.getSubQueries();
+		while ( subqueries.length > 0 ) {
+			var q = subqueries.pop();
+			this._triples = this._triples.concat( q.getTriples() );
+			subqueries.concat( q.getSubQueries() );
+		}
+
 		this._isSimpleMode = this._isSimpleQuery();
 		$element.html( this._getHtml() );
 	};

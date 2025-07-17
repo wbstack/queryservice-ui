@@ -845,20 +845,7 @@ wikibase.queryService.ui.App = ( function ( $, window, _, Cookies, moment ) {
 		this._editor.save();
 		this._updateQueryUrl();
 		this._updateTitle();
-		this._classifyQuery();
 		this._runQuery();
-	};
-
-	/**
-	 * @private
-	 */
-	SELF.prototype._classifyQuery = function () {
-		var classifier = new wikibase.queryService.services.SparqlClassifier();
-		var query = this._editor.getValue();
-
-		if ( classifier.isSimpleQuery( query ) ) {
-			this._trackStats( 'simpleQuery_total' );
-		}
 	};
 
 	/**

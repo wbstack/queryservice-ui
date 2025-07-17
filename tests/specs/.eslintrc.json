@@ -5,8 +5,5 @@
 	],
 	"rules": {
 		"mocha/no-setup-in-describe": "warn"
-	},
-	"globals": {
-		"localStorage": "readonly"
 	}
 }

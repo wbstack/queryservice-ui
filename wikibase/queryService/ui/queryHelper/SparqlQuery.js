@@ -1,14 +1,15 @@
 var wikibase = window.wikibase || {};
 wikibase.queryService = wikibase.queryService || {};
-wikibase.queryService.services = wikibase.queryService.services || {};
+wikibase.queryService.ui = wikibase.queryService.ui || {};
+wikibase.queryService.ui.queryHelper = wikibase.queryService.ui.queryHelper || {};
 
-wikibase.queryService.services.SparqlQuery = ( function ( $, wikibase, sparqljs, traverse ) {
+wikibase.queryService.ui.queryHelper.SparqlQuery = ( function ( $, wikibase, sparqljs ) {
 	'use strict';
 
 	/**
 	 * A SPARQL query representation
 	 *
-	 * @class wikibase.queryService.services.SparqlQuery
+	 * @class wikibase.queryService.ui.queryHelper.SparqlQuery
 	 * @license GNU GPL v2+
 	 *
 	 * @author Jonas Kress
@@ -78,7 +79,7 @@ wikibase.queryService.services.SparqlQuery = ( function ( $, wikibase, sparqljs,
 
 	/**
 	 * @param {number|null} limit
-	 * @return {wikibase.queryService.services.SparqlQuery}
+	 * @return {wikibase.queryService.ui.queryHelper.SparqlQuery}
 	 */
 	SELF.prototype.setLimit = function ( limit ) {
 		if ( !limit ) {
@@ -133,7 +134,7 @@ wikibase.queryService.services.SparqlQuery = ( function ( $, wikibase, sparqljs,
 	 * Add a variable to the query SELECT
 	 *
 	 * @param {string} name
-	 * @return {wikibase.queryService.services.SparqlQuery}
+	 * @return {wikibase.queryService.ui.queryHelper.SparqlQuery}
 	 */
 	SELF.prototype.addVariable = function ( name ) {
 		if ( !name || !name.startsWith( '?' ) ) {
@@ -210,27 +211,29 @@ wikibase.queryService.services.SparqlQuery = ( function ( $, wikibase, sparqljs,
 	 *
 	 * @return {Object}
 	 */
-	SELF.prototype.getTriples = function () {
-		var self = this;
-		function hasParentOfType( node, type ) {
-			return !!node.parent && ( node.parent.node.type === type || hasParentOfType( node.parent, type ) );
+	SELF.prototype.getTriples = function ( node, isOptional ) {
+		var triples = [];
+		if ( !node ) {
+			node = this._query.where;
+		}
+		if ( !isOptional ) {
+			isOptional = false;
 		}
 
-		return traverse( this._query ).reduce(
-			function ( acc, node ) {
-				// Triples within SERVICE aren't relevant for the query helper or the classification,
-				// so we skip them for now.
-				if ( node.triples && !hasParentOfType( this, 'service' ) ) {
-					return acc.concat( self._createTriples(
-						node.triples,
-						hasParentOfType( this, 'optional' )
-					) );
-				}
+		var self = this;
+		$.each( node, function ( k, v ) {
+			if ( v.type && v.type === 'bgp' ) {
+				triples = triples.concat( self._createTriples( v.triples, isOptional ) );
+			}
+			if ( v.type && v.type === 'optional' ) {
+				triples = triples.concat( self.getTriples( v.patterns, true ) );
+			}
+			if ( v.type && v.type === 'union' ) {
+				triples = triples.concat( self.getTriples( v.patterns, false ) );
+			}
+		} );
 
-				return acc;
-			},
-			[]
-		);
+		return triples;
 	};
 
 	/**
@@ -269,6 +272,36 @@ wikibase.queryService.services.SparqlQuery = ( function ( $, wikibase, sparqljs,
 		} );
 
 		return triples;
+	};
+
+	/**
+	 * Get triples defined in this query
+	 *
+	 * @return {wikibase.queryService.ui.queryHelper.SparqlQuery[]}
+	 */
+	SELF.prototype.getSubQueries = function () {
+		var queries = [];
+
+		function findSubqueriesInGroup( group ) {
+			$.each( group.patterns, function ( k, v ) {
+				switch ( v.type ) {
+					case 'query':
+						queries.push( new SELF( v ) );
+						break;
+					case 'group':
+						findSubqueriesInGroup( v );
+						break;
+				}
+			} );
+		}
+
+		$.each( this._query.where, function ( k, v ) {
+			if ( v.type === 'group' ) {
+				findSubqueriesInGroup( v );
+			}
+		} );
+
+		return queries;
 	};
 
 	/**
@@ -373,7 +406,7 @@ wikibase.queryService.services.SparqlQuery = ( function ( $, wikibase, sparqljs,
 	 * Remove a certain service from the query
 	 *
 	 * @param {string} serviceId of the service to be removed
-	 * @return {wikibase.queryService.services.SparqlQuery}
+	 * @return {wikibase.queryService.ui.queryHelper.SparqlQuery}
 	 */
 	SELF.prototype.removeService = function ( serviceId ) {
 		var self = this;
@@ -412,7 +445,7 @@ wikibase.queryService.services.SparqlQuery = ( function ( $, wikibase, sparqljs,
 	/**
 	 * Clone query
 	 *
-	 * @return {wikibase.queryService.services.SparqlQuery}
+	 * @return {wikibase.queryService.ui.queryHelper.SparqlQuery}
 	 */
 	SELF.prototype.clone = function () {
 		var query = new SELF();
@@ -421,4 +454,4 @@ wikibase.queryService.services.SparqlQuery = ( function ( $, wikibase, sparqljs,
 	};
 
 	return SELF;
-}( jQuery, wikibase, sparqljs, traverse ) );
+}( jQuery, wikibase, sparqljs ) );
