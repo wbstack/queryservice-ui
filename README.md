@@ -104,10 +104,26 @@ This triggers the publish-image pipeline. Image is available at `docker-registry
 
 
 ## Deploy in WMF environment (query.wikidata.org)
+> [!important]
+> This codebase is not automatically deployed by some [CD](https://en.wikipedia.org/wiki/Continuous_deployment) or by [the train](https://wikitech.wikimedia.org/wiki/Deployments/Train).
+>
+> After merging code and a new image being built, this code must be promptly deployed the WMF environments. ([why?](#why-we-must-deploy-promptly))
+>
+> If you merge code here it is your responsibility to ensure it is promptly deployed; either by doing it yourself or by finding someone to do it for you.
 
-After the code changes have been merged and new container image version has been published to [Wikimedia registry](https://docker-registry.wikimedia.org/repos/wmde/wikidata-query-gui/tags/), change the version tag in the Helm chart used for deployments by making and approving the change in `helmfile.d/services/wikidata-query-gui/values.yaml` in WMF's [deployment-charts](https://gerrit.wikimedia.org/g/operations/deployment-charts).
+After the code changes have been merged and new container image version has been published to [Wikimedia registry](https://docker-registry.wikimedia.org/repos/wmde/wikidata-query-gui/tags/), change the version tag passed into the Helm chart used for deployments by making and approving the change in `helmfile.d/services/wikidata-query-gui/values.yaml` in WMF's [deployment-charts](https://gerrit.wikimedia.org/g/operations/deployment-charts).
 
 Once the new deployment chart has been created, change the deployment chart version in use on the deployment server following instructions on https://wikitech.wikimedia.org/wiki/Kubernetes/Deployments. A bit more detailed deployment instructions for another service, that could be used for reference, can be found at https://wikitech.wikimedia.org/wiki/Miscweb#Deploy\_to\_Kubernetes/wikikube.
+
+### Why we must deploy promptly
+We don't want to stack up undeployed changes because we might not discover issues with the change until we do a deploy a long time in the future.
+
+This will confuse future deployers (which might be you!) if they find an issue or changes unrelated to code they think they are deploying.
+
+Even if there is only a single change waiting and deploying a long time in the future will likely mean you have forgotten the context of the change making it harder to debug and reason with.
+
+Keeping the [Lead Time for Changes](https://dora.dev/guides/dora-metrics-four-keys/) low has been identified as a key metric to for high performing software teams.
+
 
 ### Usage Metrics
 Usage metrics are only emitted when hosted on query.wikidata.org. They are sent to https://wikidata.org/beacon/stats and https://wikidata.org/beacon/statsv .
