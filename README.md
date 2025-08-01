@@ -9,8 +9,8 @@ The long-term vision is that we upstream these modifications in a configurable w
 
 # How to maintain this fork
 
-* The [`upstream` branch](https://github.com/wbstack/queryservice-ui/tree/upstream) only contains the changes from up [upstream/main](https://gitlab.wikimedia.org/repos/wmde/wikidata-query-gui/-/tree/main) and is synced manually
-* The [`develop` branch]() contains all the Wikibase Cloud specific modifications
+* The [`upstream` branch](https://github.com/wbstack/queryservice-ui/tree/upstream) only contains the changes from [upstream/main](https://gitlab.wikimedia.org/repos/wmde/wikidata-query-gui/-/tree/main) and is synced manually
+* The [`develop` branch](https://github.com/wbstack/queryservice-ui/tree/develop) contains all the Wikibase Cloud specific modifications
 * New PRs containing additional Wikibase Cloud specific modifications that can't easily be upstreamed are opened against the `develop` branch
 
 ## How to sync with upstream and release a new version
@@ -25,8 +25,11 @@ The long-term vision is that we upstream these modifications in a configurable w
 * Test that everything works as expected
 * Update the CHANGELOG
 * Push the changes with `git push --force-with-lease origin develop`
-* Get someone to review the `develop` branch
-* Tag the branch:
+* Have the `develop` branch reviewed
+  * Add a comment to the Phabricator task with a link [that compares the `develop` and `upstream` branches](https://github.com/wbstack/queryservice-ui/compare/upstream...develop)  and move the task to review
+  * Reviewer leaves any review comments on the Phabricator task
+  * Once happy with the change reviewer leaves an approval message on the Phabricator task
+* Tag the tip of the `develop` branch:
   * `git tag <version-tag>`
   * `git push origin <version-tag>`
 
