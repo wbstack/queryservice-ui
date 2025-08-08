@@ -1,5 +1,42 @@
-> ℹ️ Issues for this repository are tracked on [Phabricator](https://phabricator.wikimedia.org/project/board/5563/) - ([Click here to open a new one](https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?tags=wikibase_cloud
+> [!NOTE]
+> Issues for this repository are tracked on [Phabricator](https://phabricator.wikimedia.org/project/board/5563/) - ([Click here to open a new one](https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?tags=wikibase_cloud
 ))
+
+# About this fork
+This repository is a fork of https://gitlab.wikimedia.org/repos/wmde/wikidata-query-gui with modifications specific to Wikibase Cloud applied on top.
+
+The long-term vision is that we upstream these modifications in a configurable way so that we don't have to maintain our own fork.
+
+# How to maintain this fork
+
+* The [`upstream` branch](https://github.com/wbstack/queryservice-ui/tree/upstream) only contains the changes from [upstream/main](https://gitlab.wikimedia.org/repos/wmde/wikidata-query-gui/-/tree/main) and is synced manually
+* The [`develop` branch](https://github.com/wbstack/queryservice-ui/tree/develop) contains all the Wikibase Cloud specific modifications
+* New PRs containing additional Wikibase Cloud specific modifications that can't easily be upstreamed are opened against the `develop` branch
+
+## How to sync with upstream and release a new version
+* Update the [`upstream` branch](https://github.com/wbstack/queryservice-ui/tree/upstream) with the latest changes from upstream
+  * `git switch upstream`
+  * `git pull upstream main`
+  * `git push origin upstream`
+* Rebase the `develop` branch on top of the upstream changes
+  * `git switch develop`
+  * `git rebase upstream`
+  * Resolve any conflicts
+* Test that everything works as expected
+* Update the CHANGELOG
+* Push the changes with `git push --force-with-lease origin develop`
+* Have the `develop` branch reviewed
+  * Add a comment to the Phabricator task with a link [that compares the `develop` and `upstream` branches](https://github.com/wbstack/queryservice-ui/compare/upstream...develop)  and move the task to review
+  * Reviewer leaves any review comments on the Phabricator task
+  * Once happy with the change reviewer leaves an approval message on the Phabricator task
+* Tag the tip of the `develop` branch:
+  * `git tag <version-tag>`
+  * `git push origin <version-tag>`
+
+---
+
+> [!NOTE]
+> Below is the README from [upstream](https://gitlab.wikimedia.org/repos/wmde/wikidata-query-gui)
 
 # Wikibase Query Service GUI
 
