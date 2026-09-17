@@ -55,7 +55,7 @@
     "neotraverse": "^0.6.18",
     "select2": "^4.0.13",
     "underscore": "^1.13.7",
-    "vis-network": "^9.1.9",
+    "vis-network": "^10.1.2",
     "vis-timeline": "^7.7.3",
     "wellknown": "^0.5.0"
   },
