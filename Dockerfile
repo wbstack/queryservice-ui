@@ -5,7 +5,7 @@ WORKDIR /src/app
 COPY package.json package-lock.json ./
 
 # TODO remove the --force from the install...
-RUN npm install --force && npm cache clean --force
+RUN npm ci --force && npm cache clean --force
 
 COPY . .
 
