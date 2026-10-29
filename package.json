@@ -52,7 +52,7 @@
     "leaflet.markercluster": "^1.5.3",
     "mathjax": "^3.2.2",
     "moment": "^2.30.1",
-    "neotraverse": "^0.6.18",
+    "neotraverse": "^1.0.1",
     "select2": "^4.0.13",
     "underscore": "^1.13.7",
     "vis-network": "^9.1.9",
