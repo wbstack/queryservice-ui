@@ -2,7 +2,7 @@
 
 ## 1.10
 
-Update Javascript dependencies
+Update JavaScript dependencies ([T438709](https://phabricator.wikimedia.org/T438709))
 
 ## 1.9
 
