@@ -1,5 +1,9 @@
 # WBStack queryservice-ui
 
+## 1.10
+
+Update Javascript dependencies
+
 ## 1.9
 
 * Fix Query Service examples not loading on Cloud instances ([T399300](https://phabricator.wikimedia.org/T399300))
