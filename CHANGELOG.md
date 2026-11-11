@@ -1,5 +1,9 @@
 # WBStack queryservice-ui
 
+## 1.11
+
+Restore compatible UI and lint dependencies
+
 ## 1.10
 
 Update JavaScript dependencies ([T438709](https://phabricator.wikimedia.org/T438709))
