@@ -95,7 +95,7 @@
     "sinon": "^22.1.0",
     "stylelint": "^15.11.0",
     "stylelint-config-wikimedia": "^0.16.1",
-    "typescript": "^5.9.3",
+    "typescript": "^7.0.2",
     "uglify-js": "~3.19.3",
     "wdio-mediawiki": "^6.5.3"
   }
