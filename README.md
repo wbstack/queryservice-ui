@@ -12,6 +12,7 @@ The long-term vision is that we upstream these modifications in a configurable w
 * The [`upstream` branch](https://github.com/wbstack/queryservice-ui/tree/upstream) only contains the changes from [upstream/main](https://gitlab.wikimedia.org/repos/wmde/wikidata-query-gui/-/tree/main) and is synced manually
 * The [`develop` branch](https://github.com/wbstack/queryservice-ui/tree/develop) contains all the Wikibase Cloud specific modifications
 * New PRs containing additional Wikibase Cloud specific modifications that can't easily be upstreamed are opened against the `develop` branch
+* We do not do JavaScript dependency updates in this fork. They should be pulled in from upstream to reduce maintenance burden. See comments from [T438709#12546888](https://phabricator.wikimedia.org/T438709#12546888) onwards for more details.
 
 ## How to sync with upstream and release a new version
 * Update the [`upstream` branch](https://github.com/wbstack/queryservice-ui/tree/upstream) with the latest changes from upstream
