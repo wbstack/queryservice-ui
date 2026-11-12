@@ -1,6 +1,9 @@
 # WBStack queryservice-ui
 
-## 1.10
+## ~~1.10~~
+
+> [!WARNING]
+> This image has been deleted due to a failed dependency update
 
 Update JavaScript dependencies ([T438709](https://phabricator.wikimedia.org/T438709))
 
